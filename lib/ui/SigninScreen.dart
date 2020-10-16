@@ -464,40 +464,39 @@ void _toggle() {
                       children: <Widget>[
                         SliderButton(
 
-                         //  action: () {
-                         //    ///Do something here
-                         //    ///
-                         //
-                         //    // _signIn(context)
-                         //    //   .then((FirebaseUser user) => print(user))
-                         //    //   .catchError((e) => print(e));
-                         // //_handleGetContact();
-                         //   // Navigator.of(context).pop();
-                         //   Navigator.of(context).push(MaterialPageRoute(
-                         //       builder: (context) => TestGmailLogin()));
-                         //  },
-//                      action: () {
-//                        print('Using the sword');
-//                      },
+                          action: () {
+                            ///Do something here
+                            ///
+
+                            // _signIn(context)
+                            //   .then((FirebaseUser user) => print(user))
+                            //   .catchError((e) => print(e));
+                         //_handleGetContact();
+                           // Navigator.of(context).pop();
+                           Navigator.of(context).push(MaterialPageRoute(
+                               builder: (context) => TestGmailLogin()));
+                          },
+                     // action: () {
+                     //   print('Using the sword');
+                     // },
 
                           ///Put label over here
-                          // label: Text(
-                          //   AppLocalizations.of(context).lblLoginWithGmail,
-                          //   style: TextStyle(
-                          //       color: Colors.white,
-                          //       fontWeight: FontWeight.w500,
-                          //       fontSize: 17),
-                          // ),
-                          // icon: Center(
-                          //     child: Image.asset(
-                          //   'images/gmail_icon.png',
-                          //   fit: BoxFit.contain,
-                          // )),
+                          label: Text(
+                            AppLocalizations.of(context).lblLoginWithGmail,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 17),
+                          ),
+                          icon: Center(
+                              child: Image.asset(
+                            'images/gmail_icon.png',
+                            fit: BoxFit.contain,
+                          )),
                           alignLabel: AppLocalizations.of(context).locale=="en" ?Alignment.centerRight:Alignment.centerLeft,
                           ///Change All the color and size from here.
                           width: 250,
                           radius: 10,
-
                           buttonColor: Colors.red,
                           highlightedColor: Colors.white,
                           baseColor: Colors.red,

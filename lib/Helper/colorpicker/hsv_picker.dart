@@ -17,13 +17,13 @@ class HSVColorPainter extends CustomPainter {
     final Gradient gradientV = LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      // colors: [Colors.white, Colors.black],
+      colors: [Colors.white, Colors.black],
     );
     final Gradient gradientH = LinearGradient(
-      // colors: [
-      //   Colors.white,
-      //   HSVColor.fromAHSV(1.0, hsvColor.hue, 1.0, 1.0).toColor(),
-      // ],
+      colors: [
+        Colors.white,
+        HSVColor.fromAHSV(1.0, hsvColor.hue, 1.0, 1.0).toColor(),
+      ],
     );
     canvas.drawRect(rect, Paint()..shader = gradientV.createShader(rect));
     canvas.drawRect(
@@ -58,21 +58,21 @@ class HSLColorPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final Rect rect = Offset.zero & size;
     final Gradient gradientH = LinearGradient(
-      // colors: [
-      //   const Color(0xff808080),
-      //   HSLColor.fromAHSL(1.0, hslColor.hue, 1.0, 0.5).toColor(),
-      // ],
+      colors: [
+        const Color(0xff808080),
+        HSLColor.fromAHSL(1.0, hslColor.hue, 1.0, 0.5).toColor(),
+      ],
     );
     final Gradient gradientV = LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      // stops: [0.0, 0.5, 0.5, 1],
-      // colors: [
-      //   Colors.white,
-      //   const Color(0x00ffffff),
-      //   Colors.transparent,
-      //   Colors.black,
-      // ],
+      stops: [0.0, 0.5, 0.5, 1],
+      colors: [
+        Colors.white,
+        const Color(0x00ffffff),
+        Colors.transparent,
+        Colors.black,
+      ],
     );
     canvas.drawRect(rect, Paint()..shader = gradientH.createShader(rect));
     canvas.drawRect(rect, Paint()..shader = gradientV.createShader(rect));
@@ -159,8 +159,8 @@ class TrackPainter extends CustomPainter {
           const HSVColor.fromAHSV(1.0, 360.0, 1.0, 1.0).toColor(),
         ];
         Gradient gradient = LinearGradient(
-            //
-          // // colors: colors
+
+          colors: colors
 
         );
         canvas.drawRect(rect, Paint()..shader = gradient.createShader(rect));
@@ -171,7 +171,7 @@ class TrackPainter extends CustomPainter {
           HSVColor.fromAHSV(1.0, hsvColor.hue, 1.0, 1.0).toColor(),
         ];
         Gradient gradient = LinearGradient(
-            // colors: colors
+            colors: colors
         );
         canvas.drawRect(rect, Paint()..shader = gradient.createShader(rect));
         break;
@@ -181,7 +181,7 @@ class TrackPainter extends CustomPainter {
           HSVColor.fromAHSV(1.0, hsvColor.hue, 1.0, 1.0).toColor(),
         ];
         Gradient gradient = LinearGradient(
-            // colors: colors
+            colors: colors
         );
         canvas.drawRect(rect, Paint()..shader = gradient.createShader(rect));
         break;
@@ -191,7 +191,7 @@ class TrackPainter extends CustomPainter {
           HSLColor.fromAHSL(1.0, hsvColor.hue, 1.0, 1.0).toColor(),
         ];
         Gradient gradient = LinearGradient(
-            // colors: colors
+            colors: colors
         );
         canvas.drawRect(rect, Paint()..shader = gradient.createShader(rect));
         break;

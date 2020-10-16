@@ -70,20 +70,20 @@ class Shimmer extends StatefulWidget {
       : gradient = LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.centerRight,
-      // colors: [
-      //   baseColor,
-      //   baseColor,
-      //   highlightColor,
-      //   baseColor,
-      //   baseColor
-      // ],
-      // stops: [
-      //   0.0,
-      //   0.35,
-      //   0.5,
-      //   0.65,
-      //   1.0
-      // ]
+      colors: [
+        baseColor,
+        baseColor,
+        highlightColor,
+        baseColor,
+        baseColor
+      ],
+      stops: [
+        0.0,
+        0.35,
+        0.5,
+        0.65,
+        1.0
+      ]
   ),
         super(key: key);
 
@@ -109,7 +109,7 @@ class _ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _count = 0;
-    _controller = AnimationController( duration: widget.period)
+    _controller = AnimationController( vsync: this, duration: widget.period)
       ..addListener(() {
         setState(() {});
       })

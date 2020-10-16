@@ -85,7 +85,7 @@ ContentVM content = new ContentVM();
           flexibleSpace: Container(
             decoration: new BoxDecoration(
               gradient: new LinearGradient(
-                  // colors: [lightBgColor, transColor],
+                  colors: [lightBgColor, transColor],
                   begin: const FractionalOffset(0.1, 0.8),
                   end: const FractionalOffset(1.0, 0.5),
                   // tileMode: TileMode.clamp
