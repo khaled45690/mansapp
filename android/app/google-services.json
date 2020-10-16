@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "419812190009",
+    "firebase_url": "https://mansaapp-36b08.firebaseio.com",
+    "project_id": "mansaapp-36b08",
+    "storage_bucket": "mansaapp-36b08.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:419812190009:android:a0149918b3d6baf1222ae8",
+        "android_client_info": {
+          "package_name": "com.mansaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "419812190009-85q1ogep03dr0klr3d3cq8ugu53fis3l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mansaapp",
+            "certificate_hash": "ae0d64860d1ccd888e4bc823c3aa873e5240f27c"
+          }
+        },
+        {
+          "client_id": "419812190009-3at9edqdv3c2l27l7abv2a1epash7mbg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXha7lCYwOQjUZ2JgmimU6N7uvzMn0EnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "419812190009-3at9edqdv3c2l27l7abv2a1epash7mbg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "419812190009-gaqftvvucqu854ui1nibv1g27uqki03g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mansaapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

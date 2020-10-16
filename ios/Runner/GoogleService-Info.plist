@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>419812190009-gaqftvvucqu854ui1nibv1g27uqki03g.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.419812190009-gaqftvvucqu854ui1nibv1g27uqki03g</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>419812190009-85q1ogep03dr0klr3d3cq8ugu53fis3l.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCJi6vgftJxwa0d8VReGHpJW0RXMplnoRk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>419812190009</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mansaapp</string>
+	<key>PROJECT_ID</key>
+	<string>mansaapp-36b08</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mansaapp-36b08.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:419812190009:ios:d4c6bb9f64802d2f222ae8</string>
+	<key>DATABASE_URL</key>
+	<string>https://mansaapp-36b08.firebaseio.com</string>
+</dict>
+</plist>

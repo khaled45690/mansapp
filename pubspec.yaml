@@ -1,0 +1,204 @@
+name: mansaapp
+description: A new Flutter project.
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.6.0 <3.0.0"
+  #sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter 
+    
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^0.1.2
+  flutter_launcher_icons: "^0.7.3"
+flutter_icons:
+  image_path: "images/2-01.png" 
+  android: true
+  ios: true  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  easy_localization: ^1.0.3+1
+  shared_preferences: ^0.4.2
+  #image_picker: ^0.6.0+8
+  share: ^0.6.1+1
+  #share: ^0.6.3+5
+  connectivity: ^0.4.3+2
+  flutter_swiper: ^1.1.6
+  json_utilities: ^0.1.3
+  image_gallery_saver: ^1.1.0
+  url_launcher: ^5.0.1
+  intl:
+  location: ^2.3.5
+  google_sign_in: ^4.0.4
+  http: ^0.12.0+2
+  crypto: ^2.1.3
+  meta: ^1.1.7
+  mime_type: ^0.2.4
+  http_parser: ^3.1.3
+  equatable: ^0.6.1
+  test: ^1.6.3
+  dotenv: ^1.0.0
+  mockito: ^4.1.1
+#  flutter_cupertino_date_picker: ^1.0.12
+  dio: ^3.0.7
+  flutter_colorpicker: any
+  intl_translation: ^0.17.1  
+  flutter_email_sender: ^2.2.2
+  file_picker: ^1.1.1
+  firebase_core: ^0.3.0
+  #firebase_core: ^0.4.0+6
+  #firebase_auth: ^0.11.1+12
+  firebase_auth: ^0.9.0
+  #google_sign_in: ^4.0.1+3
+  font_awesome_flutter: ^8.2.0
+  google_maps_flutter: ^0.5.21+8
+  geocoder: ^0.2.1
+  flutter_google_places: ^0.2.3
+  geolocator: ^5.1.1
+  permission: ^0.1.5
+  image_picker: ^0.6.3+4
+  multi_image_picker: ^4.6.5+rc.1
+  webview_flutter: ^0.3.9+1
+  #christian_picker_image: ^0.1.6
+  permission_handler:
+  #image_picker: ^0.6.0+8
+
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+  assets:
+#  - resources/langs/ar.json
+#  - resources/langs/en.json
+#  - images/0.75x/
+#  - images/1.0x/
+#  - images/1.5x/
+#  - images/2.0x/
+#  - images/3.0x/
+  - images/asset2.png
+  - images/asset4.png
+  - images/asset7.png
+  - images/asset8.png
+  - images/asset9.png
+  - images/asset10.png
+  - images/asset11.png
+  - images/asset12.png
+  - images/asset16.png
+  - images/asset17.png
+  - images/asset19.png
+  - images/asset18.png
+  - images/asset20.png
+  - images/asset21.png
+  - images/asset22.png
+  - images/asset23.png
+  - images/asset24.png
+  - images/asset25.png
+  - images/asset26.png
+  - images/asset30.png
+  - images/asset311.png
+  - images/asset31.png
+  - images/asset32.png
+  - images/asset33.png
+  - images/asset34.png
+  - images/asset35.png
+  - images/asset36.png
+  - images/asset37.png
+  - images/facebook.png
+  - images/gmail.png
+  - images/insta.png
+  - images/snap.png
+  - images/twitter.png
+  - images/youtube.png
+  - images/gmail_icon.png
+  - images/ff.png
+  - images/Email.png
+  - images/Phone.png
+  - images/ads.jpg
+  - images/offer.jpg
+  - images/asset13.png
+  - images/Website.png
+  - images/rightArrow.png
+  - images/1-01.png
+  - images/assetAr31.png
+  - images/uploadSctipt.PNG
+  - images/uploadSctiptAr.PNG
+  - images/Intro.gif
+  - images/SignBk.jpg
+  - images/Logo.png
+  - images/2-01.png
+  - images/assetCerAr.PNG
+  - images/assetCerEn.PNG
+  - images/google.png
+  - images/filesAndDocs.png
+  - images/Loading.gif
+  - images/avatar.PNG
+  - images/fiveStars.PNG
+  - images/fourStars.PNG
+  - images/threeStars.PNG
+  - images/twoStars.PNG
+  - images/oneStars.PNG
+
+  fonts:
+    - family: Tajawal
+      fonts:
+        - asset: lib/fonts/Exo2-Bold.ttf
+        - asset: lib/fonts/Exo2-BoldItalic.ttf
+        - asset: lib/fonts/Exo2-ExtraBold.ttf
+        - asset: lib/fonts/Exo2-ExtraBoldItalic.ttf
+        - asset: lib/fonts/Exo2-ExtraLight.ttf
+        - asset: lib/fonts/Exo2-ExtraLightItalic.ttf
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #  - images/a_dot_burr.jpeg
+  #  - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware.
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
