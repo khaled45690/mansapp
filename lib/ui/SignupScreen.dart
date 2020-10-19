@@ -141,12 +141,12 @@ Future<File> pickImage(BuildContext context, Function callback) async {
     }
     
 
-           // _image = image;
+       //     _image = image;
        // String filePath = _path;
-        // print("FileName : $fileName");
-        // print("filePath : $filePath");
-        // print("_path : $_path");
-      //  upload(fileName, filePath); 
+       //  print("FileName : $fileName");
+       //  print("filePath : $filePath");
+       //  print("_path : $_path");
+       // upload(fileName, filePath);
     setState(() {
     //  imageURI = image;
     });

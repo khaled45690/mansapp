@@ -249,7 +249,7 @@ class _ConfirmationCodeState extends State<ConfirmationCode> {
 
 
 
-
+//
 // void _next(int index) {
 //   if(index ==1){
 //     setState(() {
@@ -265,7 +265,7 @@ class _ConfirmationCodeState extends State<ConfirmationCode> {
 //       });
 //     }
 //   }
-
+//
 //   void _prev(int index) {
 //     if (index > 0) {
 //       setState(() {

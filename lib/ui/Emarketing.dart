@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:mansaapp/APIs/ServiceApi.dart';
@@ -185,7 +186,21 @@ Future<void> loadAssets() async {
      // _error = error;
     });
   }
+  Future<void> loadAssetFromCamera() async {
+    final picked =
+    await ImagePicker.pickImage(source: ImageSource.camera);
+    if (picked != null) {
+    print(picked.path.split('/').last);
+    String fileName = picked.path.split('/').last;
 
+    ByteData byteData = await rootBundle.load(picked.path);
+    var buffer = byteData.buffer;
+    var base64Image = base64.encode(Uint8List.view(buffer));
+     _upload_Base64_pass_Base46_2(base64Image , fileName);
+    }else {
+      print("something happened");
+    }
+  }
 Future<void> loadAssets2() async {
     List<Asset> resultList = List<Asset>();
     String error = 'No Error Dectected';
@@ -737,28 +752,56 @@ void _upload_Base64_2(File file) {
                               setState(() {
                                 mailValue = emailKey_log.currentState.value;
                               });
-                              loadAssets();
+                              return showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+
+                                  actions: <Widget>[
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 60),
+                                      child: FlatButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          loadAssetFromCamera();
+                                        },
+                                        child: Icon(Icons.camera_alt),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 30),
+                                      child: FlatButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          loadAssets2();
+                                        },
+                                        child: Icon(Icons.photo_camera_back),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              );
                             },
                             child: Container(
                             child: Image.asset(
                                AppLocalizations.of(context).locale=="en" ?'images/asset311.png':'images/assetAr31.png',
                               height: 20,
-                              
+
                              // width: 250,
                               fit: BoxFit.fill,
                               alignment: Alignment.center,
-                              
+
                             ),
-                            
+
                           ),
                           ),
                           Container(
                             width: 20,
                           ),
                           Text(
-                             AppLocalizations.of(context).locale=="en" ? " Uploaded "+ lblFirstUpload.toString()+" Images ":"* تم رفع "+ lblFirstUpload.toString()+" صور  ",
-                              textAlign: TextAlign.center,
-                              style: MansaFont.getBoldFontinside_V2(),
+                            AppLocalizations.of(context).locale=="en" ? "* Uploaded "+ lblSecondUpload.toString()+" Images *":"* تم رفع "+ lblSecondUpload.toString()+" صور  *",
+                            textAlign: TextAlign.center,
+                            style: MansaFont.getBoldFontinside_V2(),
                             ),
                             ],
                           ),
@@ -787,7 +830,38 @@ void _upload_Base64_2(File file) {
                     Column(
                             children: <Widget>[
                               GestureDetector(
-                            onTap: loadAssets2,
+                            onTap: (){
+                              // loadAssets2
+                              return showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+
+                                    actions: <Widget>[
+
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 60),
+                                        child: FlatButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                            loadAssetFromCamera();
+                                          },
+                                          child: Icon(Icons.camera_alt),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 30),
+                                        child: FlatButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              loadAssets2();
+                                            },
+                                          child: Icon(Icons.photo_camera_back),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                              );
+                            },
                             child: Container(
                             child: Image.asset(
                                AppLocalizations.of(context).locale=="en" ?'images/assetCerEn.PNG':'images/filesAndDocs.png',
@@ -795,9 +869,9 @@ void _upload_Base64_2(File file) {
                               width: 100,
                               fit: BoxFit.fill,
                               alignment: Alignment.center,
-                              
+
                             ),
-                            
+
                           ),
                           ),
                           Container(
@@ -972,7 +1046,7 @@ void _upload_Base64_2(File file) {
                               value: _selectedToDay,
                               items: _dropDownMenudays,
                               onChanged: changedDropDowntoday,
-                            ) 
+                            )
                         //Dropdowndays("1"),
                       ),
                       Container(

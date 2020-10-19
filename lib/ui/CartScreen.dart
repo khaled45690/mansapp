@@ -55,11 +55,11 @@ var json=null;
   void initState() {
     super.initState();
     print("SSSSSSSSSSSSSSSS");
-    // columns = [
-    //   JsonTableColumn("name", label: "No."),
-    //   JsonTableColumn("Orders", label: "Orders"),
-    //   JsonTableColumn("Price", label: "Price"),
-    // ];
+    columns = [
+      JsonTableColumn("name", label: "No."),
+      JsonTableColumn("Orders", label: "Orders"),
+      JsonTableColumn("Price", label: "Price"),
+    ];
      int loopCount=0;
      var sPrice="";
      var serviceName="";
@@ -110,7 +110,7 @@ var json=null;
                 s=s+'{"name":"$loopCount","Orders":"$serviceName","Price":"$sPrice"},';
               }
             });
-             json= jsonDecode(s);
+             json = jsonDecode(s);
              tax = (int.parse(response.message)/100)*subTotal;
           // jsonSample=s;
           } else {
@@ -215,10 +215,10 @@ List<ShoppingCartVM> shoppingCarts ;
                         
                          Expanded(
                           flex: 1,
-                          child: Text(AppLocalizations.of(context).lblTotal+" " +(subTotal+tax.round()).toString()+" "+AppLocalizations.of(context).lblRyal, 
+                          child: Text(AppLocalizations.of(context).lblTotal+" " +(subTotal+tax.round()).toString()+" "+AppLocalizations.of(context).lblRyal,
                           //  textAlign: TextAlign.left,
                             style: MansaFont.baseFontStyleWithBackground(),),
-                        ), 
+                        ),
                         // Expanded(
                         //   flex: 1,
                         //   child: Text("", 
@@ -246,7 +246,7 @@ List<ShoppingCartVM> shoppingCarts ;
                           },
                           child: Text(
                             AppLocalizations.of(context).lblAgreeTerms,
-                            
+
                             textAlign: TextAlign.justify,
                             style: MansaFont.getLightFont_TextFormField(),
                           ),

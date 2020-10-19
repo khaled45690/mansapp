@@ -23,13 +23,11 @@ import 'SigninScreen.dart';
 import 'TabBarScreen.dart';
 import 'Terms.dart';
 
-
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:mansaapp/APIs/UploadApi.dart';
 import 'package:flutter/services.dart';
-
 
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -51,17 +49,17 @@ class _CreatePaymentState extends State<CreatePayment> {
   bool _isButtonDisabled;
   BuildContext _context;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  String name="";
-  String email="";
-  String imageprofile="";
-  int orderNum=0;
-List _accounts = ["بنك البلاد", "الراجحي", "البنك الأول","الإنماء","ساب"];
+  String name = "";
+  String email = "";
+  String imageprofile = "";
+  int orderNum = 0;
+  List _accounts = ["بنك البلاد", "الراجحي", "البنك الأول", "الإنماء", "ساب"];
 
-String title="";
-String accountName="";
-String account_IBAN="";
-String account_No="";
- var customerNameKey_log = GlobalKey<FormFieldState>();
+  String title = "";
+  String accountName = "";
+  String account_IBAN = "";
+  String account_No = "";
+  var customerNameKey_log = GlobalKey<FormFieldState>();
   var accountTransferKey_log = GlobalKey<FormFieldState>();
   var accountTransferToKey_log = GlobalKey<FormFieldState>();
   var phone1Key_log = GlobalKey<FormFieldState>();
@@ -72,82 +70,94 @@ String account_No="";
   List<DropdownMenuItem<String>> _dropDownMenuAccounts;
   String _selectedAccount;
 
-
   String _path;
-Map<String, String> _paths;
-Map<String, String> _paths2;
-String _extension;
-String _extension2;
-FileType _pickType;
-bool _multiPick = false;
-String uploadTxt1="";
-File file;
-String firstUpload="";
-String lblFirstUpload="ارفق ايصال الدفع";
-  static gettitleFontinside_blueV2({double fontSize = 13}) => TextStyle(color: lightBgColor ,fontFamily: "Tajawal", fontSize: fontSize,fontWeight: FontWeight.bold);
+  Map<String, String> _paths;
+  Map<String, String> _paths2;
+  String _extension;
+  String _extension2;
+  FileType _pickType;
+  bool _multiPick = false;
+  String uploadTxt1 = "";
+  File file;
+  String firstUpload = "";
+  String lblFirstUpload = "ارفق ايصال الدفع";
+  static gettitleFontinside_blueV2({double fontSize = 13}) => TextStyle(
+      color: lightBgColor,
+      fontFamily: "Tajawal",
+      fontSize: fontSize,
+      fontWeight: FontWeight.bold);
 
-void openFileExplorer() async {
+  void openFileExplorer() async {
     try {
-      
       //_path = null;
       if (_multiPick) {
         _paths = await FilePicker.getMultiFilePath(
             type: _pickType, allowedExtensions: [_extension]);
-           // showAppLoading(_context);
-          // lblFirstUpload="Loading ....";
-        _paths.forEach((fileName, filePath) => {upload(fileName, filePath)});  
-       
+        // showAppLoading(_context);
+        // lblFirstUpload="Loading ....";
+        _paths.forEach((fileName, filePath) => {upload(fileName, filePath)});
+
         print("Length");
-        print( _paths.length); 
-       // hideAppDialog(_context); 
+        print(_paths.length);
+        // hideAppDialog(_context);
       } else {
         _path = await FilePicker.getFilePath(
             type: _pickType, allowedExtensions: [_extension]);
-        
+
         String fileName = _path.split('/').last;
         String filePath = _path;
         print("pathssssssss 1");
-      print(_path);
+        print(_path);
         upload(fileName, filePath);
         print("pathssssssss 2");
-      print(_path);
+        print(_path);
       }
       print("pathssssssss");
       print(_path);
-     // lblFirstUpload=_paths.length.toString();
+      // lblFirstUpload=_paths.length.toString();
     } on PlatformException catch (e) {
       print("Unsupported operation" + e.toString());
     }
-   // hideAppDialog(_context);
+    // hideAppDialog(_context);
     if (!mounted) return;
-}
-void _upload_Base64(File file) {
-  
-  UploadApi.upload_Base64(file).then((response) {
-      if (response.code ==200 ) {
+  }
+
+  void _upload_Base64(File file) {
+    UploadApi.upload_Base64(file).then((response) {
+      if (response.code == 200) {
         setState(() {
-          firstUpload=response.data;
-          lblFirstUpload="تم رفع الملف بنجاح";
+          firstUpload = response.data;
+          lblFirstUpload = "تم رفع الملف بنجاح";
         });
         print(response.message);
       } else {
         print("${response.message}");
       }
     });
- }
+  }
+  Future<void> getImageFromCamera() async {
+    final image =
+    await ImagePicker.pickImage(source: ImageSource.camera , imageQuality: imageQuality);
+    if (image != null) {
+      _upload_Base64(image);
+    }else {
+      print("something happened");
+    }
+  }
 
   void getImageFromGallery() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery,imageQuality: imageQuality);
-_upload_Base64(image);
-           // String fileName = basename(image.path);
-           // _image = image;
-       // String filePath = _path;
-        // print("FileName : $fileName");
-        // print("filePath : $filePath");
-        // print("_path : $_path");
-      //  upload(fileName, filePath); 
+    var image = await ImagePicker.pickImage(
+        source: ImageSource.gallery, imageQuality: imageQuality);
+    _upload_Base64(image);
+    // String fileName = basename(image.path);
+    // _image = image;
+    // String filePath = _path;
+    // print("FileName : $fileName");
+    // print("filePath : $filePath");
+    // print("_path : $_path");
+    //  upload(fileName, filePath);
     setState(() {
-    //  imageURI = image;
+      //  imageURI = image;
     });
   }
 
@@ -155,18 +165,18 @@ _upload_Base64(image);
     file = new File(filePath);
     _upload_Base64(file);
     _extension = fileName.toString().split('.').last;
-    setState(() {
-    });
+    setState(() {});
   }
+
 //////////////
-///
+  ///
   @override
   Widget build(BuildContext context) {
     // TODO: implement getBody
     //lblFirstUpload = AppLocalizations.of(context).locale=="en" ?"Upload Image ":"ارفق ايصال الدفع";
     _context = context;
     return Scaffold(
-      key: _scaffoldKey,
+        key: _scaffoldKey,
         appBar: AppBar(
           flexibleSpace: Container(
             decoration: new BoxDecoration(
@@ -175,96 +185,95 @@ _upload_Base64(image);
                   begin: const FractionalOffset(0.0, 0.0),
                   end: const FractionalOffset(0.5, 0.0),
                   stops: [0.0, 1.0],
-                  tileMode: TileMode.clamp
-              ),
+                  tileMode: TileMode.clamp),
             ),
           ),
-          title: new Text(AppLocalizations.of(context).lblPayment,  style: MansaFont.baseFontStyle() ,) ,
+          title: new Text(
+            AppLocalizations.of(context).lblPayment,
+            style: MansaFont.baseFontStyle(),
+          ),
           centerTitle: true,
-            automaticallyImplyLeading: true,
-            elevation: 0.0,
-            leading: new IconButton(
-                  icon: new IconButton(icon:
-                   new Image.asset("images/asset17.png")),iconSize: 40.0,
-                  onPressed: () => _scaffoldKey.currentState.openDrawer()
-              ),
-            actions: <Widget>[
-              IconButton(icon: AppLocalizations.of(context).locale=="en" ? Image.asset("images/1-01.png") : Image.asset("images/asset32.png"),iconSize: 30.0,
+          automaticallyImplyLeading: true,
+          elevation: 0.0,
+          leading: new IconButton(
+              icon: new IconButton(icon: new Image.asset("images/asset17.png")),
+              iconSize: 40.0,
+              onPressed: () => _scaffoldKey.currentState.openDrawer()),
+          actions: <Widget>[
+            IconButton(
+                icon: AppLocalizations.of(context).locale == "en"
+                    ? Image.asset("images/1-01.png")
+                    : Image.asset("images/asset32.png"),
+                iconSize: 30.0,
                 onPressed: () => Navigator.of(context).pop()),
-            ],
-
+          ],
         ),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(0),
           child: Form(
-                child: _isButtonDisabled ? sucessview() : paymentview(),
-         
-         
+            child: _isButtonDisabled ? sucessview() : paymentview(),
           ),
         ),
-        drawer: buildDrawer()
-      );
+        drawer: buildDrawer());
   }
-double subTotal=0;
-     double tax=0;
-     List<OrderDataVM> ordersData ;
-      var sPrice="";
+
+  double subTotal = 0;
+  double tax = 0;
+  List<OrderDataVM> ordersData;
+  var sPrice = "";
   @override
   void initState() {
     super.initState();
     _isButtonDisabled = false;
 
     _dropDownMenuAccounts = buildAndGetDropDownMenuItems(_accounts);
-    _selectedAccount=_dropDownMenuAccounts[0].value;
-    getUser().then((user){
+    _selectedAccount = _dropDownMenuAccounts[0].value;
+    getUser().then((user) {
       setState(() {
-        this.user = user ;
-        if(user!=null){
+        this.user = user;
+        if (user != null) {
           ShoppingCartApi.getShoppingCarForUser(user.user_Id).then((response) {
-          if (response.code ==200 ) {
-            shoppingCarts = response.data;
-            print(shoppingCarts.length);
-            shoppingCarts.forEach((cart){
-             setState(() {
-               subTotal=subTotal+cart.Price;
-              sPrice=cart.Price.toString();
-             });
-            });
-           setState(() {
-             tax = (int.parse(response.message)/100)*subTotal;
-           });
-             print("المجموع الكلي : "+ (subTotal+tax).toString());
-          } else {
-            print("${response.message}");
-          }
-          setState(() {
+            if (response.code == 200) {
+              shoppingCarts = response.data;
+              print(shoppingCarts.length);
+              shoppingCarts.forEach((cart) {
+                setState(() {
+                  subTotal = subTotal + cart.Price;
+                  sPrice = cart.Price.toString();
+                });
+              });
+              setState(() {
+                tax = (int.parse(response.message) / 100) * subTotal;
+              });
+              print("المجموع الكلي : " + (subTotal + tax).toString());
+            } else {
+              print("${response.message}");
+            }
+            setState(() {});
           });
-        });
         }
       });
     });
-    setState(() {
-      
-    });
+    setState(() {});
     PaymentAccountApi.getPaymentAccounts().then((response) {
-          if (response.code ==200 ) {
-            setState(() {
-              _paymentAccount=response.data;
-              title="بنك البلاد";
-        account_No=_paymentAccount.AlAhly_ACCountNO;
-        accountName=_paymentAccount.AlAhly_BankNameAr;
-        account_IBAN=_paymentAccount.AlAhly_IBAN;
-            });
-          } else {
-            print("${response.message}");
-          }
-          setState(() {
-          });
+      if (response.code == 200) {
+        setState(() {
+          _paymentAccount = response.data;
+          title = "بنك البلاد";
+          account_No = _paymentAccount.AlAhly_ACCountNO;
+          accountName = _paymentAccount.AlAhly_BankNameAr;
+          account_IBAN = _paymentAccount.AlAhly_IBAN;
         });
+      } else {
+        print("${response.message}");
+      }
+      setState(() {});
+    });
   }
-  UserVM user ;
+
+  UserVM user;
   PaymentAccountVM _paymentAccount = new PaymentAccountVM();
-List<ShoppingCartVM> shoppingCarts ;
+  List<ShoppingCartVM> shoppingCarts;
 
   @override
   Future dispose() {
@@ -272,10 +281,7 @@ List<ShoppingCartVM> shoppingCarts ;
   }
 
   paymentview() {
-    return Column(
-      mainAxisSize: MainAxisSize.max, 
-      children: [
-        
+    return Column(mainAxisSize: MainAxisSize.max, children: [
       // Container(
       //   margin: EdgeInsets.only(right: 0, left: 0, bottom: 0, top: 20),
       //   width: MediaQuery.of(context).size.width,
@@ -312,7 +318,10 @@ List<ShoppingCartVM> shoppingCarts ;
           //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             userNameInputs(),
-            appButtonbgimage(_isButtonDisabled ? AppLocalizations.of(context).lblDone : AppLocalizations.of(context).lblNext,
+            appButtonbgimage(
+                _isButtonDisabled
+                    ? AppLocalizations.of(context).lblDone
+                    : AppLocalizations.of(context).lblNext,
                 () => _isButtonDisabled ? null : Transfere_payment(),
                 bgColor: _isButtonDisabled ? gray : lightBgColor,
                 bgColor2: _isButtonDisabled ? gray : transColor),
@@ -324,6 +333,7 @@ List<ShoppingCartVM> shoppingCarts ;
       ),
     ]);
   }
+
   sucessview() {
     return Column(mainAxisSize: MainAxisSize.max, children: [
       Container(
@@ -345,25 +355,28 @@ List<ShoppingCartVM> shoppingCarts ;
             height: 40,
           ),
           new Text(AppLocalizations.of(context).lblSuccess,
-              textAlign: TextAlign.center, style: MansaFont.gettitleFont_payment_1()),
+              textAlign: TextAlign.center,
+              style: MansaFont.gettitleFont_payment_1()),
           SizedBox(
             height: 40,
           ),
           new Text(AppLocalizations.of(context).lblThanks + orderNum.toString(),
-              textAlign: TextAlign.center, style: MansaFont.gettitleFont_payment_2()),
+              textAlign: TextAlign.center,
+              style: MansaFont.gettitleFont_payment_2()),
           new Text(AppLocalizations.of(context).lblContactSoon,
-              textAlign: TextAlign.center, style: MansaFont.gettitleFont_payment_2()),
+              textAlign: TextAlign.center,
+              style: MansaFont.gettitleFont_payment_2()),
           SizedBox(
             height: 40,
           ),
-          appButtonbgimage(AppLocalizations.of(context).lblDone,
-                  () => Transfere_payment(),
-              bgColor: lightBgColor,
-              bgColor2: transColor),
+          appButtonbgimage(
+              AppLocalizations.of(context).lblDone, () => Transfere_payment(),
+              bgColor: lightBgColor, bgColor2: transColor),
         ]),
       ),
     ]);
   }
+
   userNameInputs() {
     _context = context;
 
@@ -374,69 +387,69 @@ List<ShoppingCartVM> shoppingCarts ;
   }
 
   Transfere_payment() {
-    if(_isButtonDisabled){
-      
+    if (_isButtonDisabled) {
       setState(() {
         _isButtonDisabled = false;
       });
       Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => TabBarScreen(),));
-    }
-    else {
-      if(
-        phone1Key_log.currentState.value==null||phone1Key_log.currentState.value==""||
-        // phone2Key_log.currentState.value==null||phone2Key_log.currentState.value==""||
-        //emailKey_log.currentState.value==null||emailKey_log.currentState.value==""||
-        customerNameKey_log.currentState.value==null||customerNameKey_log.currentState.value==""||
-        accountTransferKey_log.currentState.value==null||accountTransferKey_log.currentState.value==""||
-        // accountTransferToKey_log.currentState.value==null||accountTransferToKey_log.currentState.value==""||
-        nameWhoTransferKey_log.currentState.value==null||nameWhoTransferKey_log.currentState.value==""){
-          print("objectobjectobjectobjectobjectobjectobject");
-          showInSnackBar(AppLocalizations.of(_context).lblEnterYourData, _context, _scaffoldKey);
-        }else{
-          showAppLoading(_context);
-          CreatePaymentVM obj = new CreatePaymentVM();
-          //print(emailKey_log.currentState.value);
-          obj.email=emailKey_log.currentState.value;
-          obj.phone1=phone1Key_log.currentState.value;
-          obj.phone2=phone2Key_log.currentState.value;
-          obj.customerName=customerNameKey_log.currentState.value ;
-          obj.accountTransfer=accountTransferKey_log.currentState.value;
-         // obj.accountTransferTo = accountTransferToKey_log.currentState.value;
-          obj.nameWhoTransfer=nameWhoTransferKey_log.currentState.value;
-          obj.userId=user.user_Id;
-          obj.bankName=_selectedAccount;
-          obj.Orderfile=firstUpload;
-          PaymentAccountApi.createPayment(obj).then((response) {
-          if (response.code ==200 ) {
+        builder: (context) => TabBarScreen(),
+      ));
+    } else {
+      if (phone1Key_log.currentState.value == null ||
+          phone1Key_log.currentState.value == "" ||
+          // phone2Key_log.currentState.value==null||phone2Key_log.currentState.value==""||
+          //emailKey_log.currentState.value==null||emailKey_log.currentState.value==""||
+          customerNameKey_log.currentState.value == null ||
+          customerNameKey_log.currentState.value == "" ||
+          accountTransferKey_log.currentState.value == null ||
+          accountTransferKey_log.currentState.value == "" ||
+          // accountTransferToKey_log.currentState.value==null||accountTransferToKey_log.currentState.value==""||
+          nameWhoTransferKey_log.currentState.value == null ||
+          nameWhoTransferKey_log.currentState.value == "") {
+        print("objectobjectobjectobjectobjectobjectobject");
+        showInSnackBar(AppLocalizations.of(_context).lblEnterYourData, _context,
+            _scaffoldKey);
+      } else {
+        showAppLoading(_context);
+        CreatePaymentVM obj = new CreatePaymentVM();
+        //print(emailKey_log.currentState.value);
+        obj.email = emailKey_log.currentState.value;
+        obj.phone1 = phone1Key_log.currentState.value;
+        obj.phone2 = phone2Key_log.currentState.value;
+        obj.customerName = customerNameKey_log.currentState.value;
+        obj.accountTransfer = accountTransferKey_log.currentState.value;
+        // obj.accountTransferTo = accountTransferToKey_log.currentState.value;
+        obj.nameWhoTransfer = nameWhoTransferKey_log.currentState.value;
+        obj.userId = user.user_Id;
+        obj.bankName = _selectedAccount;
+        obj.Orderfile = firstUpload;
+        PaymentAccountApi.createPayment(obj).then((response) {
+          if (response.code == 200) {
             setState(() {
-            _isButtonDisabled = true;
-            orderNum=response.data;
-          });
-          hideAppDialog(_context);
-          // Navigator.of(context).push(MaterialPageRoute(
-          //                     builder: (context) => TabBarScreen(),));
-           // hideAppDialog(context);
-           // showInSnackBar("تم اضافه الخدمه الي سله الطلبات", _context, _scaffoldKey);
-           // showSnack("تم اضافه الخدمه الي سله المهملات");
+              _isButtonDisabled = true;
+              orderNum = response.data;
+            });
+            hideAppDialog(_context);
+            // Navigator.of(context).push(MaterialPageRoute(
+            //                     builder: (context) => TabBarScreen(),));
+            // hideAppDialog(context);
+            // showInSnackBar("تم اضافه الخدمه الي سله الطلبات", _context, _scaffoldKey);
+            // showSnack("تم اضافه الخدمه الي سله المهملات");
           } else {
             print("${response.message}");
             //showInSnackBar("${response.message}", context, _scaffoldKey);
           }
           setState(() {
-          //this.loginApi = false;
+            //this.loginApi = false;
           });
         }, onError: (error) {
           print("login Error : : :$error");
           setState(() {
-          // this.loginApi = false;
+            // this.loginApi = false;
           });
         });
-        
-        }
-      
+      }
     }
-
   }
 
   void showSnack(String msg, {Duration duration}) async {
@@ -448,14 +461,16 @@ List<ShoppingCartVM> shoppingCarts ;
       duration: duration == null ? Duration(seconds: 5) : duration,
     ));
   }
+
   Widget _buildCard() => Container(
         child: Form(
           key: _form_log,
           child: Column(children: [
-            
             Container(
               margin: EdgeInsets.only(right: 5, left: 5, bottom: 0, top: 20),
-              child: Text(AppLocalizations.of(context).lblPaymentTitle,//"Bank Transaction on our Bank Account",
+              child: Text(
+                  AppLocalizations.of(context)
+                      .lblPaymentTitle, //"Bank Transaction on our Bank Account",
                   textAlign: TextAlign.center,
                   style: MansaFont.gettitleFontinside()),
             ),
@@ -467,174 +482,168 @@ List<ShoppingCartVM> shoppingCarts ;
                 Text(AppLocalizations.of(context).lblAtBank),
                 Text("    "),
                 new DropdownButton(
-                              value: _selectedAccount,
-                              items: _dropDownMenuAccounts,
-                              onChanged: changedDropDownAccount,
+                  value: _selectedAccount,
+                  items: _dropDownMenuAccounts,
+                  onChanged: changedDropDownAccount,
+                )
+              ],
+            ),
+            Container(
+              height: 20,
+            ),
+            Row(children: <Widget>[
+              Container(
+                child: Text(title,
+                    textAlign: TextAlign.left,
+                    style: MansaFont.gettitleFontinside()),
+              ),
+            ]),
+            Row(children: <Widget>[
+              Container(
+                child: SelectableText(
+                  accountName, //"Akraz Al Janoub EST",
+                  showCursor: true,
+                  toolbarOptions: ToolbarOptions(
+                      copy: true, selectAll: true, cut: false, paste: false),
+                  textAlign: TextAlign.left,
+                  style: gettitleFontinside_blueV2(),
+                ),
+              ),
+              Text("    "),
+              Text(AppLocalizations.of(context).lblCopy,
+                  textAlign: TextAlign.left,
+                  style: MansaFont.gettitleFontinside()),
+            ]),
+
+            Container(
+              height: 20,
+            ),
+
+            Row(children: <Widget>[
+              Container(
+                child: Text(AppLocalizations.of(context).lblIBAN,
+                    textAlign: TextAlign.left,
+                    style: MansaFont.gettitleFontinside()),
+              ),
+            ]),
+            Row(children: <Widget>[
+              Container(
+                child: SelectableText(
+                  account_IBAN == null
+                      ? ""
+                      : account_IBAN, //"SA 6410000047890911000101",
+                  showCursor: true,
+                  toolbarOptions: ToolbarOptions(
+                      copy: true, selectAll: true, cut: false, paste: false),
+                  textAlign: TextAlign.center,
+                  style: gettitleFontinside_blueV2(),
+                ),
+              ),
+              Text("    "),
+              Text(AppLocalizations.of(context).lblCopy,
+                  textAlign: TextAlign.left,
+                  style: MansaFont.gettitleFontinside()),
+            ]),
+
+            Container(
+              height: 20,
+            ),
+            Row(children: <Widget>[
+              Container(
+                child: Text(AppLocalizations.of(context).lblAccountNo,
+                    textAlign: TextAlign.left,
+                    style: MansaFont.gettitleFontinside()),
+              ),
+            ]),
+            Row(children: <Widget>[
+              Container(
+                child: SelectableText(
+                  account_No == null ? "" : account_No, //"47890911000101",
+                  showCursor: true,
+                  toolbarOptions: ToolbarOptions(
+                      copy: true, selectAll: true, cut: false, paste: false),
+                  textAlign: TextAlign.center,
+                  style: MansaFont.gettitleFontinside_blue(),
+                ),
+              ),
+              Text("    "),
+              Text(AppLocalizations.of(context).lblCopy,
+                  textAlign: TextAlign.left,
+                  style: MansaFont.gettitleFontinside()),
+            ]),
+            Container(
+              height: 20,
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    AppLocalizations.of(context).lblCustomerName,
+                    //textAlign: TextAlign.center,
+                    style: MansaFont.baseFontStyleWithBackground(),
+                  ),
+                ),
+                Expanded(
+                  // wrap your Column in Expanded
+                  flex: 1,
+                  child: Column(
+                    children: <Widget>[
+                      TextFormField(
+                        key: customerNameKey_log,
+                        maxLines: 1,
+                        // textAlign: TextAlign.left,
+                        style: MansaFont.getLightFont(),
+                        decoration: InputDecoration(
+                          labelText:
+                              AppLocalizations.of(context).lblCustomerName,
+                          contentPadding: new EdgeInsets.symmetric(
+                              vertical: 14.0, horizontal: 10.0),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              height: 20,
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    AppLocalizations.of(context)
+                        .lblAccountTransfer, //"Account Transfered",
+                    //textAlign: TextAlign.center,
+                    style: MansaFont.baseFontStyleWithBackground(),
+                  ),
+                ),
+                (subTotal + tax) != 0.0
+                    ? Expanded(
+                        // wrap your Column in Expanded
+                        flex: 1,
+                        child: Column(
+                          children: <Widget>[
+                            TextFormField(
+                              key: accountTransferKey_log,
+                              initialValue: (subTotal + tax).round().toString(),
+                              enabled: false,
+                              keyboardType: TextInputType.number,
+                              maxLines: 1,
+                              style: MansaFont.getLightFont(),
+                              decoration: InputDecoration(
+                                labelText: AppLocalizations.of(context)
+                                    .lblAccountTransfer,
+                                contentPadding: new EdgeInsets.symmetric(
+                                    vertical: 14.0, horizontal: 10.0),
+                              ),
                             )
-              ],
-            ),
-            Container(
-              height: 20,
-            ),
-            Row(
-                children: <Widget>[
-                  Container(
-                    child: Text(title,
-                      textAlign: TextAlign.left,
-                      style: MansaFont.gettitleFontinside()
-                      ),
-                  ),
-                ]
-            ),
-            Row(
-                children: <Widget>[
-                  Container(
-                    child: SelectableText(
-                        accountName,//"Akraz Al Janoub EST",
-                        showCursor: true,
-                        toolbarOptions: ToolbarOptions(
-                            copy: true, selectAll: true, cut: false, paste: false),
-                        textAlign: TextAlign.left,
-                        style: gettitleFontinside_blueV2(),
-                      ),
-                  ),
-                  Text("    "),
-                  Text(AppLocalizations.of(context).lblCopy,
-                      textAlign: TextAlign.left,
-                      style: MansaFont.gettitleFontinside()
-                      ),
-                ]
-            ),
-
-            Container(
-              height: 20,
-            ),
-
-            Row(
-                children: <Widget>[
-                  Container(
-                    child:  Text(AppLocalizations.of(context).lblIBAN,
-                        textAlign: TextAlign.left,
-                        style: MansaFont.gettitleFontinside()),
+                          ],
                         ),
-                ]
-            ),
-            Row(
-                children: <Widget>[
-                  Container(
-                    child: SelectableText(
-                        account_IBAN==null?"":account_IBAN,//"SA 6410000047890911000101",
-                        showCursor: true,
-                        toolbarOptions: ToolbarOptions(
-                            copy: true, selectAll: true, cut: false, paste: false),
-                        textAlign: TextAlign.center,
-                        style: gettitleFontinside_blueV2(),
-                      ),
-                  ),
-                  Text("    "),
-                  Text(AppLocalizations.of(context).lblCopy,
-                      textAlign: TextAlign.left,
-                      style: MansaFont.gettitleFontinside()
-                      ),
-                ]
-            ),
-          
-            Container(
-              height: 20,
-            ),
-            Row(
-                children: <Widget>[
-                  Container(
-                    child:  Text(AppLocalizations.of(context).lblAccountNo,
-                      textAlign: TextAlign.left,
-                      style: MansaFont.gettitleFontinside()),
-                        ),
-                ]
-            ),
-            Row(
-                children: <Widget>[
-                  Container(
-                    child: SelectableText(
-                      account_No==null?"":account_No,//"47890911000101",
-                      showCursor: true,
-                      toolbarOptions: ToolbarOptions(
-                          copy: true, selectAll: true, cut: false, paste: false),
-                      textAlign: TextAlign.center,
-                      style: MansaFont.gettitleFontinside_blue(),
-                    ),
-                  ),
-                  Text("    "),
-                  Text(AppLocalizations.of(context).lblCopy,
-                      textAlign: TextAlign.left,
-                      style: MansaFont.gettitleFontinside()
-                      ),
-                ]
-            ),
-          Container(
-            height: 20,
-          ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                flex: 1,
-                child: Text(AppLocalizations.of(context).lblCustomerName, 
-                  //textAlign: TextAlign.center,
-                  style: MansaFont.baseFontStyleWithBackground(),),
-              ),
-              Expanded( // wrap your Column in Expanded
-              flex: 1,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      key: customerNameKey_log,
-                      maxLines: 1,
-                     // textAlign: TextAlign.left,
-                      style: MansaFont.getLightFont(),
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context).lblCustomerName,
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 14.0, horizontal: 10.0),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              ],
-            ),
-            Container(
-              height: 20,
-            ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                flex: 1,
-                child: Text(AppLocalizations.of(context).lblAccountTransfer,//"Account Transfered", 
-                  //textAlign: TextAlign.center,
-                  style: MansaFont.baseFontStyleWithBackground(),),
-              ),
-              (subTotal+tax)!=0.0?Expanded( // wrap your Column in Expanded
-              flex: 1,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      key: accountTransferKey_log,
-                      initialValue: (subTotal+tax).round().toString(),
-                      enabled: false,
-                      
-                      keyboardType: TextInputType.number,
-                      maxLines: 1,
-                      style: MansaFont.getLightFont(),
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context).lblAccountTransfer,
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 14.0, horizontal: 10.0),
-                      ),
-                    )
-                  ],
-                ),
-              ):Container(
-
-              ),
+                      )
+                    : Container(),
               ],
             ),
             // Container(
@@ -644,7 +653,7 @@ List<ShoppingCartVM> shoppingCarts ;
             //   children: <Widget>[
             //     Expanded(
             //     flex: 1,
-            //     child: Text(AppLocalizations.of(context).lblAccountTransferTo, 
+            //     child: Text(AppLocalizations.of(context).lblAccountTransferTo,
             //       //textAlign: TextAlign.center,
             //       style: MansaFont.baseFontStyleWithBackground(),),
             //   ),
@@ -674,29 +683,34 @@ List<ShoppingCartVM> shoppingCarts ;
             Row(
               children: <Widget>[
                 Expanded(
-                flex: 1,
-                child: Text(AppLocalizations.of(context).lblWhoTransfer,//"Name Who Transfer", 
-                  //textAlign: TextAlign.center,
-                  style: MansaFont.baseFontStyleWithBackground(),),
-              ),
-              Expanded( // wrap your Column in Expanded
-              flex: 1,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      key: nameWhoTransferKey_log,
-                      maxLines: 1,
-                      //textAlign: TextAlign.left,
-                      style: MansaFont.getLightFont(),
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context).lblWhoTransfer,
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 14.0, horizontal: 10.0),
-                      ),
-                    )
-                  ],
+                  flex: 1,
+                  child: Text(
+                    AppLocalizations.of(context)
+                        .lblWhoTransfer, //"Name Who Transfer",
+                    //textAlign: TextAlign.center,
+                    style: MansaFont.baseFontStyleWithBackground(),
+                  ),
                 ),
-              ),
+                Expanded(
+                  // wrap your Column in Expanded
+                  flex: 1,
+                  child: Column(
+                    children: <Widget>[
+                      TextFormField(
+                        key: nameWhoTransferKey_log,
+                        maxLines: 1,
+                        //textAlign: TextAlign.left,
+                        style: MansaFont.getLightFont(),
+                        decoration: InputDecoration(
+                          labelText:
+                              AppLocalizations.of(context).lblWhoTransfer,
+                          contentPadding: new EdgeInsets.symmetric(
+                              vertical: 14.0, horizontal: 10.0),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
             Container(
@@ -713,223 +727,256 @@ List<ShoppingCartVM> shoppingCarts ;
                       style: MansaFont.getBoldFontinside(),
                     ),
                   ),
-                ]
-            ),
-              Container(
-                height: 20,
-              ),    
-            Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Text(AppLocalizations.of(context).lblFirstNum+" *", 
-                  //textAlign: TextAlign.center,
-                  style: MansaFont.baseFontStyleWithBackground(),),
-              ),
-              Expanded( // wrap your Column in Expanded
-              flex: 2,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      key: phone1Key_log,
-                      maxLines: 1,
-                      keyboardType: TextInputType.number,
-                      //textAlign: TextAlign.left,
-                      style: MansaFont.getLightFont(),
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context).lblFirstNumPlaceholder,
-                        // labelStyle:
-                        // MansaFont.getLightFont_TextFormField(),
-                        // fillColor: Colors.blueGrey,
-                        // hintText: AppLocalizations.of(context).lblFirstNumPlaceholder,
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 14.0, horizontal: 10.0),
-                        // border: OutlineInputBorder(
-                        //   borderSide:
-                        //   const BorderSide(color: grey_ligth, width: 0.0),
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        // ),
-                        // focusedBorder: OutlineInputBorder(
-                        //   borderSide:
-                        //   const BorderSide(color: grey_ligth, width: 1.0),
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        // ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-
-              Expanded(
-                flex: 1,
-                child: Text(AppLocalizations.of(context).lblSecondNum, 
-                  textAlign: TextAlign.center,
-                  style: MansaFont.baseFontStyleWithBackground(),),
-              ),
-              Expanded( // wrap your Column in Expanded
-                flex: 2,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      key: phone2Key_log,
-                      maxLines: 1,
-                      keyboardType: TextInputType.number,
-                      //textAlign: TextAlign.left,
-                      style: MansaFont.getLightFont(),
-                      decoration: InputDecoration(
-                        labelText:AppLocalizations.of(context).lblSecondNumPlaceholder,
-                        // labelStyle:
-                        // MansaFont.getLightFont_TextFormField(),
-                        // fillColor: Colors.blueGrey,
-                        // hintText: AppLocalizations.of(context).lblSecondNumPlaceholder,
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 14.0, horizontal: 10.0),
-                        // border: OutlineInputBorder(
-                        //   borderSide:
-                        //   const BorderSide(color: grey_ligth, width: 0.0),
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        // ),
-                        // focusedBorder: OutlineInputBorder(
-                        //   borderSide:
-                        //   const BorderSide(color: grey_ligth, width: 1.0),
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        // ),
-                      ),
-                    )
-
-                  ],
-                ),
-              ),
-            ],
-          ),
-
-          Container(
-            height: 20,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                
-                flex: 1,
-                child: Text(AppLocalizations.of(context).lblemail, 
-                  //textAlign: TextAlign.center,
-                  style: MansaFont.baseFontStyleWithBackground(),),
-              ),
-              Expanded( // wrap your Column in Expanded
-              flex: 3,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      key: emailKey_log,
-                      maxLines: 1,
-                      //textAlign: TextAlign.left,
-                      style: MansaFont.getLightFont(),
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context).lblemail,
-                        // labelStyle:
-                        // MansaFont.getLightFont_TextFormField(),
-                        // fillColor: Colors.blueGrey,
-                        // hintText: AppLocalizations.of(context).lblEmailSample,
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 14.0, horizontal: 10.0),
-                        // border: OutlineInputBorder(
-                        //   borderSide:
-                        //   const BorderSide(color: grey_ligth, width: 0.0),
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        // ),
-                        // focusedBorder: OutlineInputBorder(
-                        //   borderSide:
-                        //   const BorderSide(color: grey_ligth, width: 1.0),
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        // ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-
-           Container(
+                ]),
+            Container(
               height: 20,
             ),
             Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    AppLocalizations.of(context).lblFirstNum + " *",
+                    //textAlign: TextAlign.center,
+                    style: MansaFont.baseFontStyleWithBackground(),
+                  ),
+                ),
+                Expanded(
+                  // wrap your Column in Expanded
+                  flex: 2,
+                  child: Column(
                     children: <Widget>[
-                      Container(
-                        width: 230,
-                        child: Column(
-                          children: <Widget>[
-                            appButtonbgimage_normal(
-                                // Strings.getupload(),
-                                //     () => Navigator.of(context).push(MaterialPageRoute(
-                                //     builder: (context) => Emarkiting_campaigns())),
-                                AppLocalizations.of(context).lblgetupload,
-                                    getImageFromGallery,
-                                bgColor: desgin_button1_start,
-                                bgColor2: desgin_button1_end),
-                            Container(
-                              child: Text(
-                                 lblFirstUpload,//AppLocalizations.of(context).lblgetupload_text
-                                textAlign: TextAlign.center,
-                                style: MansaFont.getRegularFontinside(),
-                              ),
-                            ),
-                          ],
+                      TextFormField(
+                        key: phone1Key_log,
+                        maxLines: 1,
+                        keyboardType: TextInputType.number,
+                        //textAlign: TextAlign.left,
+                        style: MansaFont.getLightFont(),
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)
+                              .lblFirstNumPlaceholder,
+                          // labelStyle:
+                          // MansaFont.getLightFont_TextFormField(),
+                          // fillColor: Colors.blueGrey,
+                          // hintText: AppLocalizations.of(context).lblFirstNumPlaceholder,
+                          contentPadding: new EdgeInsets.symmetric(
+                              vertical: 14.0, horizontal: 10.0),
+                          // border: OutlineInputBorder(
+                          //   borderSide:
+                          //   const BorderSide(color: grey_ligth, width: 0.0),
+                          //   borderRadius: BorderRadius.circular(25.0),
+                          // ),
+                          // focusedBorder: OutlineInputBorder(
+                          //   borderSide:
+                          //   const BorderSide(color: grey_ligth, width: 1.0),
+                          //   borderRadius: BorderRadius.circular(25.0),
+                          // ),
                         ),
-                      ),
-                    ]
+                      )
+                    ],
+                  ),
                 ),
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    AppLocalizations.of(context).lblSecondNum,
+                    textAlign: TextAlign.center,
+                    style: MansaFont.baseFontStyleWithBackground(),
+                  ),
+                ),
+                Expanded(
+                  // wrap your Column in Expanded
+                  flex: 2,
+                  child: Column(
+                    children: <Widget>[
+                      TextFormField(
+                        key: phone2Key_log,
+                        maxLines: 1,
+                        keyboardType: TextInputType.number,
+                        //textAlign: TextAlign.left,
+                        style: MansaFont.getLightFont(),
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)
+                              .lblSecondNumPlaceholder,
+                          // labelStyle:
+                          // MansaFont.getLightFont_TextFormField(),
+                          // fillColor: Colors.blueGrey,
+                          // hintText: AppLocalizations.of(context).lblSecondNumPlaceholder,
+                          contentPadding: new EdgeInsets.symmetric(
+                              vertical: 14.0, horizontal: 10.0),
+                          // border: OutlineInputBorder(
+                          //   borderSide:
+                          //   const BorderSide(color: grey_ligth, width: 0.0),
+                          //   borderRadius: BorderRadius.circular(25.0),
+                          // ),
+                          // focusedBorder: OutlineInputBorder(
+                          //   borderSide:
+                          //   const BorderSide(color: grey_ligth, width: 1.0),
+                          //   borderRadius: BorderRadius.circular(25.0),
+                          // ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
 
-                Container(
-                  height: 20,
+            Container(
+              height: 20,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    AppLocalizations.of(context).lblemail,
+                    //textAlign: TextAlign.center,
+                    style: MansaFont.baseFontStyleWithBackground(),
+                  ),
                 ),
+                Expanded(
+                  // wrap your Column in Expanded
+                  flex: 3,
+                  child: Column(
+                    children: <Widget>[
+                      TextFormField(
+                        key: emailKey_log,
+                        maxLines: 1,
+                        //textAlign: TextAlign.left,
+                        style: MansaFont.getLightFont(),
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context).lblemail,
+                          // labelStyle:
+                          // MansaFont.getLightFont_TextFormField(),
+                          // fillColor: Colors.blueGrey,
+                          // hintText: AppLocalizations.of(context).lblEmailSample,
+                          contentPadding: new EdgeInsets.symmetric(
+                              vertical: 14.0, horizontal: 10.0),
+                          // border: OutlineInputBorder(
+                          //   borderSide:
+                          //   const BorderSide(color: grey_ligth, width: 0.0),
+                          //   borderRadius: BorderRadius.circular(25.0),
+                          // ),
+                          // focusedBorder: OutlineInputBorder(
+                          //   borderSide:
+                          //   const BorderSide(color: grey_ligth, width: 1.0),
+                          //   borderRadius: BorderRadius.circular(25.0),
+                          // ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+
+            Container(
+              height: 20,
+            ),
+            Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    width: 230,
+                    child: Column(
+                      children: <Widget>[
+                        appButtonbgimage_normal(
+                            // Strings.getupload(),
+                            //     () => Navigator.of(context).push(MaterialPageRoute(
+                            //     builder: (context) => Emarkiting_campaigns())),
+                            AppLocalizations.of(context).lblgetupload, () {
+                          return showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              actions: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 60),
+                                  child: FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      getImageFromCamera();
+                                    },
+                                    child: Icon(Icons.camera_alt),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 30),
+                                  child: FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      getImageFromGallery();
+                                    },
+                                    child: Icon(Icons.photo_camera_back),
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                            bgColor: desgin_button1_start,
+                            bgColor2: desgin_button1_end),
+                        Container(
+                          child: Text(
+                            lblFirstUpload, //AppLocalizations.of(context).lblgetupload_text
+                            textAlign: TextAlign.center,
+                            style: MansaFont.getRegularFontinside(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ]),
+
+            Container(
+              height: 20,
+            ),
           ]),
         ),
       );
-void changedDropDownAccount(String selectedS) {
+  void changedDropDownAccount(String selectedS) {
     setState(() {
       _selectedAccount = selectedS;
-      if(selectedS=="بنك البلاد"){
+      if (selectedS == "بنك البلاد") {
         //title="الاهلي";
-        account_No=_paymentAccount.AlAhly_ACCountNO;
-        accountName=_paymentAccount.AlAhly_BankNameAr;
-        account_IBAN=_paymentAccount.AlAhly_IBAN;
-      }else if(selectedS=="الراجحي"){
+        account_No = _paymentAccount.AlAhly_ACCountNO;
+        accountName = _paymentAccount.AlAhly_BankNameAr;
+        account_IBAN = _paymentAccount.AlAhly_IBAN;
+      } else if (selectedS == "الراجحي") {
         //title="الراجحي";
-        account_No=_paymentAccount.AlRaghy_ACCountNO;
-        accountName=_paymentAccount.AlRaghy_BankNameAr;
-        account_IBAN=_paymentAccount.AlRaghy_IBAN;
-      }else if(selectedS=="البنك الأول"){
+        account_No = _paymentAccount.AlRaghy_ACCountNO;
+        accountName = _paymentAccount.AlRaghy_BankNameAr;
+        account_IBAN = _paymentAccount.AlRaghy_IBAN;
+      } else if (selectedS == "البنك الأول") {
         //title="سامبا";
-        account_No=_paymentAccount.Sampa_ACCountNO;
-        accountName=_paymentAccount.Sampa_BankNameAr;
-        account_IBAN=_paymentAccount.Sampa_IBAN;
-      }else if(selectedS=="الإنماء"){
+        account_No = _paymentAccount.Sampa_ACCountNO;
+        accountName = _paymentAccount.Sampa_BankNameAr;
+        account_IBAN = _paymentAccount.Sampa_IBAN;
+      } else if (selectedS == "الإنماء") {
         //title="الانما";
-        account_No=_paymentAccount.AlEnma_ACCountNO;
-        accountName=_paymentAccount.AlEnma_BankNameAr;
-        account_IBAN=_paymentAccount.AlEnma_IBAN;
-      }else if(selectedS=="ساب"){
+        account_No = _paymentAccount.AlEnma_ACCountNO;
+        accountName = _paymentAccount.AlEnma_BankNameAr;
+        account_IBAN = _paymentAccount.AlEnma_IBAN;
+      } else if (selectedS == "ساب") {
         //title="ساب";
-        account_No=_paymentAccount.Sap_ACCountNO;
-        accountName=_paymentAccount.Sap_BankNameAr;
-        account_IBAN=_paymentAccount.Sap_IBAN;
+        account_No = _paymentAccount.Sap_ACCountNO;
+        accountName = _paymentAccount.Sap_BankNameAr;
+        account_IBAN = _paymentAccount.Sap_IBAN;
       }
-      title=selectedS;
+      title = selectedS;
     });
   }
-List<DropdownMenuItem<String>> buildAndGetDropDownMenuItems(List _countries) {
+
+  List<DropdownMenuItem<String>> buildAndGetDropDownMenuItems(List _countries) {
     List<DropdownMenuItem<String>> items = new List();
     for (String fruit in _countries) {
       items.add(new DropdownMenuItem(value: fruit, child: new Text(fruit)));
     }
     return items;
   }
-
 }
