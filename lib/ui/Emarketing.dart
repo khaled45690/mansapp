@@ -187,15 +187,14 @@ Future<void> loadAssets() async {
     });
   }
   Future<void> loadAssetFromCamera() async {
-    final picked =
-    await ImagePicker.pickImage(source: ImageSource.camera);
+    final _picked = ImagePicker();
+   final picked =  await _picked.getImage(source: ImageSource.camera);
+
     if (picked != null) {
     print(picked.path.split('/').last);
     String fileName = picked.path.split('/').last;
-
-    ByteData byteData = await rootBundle.load(picked.path);
-    var buffer = byteData.buffer;
-    var base64Image = base64.encode(Uint8List.view(buffer));
+    final bytes = File(picked.path).readAsBytesSync();
+    String base64Image = base64Encode(bytes);
      _upload_Base64_pass_Base46_2(base64Image , fileName);
     }else {
       print("something happened");

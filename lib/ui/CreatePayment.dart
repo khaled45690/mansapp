@@ -137,7 +137,7 @@ class _CreatePaymentState extends State<CreatePayment> {
   }
   Future<void> getImageFromCamera() async {
     final image =
-    await ImagePicker.pickImage(source: ImageSource.camera , imageQuality: imageQuality);
+    await ImagePicker.pickImage(source: ImageSource.camera);
     if (image != null) {
       _upload_Base64(image);
     }else {
