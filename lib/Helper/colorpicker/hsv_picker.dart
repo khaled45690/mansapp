@@ -39,7 +39,7 @@ class HSVColorPainter extends CustomPainter {
       size.height * 0.04,
       Paint()
         ..color =
-            UseWhiteForeground(hsvColor.toColor()) ? Colors.white : Colors.black
+            useWhiteForeground(hsvColor.toColor()) ? Colors.white : Colors.black
         ..strokeWidth = 1.5
         ..style = PaintingStyle.stroke,
     );
@@ -83,7 +83,7 @@ class HSLColorPainter extends CustomPainter {
       size.height * 0.04,
       Paint()
         ..color =
-            UseWhiteForeground(hslColor.toColor()) ? Colors.white : Colors.black
+            useWhiteForeground(hslColor.toColor()) ? Colors.white : Colors.black
         ..strokeWidth = 1.5
         ..style = PaintingStyle.stroke,
     );
@@ -158,11 +158,7 @@ class TrackPainter extends CustomPainter {
           const HSVColor.fromAHSV(1.0, 300.0, 1.0, 1.0).toColor(),
           const HSVColor.fromAHSV(1.0, 360.0, 1.0, 1.0).toColor(),
         ];
-        Gradient gradient = LinearGradient(
-
-          colors: colors
-
-        );
+        Gradient gradient = LinearGradient(colors: colors);
         canvas.drawRect(rect, Paint()..shader = gradient.createShader(rect));
         break;
       case TrackType.saturation:
@@ -170,9 +166,7 @@ class TrackPainter extends CustomPainter {
           HSVColor.fromAHSV(1.0, hsvColor.hue, 0.0, 1.0).toColor(),
           HSVColor.fromAHSV(1.0, hsvColor.hue, 1.0, 1.0).toColor(),
         ];
-        Gradient gradient = LinearGradient(
-            colors: colors
-        );
+        Gradient gradient = LinearGradient(colors: colors);
         canvas.drawRect(rect, Paint()..shader = gradient.createShader(rect));
         break;
       case TrackType.value:
@@ -180,9 +174,7 @@ class TrackPainter extends CustomPainter {
           HSVColor.fromAHSV(1.0, hsvColor.hue, 1.0, 0.0).toColor(),
           HSVColor.fromAHSV(1.0, hsvColor.hue, 1.0, 1.0).toColor(),
         ];
-        Gradient gradient = LinearGradient(
-            colors: colors
-        );
+        Gradient gradient = LinearGradient(colors: colors);
         canvas.drawRect(rect, Paint()..shader = gradient.createShader(rect));
         break;
       case TrackType.lightness:
@@ -190,9 +182,7 @@ class TrackPainter extends CustomPainter {
           HSLColor.fromAHSL(1.0, hsvColor.hue, 1.0, 0.0).toColor(),
           HSLColor.fromAHSL(1.0, hsvColor.hue, 1.0, 1.0).toColor(),
         ];
-        Gradient gradient = LinearGradient(
-            colors: colors
-        );
+        Gradient gradient = LinearGradient(colors: colors);
         canvas.drawRect(rect, Paint()..shader = gradient.createShader(rect));
         break;
       case TrackType.alpha:
@@ -200,9 +190,7 @@ class TrackPainter extends CustomPainter {
           Colors.black.withOpacity(0.0),
           Colors.black.withOpacity(1.0),
         ];
-        Gradient gradient = LinearGradient(
-            colors: colors
-        );
+        Gradient gradient = LinearGradient(colors: colors);
         canvas.drawRect(rect, Paint()..shader = gradient.createShader(rect));
         break;
     }

@@ -4,7 +4,6 @@ import 'package:mansaapp/APIs/ShoppingCartApi.dart';
 import 'package:mansaapp/Constants/_buildDrawer.dart';
 import 'package:mansaapp/Constants/customcolors.dart';
 import 'package:mansaapp/Constants/strings.dart';
-import 'package:mansaapp/Helper/colorpicker/utils.dart' ;
 import 'package:mansaapp/Models/ServiceVM.dart';
 import 'package:mansaapp/Models/ShoppingCartVM.dart';
 import 'package:mansaapp/Models/UserVM.dart';
@@ -302,6 +301,7 @@ class _LogsState extends State<Logs> with WidgetsBindingObserver{
                                                   pickerAreaHeightPercent: 0.7,
                                                   enableAlpha: true,
                                                   displayThumbColor: true,
+
                                                   paletteType: PaletteType.hsv,
                                                   // pickerAreaBorderRadius: const BorderRadius.only(
                                                   //   topLeft: const Radius.circular(2.0),
@@ -363,6 +363,7 @@ class _LogsState extends State<Logs> with WidgetsBindingObserver{
                                                   pickerAreaHeightPercent: 0.7,
                                                   enableAlpha: true,
                                                   displayThumbColor: true,
+
                                                   paletteType: PaletteType.hsv,
                                                   // pickerAreaBorderRadius: const BorderRadius.only(
                                                   //   topLeft: const Radius.circular(2.0),

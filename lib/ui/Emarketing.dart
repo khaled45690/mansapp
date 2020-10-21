@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
+import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mansaapp/APIs/ServiceApi.dart';
 import 'package:mansaapp/APIs/ShoppingCartApi.dart';
@@ -40,7 +40,6 @@ import 'package:multi_image_picker/multi_image_picker.dart';
 
 import 'package:dio/dio.dart';
 
-
 class Emarketing extends StatefulWidget {
   @override
   _EmarketingState createState() => new _EmarketingState();
@@ -51,46 +50,295 @@ class _EmarketingState extends State<Emarketing> with WidgetsBindingObserver {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   GlobalKey key;
   String dropdownValue = 'One';
-  String name="";
-  String email="";
-  String imageprofile="";
-  List _countries = ["السعوديه", "مصر", "الامارات","الكويت","البحرين","قطر"];
-  List _kwaitCities=["اعاصمه","الاحمدي","الفروانية","الجهراء","حولي","مبارك الكبير"];
-  List _bahrinCities=["المنامه","المحرق","الرفاع","ستره","مدينه حمد","مدينة عيسى","جد حفص","الحد","	الدراز"];
-  List _qatarCities =["أبو الظلوف","أبو ثايله","الدوحه الجديده","الـعريش","البدع الشرقيه","الغنيم","الغارية",
-            "الهلال الغربيه","الهلال الشرقيه","الهتمي","الجسره","الجميليه","الكعبان","الخليفه","الخور","الذخيرة","الخاور","الخواير","الـمفجر"
-            ,"القابيه","المدينه الثانيه","العذبة","النجمه","الراكيات","الريان","الرويس","السالاته","السلاتة الجديدة",
-            "الصنيع","السوق","الثقب","دخان","زكريت","أم باب","مسيعيد","أم صلال على",
-            "أم ضلال محمد","أم الاحويا","أم الشخوط","أم العمد","أم عبيريه","عصاة الراعي","حوطان","الصخامه","مدينة رأس لفان "];
-  List _saudiaCities = ["مكة المكرمة", "جدة", "الطائف","القنفذة" 
-  ,"الليث","رابغ","خليص","الخرمة","رنية","تربة","الجموم",
-  "الأحساء","حفر الباطن	","الجبيل","القطيف",
-  "الخبر","الخفجي","الرياض","الدرعيه","الخرج","الدوادمي","المجمعه",
-  "القويعيه","الافلاج","وادي الدواسر","الزلفي","شقراء","حوطه بني تميم","عفيف","الغاط"
-  ,"المدينه المنوره","ينبع","العلا","مهد الذهب","الحناكيه"
-      ,"بدر","خيبر","العيص","وادي الفرع","بريده","الرس","المذنب","البكيريه"
-      ,"البدائع","الدمام","الاحساء","حفر الباطن","الجبيل","القطيف","الخبر"
-      ,"الخفجي","أبها","خميس مشيط","بيشه","النماص","محايل عسير","ظهران الجنوب"
-      ,"تثليث","تبوك","الوجه","ضيا","تيماء","أملج","حائل","بقعاء","عرعر",
-      "رفجاء","طريف","جازان","صبيا","أبو عريش","صامطه","بيش","الدرب",
-      "نجران","شروره","الباحه","بلجرشي","المندق","المخواه"
-      ,"قلوه","سكاكا","القريات","دومه الجندل"];
-  List _egyptCities = ["القاهره", "المنوفيه", "الدقهليه","الشرقيه","الغربيه","الاسماعيليه","الاسكندريه","البحر الاحمر","أسوان","سوهاج","قنا","المنيا","الجيزه","القليوبيه","البحيره","مطروح","دمياط","كفر الشيخ","بورسعيد","الاسماعيليه","السويس","شمال سينا","جنوب سينا","بني سويف","الفيوم","أسيوط","الوادي الجديد","قنا","الاقصر"];
-  List _emiratesCities = ["دبي", "أبو ظبي", "الشارقه","العين",
-      "رأس الخيمه","عجمان","الفجيره","أم القيوين","خورفكان",
-      "دبا الحصن"];
-  List _discounts = ["0%","5%","10%","15%", "20%","25%", "30%", "35%","40%","45%", "50%", "55%","60%","65%", "70%","75%", "80%","85%", "90%","95%", "100%"];
-  List _days = ["01", "02", "03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"];
-  List _months = ["01", "02", "03","04","05","06","07","08","09","10","11","12"];
-  List _years = ["2020","2021","2022" , "2023" , "2024" , "2025" , "2026" ,"2027" , "2028" , "2029" , "2030"];
-  List _sectors =["حكومي","أفراد","جمعيات خيريه"];
-List<DropdownMenuItem<String>> _dropDownMenuCountries;
-List<DropdownMenuItem<String>> _dropDownMenuCities;
-List<DropdownMenuItem<String>> _dropDownMenuDiscounts;
-List<DropdownMenuItem<String>> _dropDownMenudays;
-List<DropdownMenuItem<String>> _dropDownMenumonths;
-List<DropdownMenuItem<String>> _dropDownMenuyears;
-List<DropdownMenuItem<String>> _dropDownMenuSector;
+  String name = "";
+  String email = "";
+  String imageprofile = "";
+  List _countries = ["السعوديه", "مصر", "الامارات", "الكويت", "البحرين", "قطر"];
+  List _kwaitCities = [
+    "اعاصمه",
+    "الاحمدي",
+    "الفروانية",
+    "الجهراء",
+    "حولي",
+    "مبارك الكبير"
+  ];
+  List _bahrinCities = [
+    "المنامه",
+    "المحرق",
+    "الرفاع",
+    "ستره",
+    "مدينه حمد",
+    "مدينة عيسى",
+    "جد حفص",
+    "الحد",
+    "	الدراز"
+  ];
+  List _qatarCities = [
+    "أبو الظلوف",
+    "أبو ثايله",
+    "الدوحه الجديده",
+    "الـعريش",
+    "البدع الشرقيه",
+    "الغنيم",
+    "الغارية",
+    "الهلال الغربيه",
+    "الهلال الشرقيه",
+    "الهتمي",
+    "الجسره",
+    "الجميليه",
+    "الكعبان",
+    "الخليفه",
+    "الخور",
+    "الذخيرة",
+    "الخاور",
+    "الخواير",
+    "الـمفجر",
+    "القابيه",
+    "المدينه الثانيه",
+    "العذبة",
+    "النجمه",
+    "الراكيات",
+    "الريان",
+    "الرويس",
+    "السالاته",
+    "السلاتة الجديدة",
+    "الصنيع",
+    "السوق",
+    "الثقب",
+    "دخان",
+    "زكريت",
+    "أم باب",
+    "مسيعيد",
+    "أم صلال على",
+    "أم ضلال محمد",
+    "أم الاحويا",
+    "أم الشخوط",
+    "أم العمد",
+    "أم عبيريه",
+    "عصاة الراعي",
+    "حوطان",
+    "الصخامه",
+    "مدينة رأس لفان "
+  ];
+  List _saudiaCities = [
+    "مكة المكرمة",
+    "جدة",
+    "الطائف",
+    "القنفذة",
+    "الليث",
+    "رابغ",
+    "خليص",
+    "الخرمة",
+    "رنية",
+    "تربة",
+    "الجموم",
+    "الأحساء",
+    "حفر الباطن	",
+    "الجبيل",
+    "القطيف",
+    "الخبر",
+    "الخفجي",
+    "الرياض",
+    "الدرعيه",
+    "الخرج",
+    "الدوادمي",
+    "المجمعه",
+    "القويعيه",
+    "الافلاج",
+    "وادي الدواسر",
+    "الزلفي",
+    "شقراء",
+    "حوطه بني تميم",
+    "عفيف",
+    "الغاط",
+    "المدينه المنوره",
+    "ينبع",
+    "العلا",
+    "مهد الذهب",
+    "الحناكيه",
+    "بدر",
+    "خيبر",
+    "العيص",
+    "وادي الفرع",
+    "بريده",
+    "الرس",
+    "المذنب",
+    "البكيريه",
+    "البدائع",
+    "الدمام",
+    "الاحساء",
+    "حفر الباطن",
+    "الجبيل",
+    "القطيف",
+    "الخبر",
+    "الخفجي",
+    "أبها",
+    "خميس مشيط",
+    "بيشه",
+    "النماص",
+    "محايل عسير",
+    "ظهران الجنوب",
+    "تثليث",
+    "تبوك",
+    "الوجه",
+    "ضيا",
+    "تيماء",
+    "أملج",
+    "حائل",
+    "بقعاء",
+    "عرعر",
+    "رفجاء",
+    "طريف",
+    "جازان",
+    "صبيا",
+    "أبو عريش",
+    "صامطه",
+    "بيش",
+    "الدرب",
+    "نجران",
+    "شروره",
+    "الباحه",
+    "بلجرشي",
+    "المندق",
+    "المخواه",
+    "قلوه",
+    "سكاكا",
+    "القريات",
+    "دومه الجندل"
+  ];
+  List _egyptCities = [
+    "القاهره",
+    "المنوفيه",
+    "الدقهليه",
+    "الشرقيه",
+    "الغربيه",
+    "الاسماعيليه",
+    "الاسكندريه",
+    "البحر الاحمر",
+    "أسوان",
+    "سوهاج",
+    "قنا",
+    "المنيا",
+    "الجيزه",
+    "القليوبيه",
+    "البحيره",
+    "مطروح",
+    "دمياط",
+    "كفر الشيخ",
+    "بورسعيد",
+    "الاسماعيليه",
+    "السويس",
+    "شمال سينا",
+    "جنوب سينا",
+    "بني سويف",
+    "الفيوم",
+    "أسيوط",
+    "الوادي الجديد",
+    "قنا",
+    "الاقصر"
+  ];
+  List _emiratesCities = [
+    "دبي",
+    "أبو ظبي",
+    "الشارقه",
+    "العين",
+    "رأس الخيمه",
+    "عجمان",
+    "الفجيره",
+    "أم القيوين",
+    "خورفكان",
+    "دبا الحصن"
+  ];
+  List _discounts = [
+    "0%",
+    "5%",
+    "10%",
+    "15%",
+    "20%",
+    "25%",
+    "30%",
+    "35%",
+    "40%",
+    "45%",
+    "50%",
+    "55%",
+    "60%",
+    "65%",
+    "70%",
+    "75%",
+    "80%",
+    "85%",
+    "90%",
+    "95%",
+    "100%"
+  ];
+  List _days = [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30"
+  ];
+  List _months = [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12"
+  ];
+  List _years = [
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026",
+    "2027",
+    "2028",
+    "2029",
+    "2030"
+  ];
+  List _sectors = ["حكومي", "أفراد", "جمعيات خيريه"];
+  List<DropdownMenuItem<String>> _dropDownMenuCountries;
+  List<DropdownMenuItem<String>> _dropDownMenuCities;
+  List<DropdownMenuItem<String>> _dropDownMenuDiscounts;
+  List<DropdownMenuItem<String>> _dropDownMenudays;
+  List<DropdownMenuItem<String>> _dropDownMenumonths;
+  List<DropdownMenuItem<String>> _dropDownMenuyears;
+  List<DropdownMenuItem<String>> _dropDownMenuSector;
   String _selectedCountry;
   String _selectedCity;
   String _selectedDiscount;
@@ -101,111 +349,53 @@ List<DropdownMenuItem<String>> _dropDownMenuSector;
   String _selectedToMonth;
   String _selectedToYear;
   String _selectedSector;
-  
-   GlobalKey<FormState> _form_logo = GlobalKey<FormState>();
+
+  GlobalKey<FormState> _form_logo = GlobalKey<FormState>();
   var phone1Key_log = GlobalKey<FormFieldState>();
   var phone2Key_log = GlobalKey<FormFieldState>();
   var emailKey_log = GlobalKey<FormFieldState>();
   var desKey_log = GlobalKey<FormFieldState>();
   var destrictKey_log = GlobalKey<FormFieldState>();
 
+  String _path;
+  Map<String, String> _paths;
+  Map<String, String> _paths2;
+  String _extension;
+  String _extension2;
+  FileType _pickType = FileType.any;
+  bool _multiPick = true;
+  String uploadTxt1 = "";
+  File file;
+  String firstUpload = "";
+  String secondUpload = "";
+  int lblFirstUpload = 0;
+  int lblSecondUpload = 0;
 
-String _path;
-Map<String, String> _paths;
-Map<String, String> _paths2;
-String _extension;
-String _extension2;
-FileType _pickType=FileType.any;
-bool _multiPick = true;
-String uploadTxt1="";
-File file;
-String firstUpload="";
-String secondUpload="";
-int lblFirstUpload=0;
-int lblSecondUpload =0;
+  LatLng position;
+  String address = "اختر المكان المراد الاعلان عنه من الخريطة";
 
-LatLng position;
-String address = "اختر المكان المراد الاعلان عنه من الخريطة";
-
-
-String mailValue="";
-   List<Asset> images = List<Asset>();
-
-Future<void> loadAssets() async {
-    List<Asset> resultList = List<Asset>();
-    String error = 'No Error Dectected';
-
-    try {
-       //_pickImage(_context);
-      resultList = await MultiImagePicker.pickImages(
-        maxImages: 300,
-        enableCamera: false,
-        selectedAssets: images,
-        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
-        materialOptions: MaterialOptions(
-          //actionBarColor: "#abcdef",
-          //actionBarTitle: "Example App",
-          allViewTitle: "Choose Images",
-          //useDetailsView: false,
-          //selectCircleStrokeColor: "#000000",
-        ),
-      );
-      print("Assets");
-      String  base64Image;
-      List<MultipartFile> multipart = List<MultipartFile>();
-
-                for (int i = 0; i < resultList.length; i++) {
-                  //AssetImage('graphics/background.png')
-                 print(resultList[i].identifier);
-                 print(resultList[i]);
-                 print(resultList[i].name);
-                 ByteData byteData = await resultList[i].getByteData(quality: imageQualityForMultipleImages);
-                 List<int> imageData = byteData.buffer.asUint8List();
-                base64Image = base64Encode(imageData);
-                 print(imageData);
-                 print(base64Image);
-                  _upload_Base64_pass_Base46(base64Image , resultList[i].name);
-                //  ByteData bytes = await rootBundle.load(resultList[i].name);
-                // var buffer = bytes.buffer;
-                // var m = base64.encode(Uint8List.view(buffer));
-                // print(m);
-                } 
-      print(resultList);
-      
-    } on Exception catch (e) {
-      error = e.toString();
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-    //  images = resultList;
-     // _error = error;
-    });
-  }
-  Future<void> loadAssetFromCamera() async {
+  String mailValue = "";
+  List<Asset> images = List<Asset>();
+  Future<void> loadAssetFromCamera1() async{
     final _picked = ImagePicker();
-   final picked =  await _picked.getImage(source: ImageSource.camera);
+    final picked =  await _picked.getImage(source: ImageSource.camera);
 
     if (picked != null) {
-    print(picked.path.split('/').last);
-    String fileName = picked.path.split('/').last;
-    final bytes = File(picked.path).readAsBytesSync();
-    String base64Image = base64Encode(bytes);
-     _upload_Base64_pass_Base46_2(base64Image , fileName);
+      print(picked.path.split('/').last);
+      String fileName = picked.path.split('/').last;
+      final bytes = File(picked.path).readAsBytesSync();
+      String base64Image = base64Encode(bytes);
+      _upload_Base64_pass_Base46(base64Image , fileName);
     }else {
       print("something happened");
     }
   }
-Future<void> loadAssets2() async {
+  Future<void> loadAssets() async {
     List<Asset> resultList = List<Asset>();
     String error = 'No Error Dectected';
 
     try {
-       //_pickImage(_context);
+      //_pickImage(_context);
       resultList = await MultiImagePicker.pickImages(
         maxImages: 300,
         enableCamera: false,
@@ -220,27 +410,27 @@ Future<void> loadAssets2() async {
         ),
       );
       print("Assets");
-      String  base64Image;
+      String base64Image;
       List<MultipartFile> multipart = List<MultipartFile>();
 
-                for (int i = 0; i < resultList.length; i++) {
-                  //AssetImage('graphics/background.png')
-                 print(resultList[i].identifier);
-                 print(resultList[i]);
-                 print(resultList[i].name);
-                 ByteData byteData = await resultList[i].getByteData(quality: imageQualityForMultipleImages);
-                 List<int> imageData = byteData.buffer.asUint8List();
-                base64Image = base64Encode(imageData);
-                 print(imageData);
-                 print(base64Image);
-                  _upload_Base64_pass_Base46_2(base64Image , resultList[i].name);
-                //  ByteData bytes = await rootBundle.load(resultList[i].name);
-                // var buffer = bytes.buffer;
-                // var m = base64.encode(Uint8List.view(buffer));
-                // print(m);
-                } 
+      for (int i = 0; i < resultList.length; i++) {
+        //AssetImage('graphics/background.png')
+        print(resultList[i].identifier);
+        print(resultList[i]);
+        print(resultList[i].name);
+        ByteData byteData = await resultList[i]
+            .getByteData(quality: imageQualityForMultipleImages);
+        List<int> imageData = byteData.buffer.asUint8List();
+        base64Image = base64Encode(imageData);
+        print(imageData);
+        print(base64Image);
+        _upload_Base64_pass_Base46(base64Image, resultList[i].name);
+        //  ByteData bytes = await rootBundle.load(resultList[i].name);
+        // var buffer = bytes.buffer;
+        // var m = base64.encode(Uint8List.view(buffer));
+        // print(m);
+      }
       print(resultList);
-      
     } on Exception catch (e) {
       error = e.toString();
     }
@@ -251,85 +441,152 @@ Future<void> loadAssets2() async {
     if (!mounted) return;
 
     setState(() {
-    //  images = resultList;
-     // _error = error;
+      //  images = resultList;
+      // _error = error;
+    });
+  }
+  Future<void> loadAssetFromCamera2() async {
+    final _picked = ImagePicker();
+    final picked =  await _picked.getImage(source: ImageSource.camera);
+
+    if (picked != null) {
+      print(picked.path.split('/').last);
+      String fileName = picked.path.split('/').last;
+      final bytes = File(picked.path).readAsBytesSync();
+      String base64Image = base64Encode(bytes);
+      _upload_Base64_pass_Base46_2(base64Image , fileName);
+    }else {
+      print("something happened");
+    }
+  }
+  Future<void> loadAssets2() async {
+    List<Asset> resultList = List<Asset>();
+    String error = 'No Error Dectected';
+
+    try {
+      //_pickImage(_context);
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 300,
+        enableCamera: false,
+        selectedAssets: images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          //actionBarColor: "#abcdef",
+          //actionBarTitle: "Example App",
+          allViewTitle: "Choose Images",
+          //useDetailsView: false,
+          //selectCircleStrokeColor: "#000000",
+        ),
+      );
+      print("Assets");
+      String base64Image;
+      List<MultipartFile> multipart = List<MultipartFile>();
+
+      for (int i = 0; i < resultList.length; i++) {
+        //AssetImage('graphics/background.png')
+        print(resultList[i].identifier);
+        print(resultList[i]);
+        print(resultList[i].name);
+        ByteData byteData = await resultList[i]
+            .getByteData(quality: imageQualityForMultipleImages);
+        List<int> imageData = byteData.buffer.asUint8List();
+        base64Image = base64Encode(imageData);
+        print(imageData);
+        print(base64Image);
+        _upload_Base64_pass_Base46_2(base64Image, resultList[i].name);
+        //  ByteData bytes = await rootBundle.load(resultList[i].name);
+        // var buffer = bytes.buffer;
+        // var m = base64.encode(Uint8List.view(buffer));
+        // print(m);
+      }
+      print(resultList);
+    } on Exception catch (e) {
+      error = e.toString();
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      //  images = resultList;
+      // _error = error;
     });
   }
 
-void openFileExplorer() async {
+  void openFileExplorer() async {
     try {
-      
       _path = null;
       if (_multiPick) {
         _paths = await FilePicker.getMultiFilePath(
             type: _pickType, allowedExtensions: [_extension]);
-           // showAppLoading(_context);
-          // lblFirstUpload="Loading ....";
-        _paths.forEach((fileName, filePath) => {upload(fileName, filePath)});  
-       
+        // showAppLoading(_context);
+        // lblFirstUpload="Loading ....";
+        _paths.forEach((fileName, filePath) => {upload(fileName, filePath)});
+
         print("Length");
-        print( _paths.length); 
-       // hideAppDialog(_context); 
+        print(_paths.length);
+        // hideAppDialog(_context);
       } else {
         _path = await FilePicker.getFilePath(
             type: _pickType, allowedExtensions: [_extension]);
-           
       }
       print("pathssssssss");
       print(_paths);
-     // lblFirstUpload=_paths.length.toString();
+      // lblFirstUpload=_paths.length.toString();
     } on PlatformException catch (e) {
       print("Unsupported operation" + e.toString());
     }
-   // hideAppDialog(_context);
+    // hideAppDialog(_context);
     if (!mounted) return;
-}
-void _upload_Base64(File file) {
-  
-  UploadApi.upload_Base64AndReturnId(file).then((response) {
-      if (response.code ==200 ) {
+  }
+
+  void _upload_Base64(File file) {
+    UploadApi.upload_Base64AndReturnId(file).then((response) {
+      if (response.code == 200) {
         setState(() {
-          lblFirstUpload=lblFirstUpload+1;
-          firstUpload=firstUpload+response.data+",";
+          lblFirstUpload = lblFirstUpload + 1;
+          firstUpload = firstUpload + response.data + ",";
         });
         print(response.message);
       } else {
         print("${response.message}");
       }
     });
- }
-  void _upload_Base64_pass_Base46(String base64 , String name) {
-  
-  UploadApi.upload_Base64AndReturnId2(base64 , name).then((response) {
-      if (response.code ==200 ) {
+  }
+
+  void _upload_Base64_pass_Base46(String base64, String name) {
+    UploadApi.upload_Base64AndReturnId2(base64, name).then((response) {
+      if (response.code == 200) {
         setState(() {
-          lblFirstUpload=lblFirstUpload+1;
-          firstUpload=firstUpload+response.data+",";
+          lblFirstUpload = lblFirstUpload + 1;
+          firstUpload = firstUpload + response.data + ",";
         });
         print(response.message);
       } else {
         print("${response.message}");
       }
     });
- }
-  
+  }
+
   upload(fileName, filePath) {
     file = new File(filePath);
     _upload_Base64(file);
     _extension = fileName.toString().split('.').last;
-    setState(() {
-    });
+    setState(() {});
   }
+
 //////////////
-void openFileExplorer2() async {
+  void openFileExplorer2() async {
     try {
       _path = null;
       if (_multiPick) {
         _paths2 = await FilePicker.getMultiFilePath(
             type: _pickType, allowedExtensions: [_extension]);
-        _paths2.forEach((fileName, filePath) => {upload2(fileName, filePath)});   
+        _paths2.forEach((fileName, filePath) => {upload2(fileName, filePath)});
         print("Length");
-        print( _paths2.length); 
+        print(_paths2.length);
       } else {
         _path = await FilePicker.getFilePath(
             type: _pickType, allowedExtensions: [_extension]);
@@ -340,53 +597,52 @@ void openFileExplorer2() async {
       print("Unsupported operation" + e.toString());
     }
     if (!mounted) return;
-}
-void _upload_Base64_2(File file) {
-  UploadApi.upload_Base64AndReturnId(file).then((response) {
-      if (response.code ==200 ) {
+  }
+
+  void _upload_Base64_2(File file) {
+    UploadApi.upload_Base64AndReturnId(file).then((response) {
+      if (response.code == 200) {
         setState(() {
-          lblSecondUpload=lblSecondUpload+1;
-          secondUpload=firstUpload+response.data+",";
+          lblSecondUpload = lblSecondUpload + 1;
+          secondUpload = firstUpload + response.data + ",";
         });
-        
+
         print(response.message);
       } else {
         print("${response.message}");
       }
     });
- }
-  
-  void _upload_Base64_pass_Base46_2(String base64 , String name) {
-  
-  UploadApi.upload_Base64AndReturnId2(base64 , name).then((response) {
-      if (response.code ==200 ) {
+  }
+
+  void _upload_Base64_pass_Base46_2(String base64, String name) {
+    UploadApi.upload_Base64AndReturnId2(base64, name).then((response) {
+      if (response.code == 200) {
         setState(() {
-          lblSecondUpload=lblSecondUpload+1;
-          secondUpload=firstUpload+response.data+",";
+          lblSecondUpload = lblSecondUpload + 1;
+          secondUpload = firstUpload + response.data + ",";
         });
-        
+
         print(response.message);
       } else {
         print("${response.message}");
       }
     });
- }
-  
-  
+  }
+
   upload2(fileName, filePath) {
     file = new File(filePath);
     _upload_Base64_2(file);
     _extension = fileName.toString().split('.').last;
-    setState(() {
-    });
+    setState(() {});
   }
+
   ////////////
   ///
   @override
   Widget build(BuildContext context) {
     // TODO: implement getBody
     _context = context;
-        return Scaffold(
+    return Scaffold(
         key: _scaffoldKey,
         backgroundColor: bgColor,
         appBar: AppBar(
@@ -397,8 +653,7 @@ void _upload_Base64_2(File file) {
                   begin: const FractionalOffset(0.0, 0.0),
                   end: const FractionalOffset(0.5, 0.0),
                   stops: [0.0, 1.0],
-                  tileMode: TileMode.clamp
-              ),
+                  tileMode: TileMode.clamp),
             ),
           ),
           title: new Text(
@@ -406,708 +661,702 @@ void _upload_Base64_2(File file) {
             style: MansaFont.baseFontStyle(),
           ),
           centerTitle: true,
-            automaticallyImplyLeading: true,
-            elevation: 0.0,
-            leading: new IconButton(
-                  icon: new IconButton(icon:
-                   new Image.asset("images/asset17.png")),iconSize: 40.0,
-                  onPressed: () => _scaffoldKey.currentState.openDrawer()
-              ),
-            actions: <Widget>[
-              IconButton(icon: AppLocalizations.of(context).locale=="en" ? Image.asset("images/1-01.png") : Image.asset("images/asset32.png"),iconSize: 30.0,
+          automaticallyImplyLeading: true,
+          elevation: 0.0,
+          leading: new IconButton(
+              icon: new IconButton(icon: new Image.asset("images/asset17.png")),
+              iconSize: 40.0,
+              onPressed: () => _scaffoldKey.currentState.openDrawer()),
+          actions: <Widget>[
+            IconButton(
+                icon: AppLocalizations.of(context).locale == "en"
+                    ? Image.asset("images/1-01.png")
+                    : Image.asset("images/asset32.png"),
+                iconSize: 30.0,
                 onPressed: () => Navigator.of(context).pop()),
-            ],
+          ],
         ),
-    body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
-        child: Form(
-          key: _form_logo,
-        child: Column(children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(right: 0, left: 0, bottom: 0, top: 20),
-            width: MediaQuery.of(context).size.width,
-            color: grey_ligth,
-            child: Column(mainAxisSize: MainAxisSize.max, children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                        children: <Widget>[
-                          Text(
-                            AppLocalizations.of(context).lblCountry,
-                            textAlign: TextAlign.center,
-                            style: MansaFont.getBoldFontinside(),
-                          ),
-                          Container(
-                            child: new DropdownButton(
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(20),
+          child: Form(
+            key: _form_logo,
+            child: Column(children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(right: 0, left: 0, bottom: 0, top: 20),
+                width: MediaQuery.of(context).size.width,
+                color: grey_ligth,
+                child: Column(mainAxisSize: MainAxisSize.max, children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              AppLocalizations.of(context).lblCountry,
+                              textAlign: TextAlign.center,
+                              style: MansaFont.getBoldFontinside(),
+                            ),
+                            Container(
+                                child: new DropdownButton(
                               value: _selectedCountry,
                               items: _dropDownMenuCountries,
                               onChanged: changedDropDownCountry,
                             )
-                           // DropdownCountryExample("قم بالاختيار"),
-                          ),
-                        ],
+                                // DropdownCountryExample("قم بالاختيار"),
+                                ),
+                          ],
+                        ),
                       ),
-                  ),
-                  
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                        children: <Widget>[
-                          Text(
-                            AppLocalizations.of(context).lblCity,
-                            textAlign: TextAlign.center,
-                            style: MansaFont.getBoldFontinside(),
-                          ),
-                          Container(
-                            child: new DropdownButton(
+
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              AppLocalizations.of(context).lblCity,
+                              textAlign: TextAlign.center,
+                              style: MansaFont.getBoldFontinside(),
+                            ),
+                            Container(
+                                child: new DropdownButton(
                               value: _selectedCity,
                               items: _dropDownMenuCities,
                               onChanged: changedDropDownCity,
                             )
-                            //DropdownExample("قم بالاختيار"),
-                          ),
-                        ],
+                                //DropdownExample("قم بالاختيار"),
+                                ),
+                          ],
+                        ),
                       ),
+
+                      // Expanded(
+                      //   flex: 1,
+                      //   child: Text(
+                      //       AppLocalizations.of(context).lblCity,
+                      //       textAlign: TextAlign.center,
+                      //       style: MansaFont.getBoldFontinside(),
+                      //     ),
+                      // ),
+                      // Expanded( // wrap your Column in Expanded
+                      // flex: 3,
+                      //   child: Container(
+                      //       child: DropdownExample("قم بالاختيار"),
+                      //     ),
+                      // ),
+                    ],
                   ),
-                  
-                  // Expanded(
-                  //   flex: 1,
-                  //   child: Text(
-                  //       AppLocalizations.of(context).lblCity,
-                  //       textAlign: TextAlign.center,
-                  //       style: MansaFont.getBoldFontinside(),
-                  //     ),
-                  // ),
-                  // Expanded( // wrap your Column in Expanded
-                  // flex: 3,
-                  //   child: Container(
-                  //       child: DropdownExample("قم بالاختيار"),
-                  //     ),
-                  // ),
-                ],
+                  Container(
+                    height: 5,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              AppLocalizations.of(context).lblSector,
+                              textAlign: TextAlign.center,
+                              style: MansaFont.getBoldFontinside(),
+                            ),
+                            Container(
+                                child: new DropdownButton(
+                              value: _selectedSector,
+                              items: _dropDownMenuSector,
+                              onChanged: changedDropDownSector,
+                            )
+                                //DropdownDistrictExample("قم بالاختيار"),
+                                ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              AppLocalizations.of(context).lblDistrict + " * ",
+                              textAlign: TextAlign.center,
+                              style: MansaFont.getBoldFontinside(),
+                            ),
+                            Container(
+                              child: TextFormField(
+                                key: destrictKey_log,
+                                maxLines: 1,
+                                textAlign:
+                                    AppLocalizations.of(context).locale == "en"
+                                        ? TextAlign.left
+                                        : TextAlign.right,
+                                style: MansaFont.getLightFont(),
+                                decoration: InputDecoration(
+                                  labelText:
+                                      AppLocalizations.of(context).lblDistrict +
+                                          " *",
+                                  // labelStyle:
+                                  // MansaFont.getLightFont_TextFormField(),
+                                  // fillColor: Colors.blueGrey,
+                                  // hintText: AppLocalizations.of(context).lblFirstNumPlaceholder,
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical: 14.0, horizontal: 10.0),
+                                  // border: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 0.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                  // focusedBorder: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 1.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: 5,
+                  ),
+                ]),
               ),
+
               Container(
-                height: 5,
+                height: 20,
+              ),
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      child: Text(
+                        AppLocalizations.of(context).lblContact_with,
+                        textAlign: TextAlign.center,
+                        style: MansaFont.getBoldFontinside(),
+                      ),
+                    ),
+                  ]),
+              Container(
+                height: 20,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                
                   Expanded(
                     flex: 1,
-                    child: Column(
-                        children: <Widget>[
-                          Text(
-                            AppLocalizations.of(context).lblSector,
-                            textAlign: TextAlign.center,
-                            style: MansaFont.getBoldFontinside(),
-                          ),
-                          Container(
-                            child: new DropdownButton(
-                              value: _selectedSector,
-                              items: _dropDownMenuSector,
-                              onChanged: changedDropDownSector,
-                            )
-                            //DropdownDistrictExample("قم بالاختيار"),
-                          ),
-                        ],
-                      ),
+                    child: Text(
+                      AppLocalizations.of(context).lblFirstNum + " *",
+                      //textAlign: TextAlign.center,
+                      style: MansaFont.baseFontStyleWithBackground(),
+                    ),
                   ),
-                  
+                  Expanded(
+                    // wrap your Column in Expanded
+                    flex: 2,
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          key: phone1Key_log,
+                          maxLines: 1,
+                          keyboardType: TextInputType.number,
+                          textAlign: AppLocalizations.of(context).locale == "en"
+                              ? TextAlign.left
+                              : TextAlign.right,
+                          style: MansaFont.getLightFont(),
+                          decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context)
+                                .lblFirstNumPlaceholder,
+                            // labelStyle:
+                            // MansaFont.getLightFont_TextFormField(),
+                            // fillColor: Colors.blueGrey,
+                            // hintText: AppLocalizations.of(context).lblFirstNumPlaceholder,
+                            contentPadding: new EdgeInsets.symmetric(
+                                vertical: 14.0, horizontal: 10.0),
+                            // border: OutlineInputBorder(
+                            //   borderSide:
+                            //   const BorderSide(color: grey_ligth, width: 0.0),
+                            //   borderRadius: BorderRadius.circular(25.0),
+                            // ),
+                            // focusedBorder: OutlineInputBorder(
+                            //   borderSide:
+                            //   const BorderSide(color: grey_ligth, width: 1.0),
+                            //   borderRadius: BorderRadius.circular(25.0),
+                            // ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                   Expanded(
                     flex: 1,
+                    child: Text(
+                      AppLocalizations.of(context).lblSecondNum,
+                      textAlign: TextAlign.center,
+                      style: MansaFont.baseFontStyleWithBackground(),
+                    ),
+                  ),
+                  Expanded(
+                    // wrap your Column in Expanded
+                    flex: 2,
                     child: Column(
-                        children: <Widget>[
-                          Text(
-                            AppLocalizations.of(context).lblDistrict+" * ",
-                            textAlign: TextAlign.center,
-                            style: MansaFont.getBoldFontinside(),
+                      children: <Widget>[
+                        TextFormField(
+                          key: phone2Key_log,
+                          maxLines: 1,
+                          keyboardType: TextInputType.number,
+                          textAlign: AppLocalizations.of(context).locale == "en"
+                              ? TextAlign.left
+                              : TextAlign.right,
+                          style: MansaFont.getLightFont(),
+                          decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context)
+                                .lblSecondNumPlaceholder,
+                            // labelStyle:
+                            // MansaFont.getLightFont_TextFormField(),
+                            // fillColor: Colors.blueGrey,
+                            // hintText: AppLocalizations.of(context).lblSecondNumPlaceholder,
+                            contentPadding: new EdgeInsets.symmetric(
+                                vertical: 14.0, horizontal: 10.0),
+                            // border: OutlineInputBorder(
+                            //   borderSide:
+                            //   const BorderSide(color: grey_ligth, width: 0.0),
+                            //   borderRadius: BorderRadius.circular(25.0),
+                            // ),
+                            // focusedBorder: OutlineInputBorder(
+                            //   borderSide:
+                            //   const BorderSide(color: grey_ligth, width: 1.0),
+                            //   borderRadius: BorderRadius.circular(25.0),
+                            // ),
                           ),
-                          Container(
-                            child: TextFormField(
-                              key: destrictKey_log ,
-                            maxLines: 1,
-                            textAlign:  AppLocalizations.of(context).locale=="en"?TextAlign.left:TextAlign.right,
-                            style: MansaFont.getLightFont(),
-                            decoration: InputDecoration(
-                              labelText: AppLocalizations.of(context).lblDistrict+" *",
-                              // labelStyle:
-                              // MansaFont.getLightFont_TextFormField(),
-                              // fillColor: Colors.blueGrey,
-                              // hintText: AppLocalizations.of(context).lblFirstNumPlaceholder,
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: 14.0, horizontal: 10.0),
-                              // border: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 0.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
-                              // focusedBorder: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 1.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
-                            ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              Container(
+                height: 20,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: Text(
+                      AppLocalizations.of(context).lblemail,
+                      //textAlign: TextAlign.center,
+                      style: MansaFont.baseFontStyleWithBackground(),
+                    ),
+                  ),
+                  Expanded(
+                    // wrap your Column in Expanded
+                    flex: 3,
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          key: emailKey_log,
+                          maxLines: 1,
+                          initialValue: mailValue,
+                          textAlign: AppLocalizations.of(context).locale == "en"
+                              ? TextAlign.left
+                              : TextAlign.right,
+                          style: MansaFont.getLightFont(),
+                          decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context).lblemail,
+                            // labelStyle:
+                            // MansaFont.getLightFont_TextFormField(),
+                            // fillColor: Colors.blueGrey,
+                            // hintText: AppLocalizations.of(context).lblEmailSample,
+                            contentPadding: new EdgeInsets.symmetric(
+                                vertical: 14.0, horizontal: 10.0),
+                            // border: OutlineInputBorder(
+                            //   borderSide:
+                            //   const BorderSide(color: grey_ligth, width: 0.0),
+                            //   borderRadius: BorderRadius.circular(25.0),
+                            // ),
+                            // focusedBorder: OutlineInputBorder(
+                            //   borderSide:
+                            //   const BorderSide(color: grey_ligth, width: 1.0),
+                            //   borderRadius: BorderRadius.circular(25.0),
+                            // ),
                           ),
-                          ),
-                        ],
-                      ),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),
               Container(
+                height: 20,
+              ),
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              child: Image.asset(
+                                'images/asset34.png',
+                                height: 20,
+                                //width: 20,
+                                fit: BoxFit.fill,
+                                alignment: Alignment.center,
+                              ),
+                            ),
+                            Container(
+                              width: 10,
+                            ),
+                            Column(
+                              children: <Widget>[
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      mailValue =
+                                          emailKey_log.currentState.value;
+                                    });
+
+                                    return showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        actions: <Widget>[
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.only(left: 60),
+                                            child: FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                loadAssetFromCamera1();
+                                              },
+                                              child: Icon(Icons.camera_alt),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.only(left: 30),
+                                            child: FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                loadAssets();
+                                              },
+                                              child:
+                                              Icon(Icons.photo_camera_back),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    child: Image.asset(
+                                      AppLocalizations.of(context).locale ==
+                                              "en"
+                                          ? 'images/asset311.png'
+                                          : 'images/assetAr31.png',
+                                      height: 20,
+
+                                      // width: 250,
+                                      fit: BoxFit.fill,
+                                      alignment: Alignment.center,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 20,
+                                ),
+                                Text(
+                                  AppLocalizations.of(context).locale == "en"
+                                      ? " Uploaded " +
+                                          lblFirstUpload.toString() +
+                                          " Images "
+                                      : "* تم رفع " +
+                                          lblFirstUpload.toString() +
+                                          " صور  ",
+                                  textAlign: TextAlign.center,
+                                  style: MansaFont.getBoldFontinside_V2(),
+                                ),
+                              ],
+                            ),
+                          ]),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              child: Image.asset(
+                                'images/asset34.png',
+                                height: 20,
+                                //width: 20,
+                                fit: BoxFit.fill,
+                                alignment: Alignment.center,
+                              ),
+                            ),
+                            Container(
+                              width: 10,
+                            ),
+                            Column(
+                              children: <Widget>[
+                                GestureDetector(
+                                  onTap: () {
+                                    return showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        actions: <Widget>[
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 60),
+                                            child: FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                 loadAssetFromCamera2();
+                                              },
+                                              child: Icon(Icons.camera_alt),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 30),
+                                            child: FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                loadAssets2();
+                                              },
+                                              child:
+                                                  Icon(Icons.photo_camera_back),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    child: Image.asset(
+                                      AppLocalizations.of(context).locale ==
+                                              "en"
+                                          ? 'images/assetCerEn.PNG'
+                                          : 'images/filesAndDocs.png',
+                                      height: 20,
+                                      width: 100,
+                                      fit: BoxFit.fill,
+                                      alignment: Alignment.center,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 20,
+                                ),
+                                Text(
+                                  AppLocalizations.of(context).locale == "en"
+                                      ? "* Uploaded " +
+                                          lblSecondUpload.toString() +
+                                          " Images *"
+                                      : "* تم رفع " +
+                                          lblSecondUpload.toString() +
+                                          " صور  *",
+                                  textAlign: TextAlign.center,
+                                  style: MansaFont.getBoldFontinside_V2(),
+                                ),
+                              ],
+                            ),
+                          ]),
+                    ),
+                  ]),
+              Container(
+                height: 20,
+              ),
+              Container(
+                height: 10,
+              ),
+
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      child: Text(
+                        AppLocalizations.of(context).lblDiscount,
+                        textAlign: TextAlign.center,
+                        style: MansaFont.getRegularFontinside(),
+                      ),
+                    ),
+                    Container(
+                      width: 5,
+                    ),
+                    Container(
+                        child: new DropdownButton(
+                      value: _selectedDiscount,
+                      items: _dropDownMenuDiscounts,
+                      onChanged: changedDropDownDiscount,
+                    )
+                        //DropdownDiscount("0%"),
+                        ),
+                    Container(
+                      width: 10,
+                    ),
+                    Container(
+                      child: Text(
+                        AppLocalizations.of(context)
+                            .lblFor_Application_Customers,
+                        textAlign: TextAlign.center,
+                        style: MansaFont.getRegularFontinside2(),
+                      ),
+                    ),
+                  ]),
+              Container(
                 height: 5,
               ),
-            ]),
-          ),
-          
-          Container(
-            height: 20,
-          ),
-          Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    AppLocalizations.of(context).lblContact_with,
-                    textAlign: TextAlign.center,
-                    style: MansaFont.getBoldFontinside(),
-                  ),
-                ),
-              ]),
-          Container(
-            height: 20,
-          ),
-           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Text(AppLocalizations.of(context).lblFirstNum+" *", 
-                  //textAlign: TextAlign.center,
-                  style: MansaFont.baseFontStyleWithBackground(),),
-              ),
-              Expanded( // wrap your Column in Expanded
-              flex: 2,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      key: phone1Key_log,
-                      maxLines: 1,
-                      keyboardType: TextInputType.number,
-                      textAlign:  AppLocalizations.of(context).locale=="en"?TextAlign.left:TextAlign.right,
-                      style: MansaFont.getLightFont(),
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context).lblFirstNumPlaceholder,
-                        // labelStyle:
-                        // MansaFont.getLightFont_TextFormField(),
-                        // fillColor: Colors.blueGrey,
-                        // hintText: AppLocalizations.of(context).lblFirstNumPlaceholder,
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 14.0, horizontal: 10.0),
-                        // border: OutlineInputBorder(
-                        //   borderSide:
-                        //   const BorderSide(color: grey_ligth, width: 0.0),
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        // ),
-                        // focusedBorder: OutlineInputBorder(
-                        //   borderSide:
-                        //   const BorderSide(color: grey_ligth, width: 1.0),
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        // ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Text(AppLocalizations.of(context).lblSecondNum, 
-                  textAlign: TextAlign.center,
-                  style: MansaFont.baseFontStyleWithBackground(),),
-              ),
-              Expanded( // wrap your Column in Expanded
-                flex: 2,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      key: phone2Key_log,
-                      maxLines: 1,
-                      keyboardType: TextInputType.number,
-                      textAlign:  AppLocalizations.of(context).locale=="en"?TextAlign.left:TextAlign.right,
-                      style: MansaFont.getLightFont(),
-                      decoration: InputDecoration(
-                        labelText:AppLocalizations.of(context).lblSecondNumPlaceholder,
-                        // labelStyle:
-                        // MansaFont.getLightFont_TextFormField(),
-                        // fillColor: Colors.blueGrey,
-                        // hintText: AppLocalizations.of(context).lblSecondNumPlaceholder,
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 14.0, horizontal: 10.0),
-                        // border: OutlineInputBorder(
-                        //   borderSide:
-                        //   const BorderSide(color: grey_ligth, width: 0.0),
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        // ),
-                        // focusedBorder: OutlineInputBorder(
-                        //   borderSide:
-                        //   const BorderSide(color: grey_ligth, width: 1.0),
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        // ),
-                      ),
-                    )
 
-                  ],
-                ),
-              ),
-            ],
-          ),
-
-          Container(
-            height: 20,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Text(AppLocalizations.of(context).lblemail, 
-                  //textAlign: TextAlign.center,
-                  style: MansaFont.baseFontStyleWithBackground(),),
-              ),
-              Expanded( // wrap your Column in Expanded
-              flex: 3,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      key: emailKey_log,
-                      maxLines: 1,
-                      initialValue: mailValue,
-                      textAlign:  AppLocalizations.of(context).locale=="en"?TextAlign.left:TextAlign.right,
-                      style: MansaFont.getLightFont(),
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context).lblemail,
-                        // labelStyle:
-                        // MansaFont.getLightFont_TextFormField(),
-                        // fillColor: Colors.blueGrey,
-                        // hintText: AppLocalizations.of(context).lblEmailSample,
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 14.0, horizontal: 10.0),
-                        // border: OutlineInputBorder(
-                        //   borderSide:
-                        //   const BorderSide(color: grey_ligth, width: 0.0),
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        // ),
-                        // focusedBorder: OutlineInputBorder(
-                        //   borderSide:
-                        //   const BorderSide(color: grey_ligth, width: 1.0),
-                        //   borderRadius: BorderRadius.circular(25.0),
-                        // ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Container(
-            height: 20,
-          ),
-          Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Row(
+              Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                      child: Image.asset(
-                        'images/asset34.png',
-                        height: 20,
-                        //width: 20,
-                        fit: BoxFit.fill,
-                        alignment: Alignment.center,
+                      child: Text(
+                        AppLocalizations.of(context).lblFrom,
+                        textAlign: TextAlign.center,
+                        style: MansaFont.getRegularFontinside(),
                       ),
                     ),
                     Container(
-                      width: 10,
-                    ),
-                    Column(
-                            children: <Widget>[
-                              GestureDetector(
-                            onTap: (){
-                              setState(() {
-                                mailValue = emailKey_log.currentState.value;
-                              });
-                              return showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-
-                                  actions: <Widget>[
-
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 60),
-                                      child: FlatButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                          loadAssetFromCamera();
-                                        },
-                                        child: Icon(Icons.camera_alt),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 30),
-                                      child: FlatButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                          loadAssets2();
-                                        },
-                                        child: Icon(Icons.photo_camera_back),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
-                            child: Container(
-                            child: Image.asset(
-                               AppLocalizations.of(context).locale=="en" ?'images/asset311.png':'images/assetAr31.png',
-                              height: 20,
-
-                             // width: 250,
-                              fit: BoxFit.fill,
-                              alignment: Alignment.center,
-
-                            ),
-
-                          ),
-                          ),
-                          Container(
-                            width: 20,
-                          ),
-                          Text(
-                            AppLocalizations.of(context).locale=="en" ? "* Uploaded "+ lblSecondUpload.toString()+" Images *":"* تم رفع "+ lblSecondUpload.toString()+" صور  *",
-                            textAlign: TextAlign.center,
-                            style: MansaFont.getBoldFontinside_V2(),
-                            ),
-                            ],
-                          ),
-                  ]
-
-              ),
-              ),
-              Expanded(
-              flex: 1,
-              child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      child: Image.asset(
-                        'images/asset34.png',
-                        height: 20,
-                        //width: 20,
-                        fit: BoxFit.fill,
-                        alignment: Alignment.center,
-                      ),
+                      width: 5,
                     ),
                     Container(
-                      width: 10,
-                    ),
-                    Column(
-                            children: <Widget>[
-                              GestureDetector(
-                            onTap: (){
-                              // loadAssets2
-                              return showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-
-                                    actions: <Widget>[
-
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 60),
-                                        child: FlatButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                            loadAssetFromCamera();
-                                          },
-                                          child: Icon(Icons.camera_alt),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 30),
-                                        child: FlatButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                              loadAssets2();
-                                            },
-                                          child: Icon(Icons.photo_camera_back),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                              );
-                            },
-                            child: Container(
-                            child: Image.asset(
-                               AppLocalizations.of(context).locale=="en" ?'images/assetCerEn.PNG':'images/filesAndDocs.png',
-                              height: 20,
-                              width: 100,
-                              fit: BoxFit.fill,
-                              alignment: Alignment.center,
-
-                            ),
-
-                          ),
-                          ),
-                          Container(
-                            width: 20,
-                          ),
-                          Text(
-                             AppLocalizations.of(context).locale=="en" ? "* Uploaded "+ lblSecondUpload.toString()+" Images *":"* تم رفع "+ lblSecondUpload.toString()+" صور  *",
-                              textAlign: TextAlign.center,
-                              style: MansaFont.getBoldFontinside_V2(),
-                            ),
-                            ],
-                          ),
-                  ]
-
-              ),
-              ),
-            
-          ]
-
-      ),
-       Container(
-          height: 20,
-        ),
-      Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Expanded( // wrap your Column in Expanded
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                key: desKey_log,
-                maxLines: 3,
-                textAlign:  AppLocalizations.of(context).locale=="en"?TextAlign.left:TextAlign.right,
-                style: MansaFont.getLightFont(),
-                decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context).lblDescriptionPlaceholder +" *",
-                  labelStyle:
-                  MansaFont.getLightFont_TextFormField(),
-                  // fillColor: Colors.blueGrey,
-                  // hintText: AppLocalizations.of(context).lblDescriptionPlaceholder,
-                  contentPadding: new EdgeInsets.symmetric(
-                      vertical: 14.0, horizontal: 10.0),
-                  border: OutlineInputBorder(
-                    borderSide:
-                    const BorderSide(color: Colors.grey, width: 0.0),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide:
-                    const BorderSide(color: Colors.grey, width: 1.0),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-              )
-
-            ],
-          ),
-        ),
-      ],
-    ),
-      Container(
-        height: 10,
-      ),
-
-
-                Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          AppLocalizations.of(context).lblDiscount,
-                          textAlign: TextAlign.center,
-                          style: MansaFont.getRegularFontinside(),
-                        ),
-                      ),
-                      Container(
-                        width: 5,
-                      ),
-                      Container(
                         child: new DropdownButton(
-                              value: _selectedDiscount,
-                              items: _dropDownMenuDiscounts,
-                              onChanged: changedDropDownDiscount,
-                            )
-                            //DropdownDiscount("0%"),
-                      ),
-                      Container(
-                        width: 10,
-                      ),
-                      Container(
-                        child: Text(
-                          AppLocalizations.of(context).lblFor_Application_Customers,
-                          textAlign: TextAlign.center,
-                          style: MansaFont.getRegularFontinside2(),
-                        ),
-                      ),
-                    ]),
-                Container(
-                  height: 5,
-                ),
-
-                Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          AppLocalizations.of(context).lblFrom,
-                          textAlign: TextAlign.center,
-                          style: MansaFont.getRegularFontinside(),
-                        ),
-                      ),
-                      Container(
-                        width: 5,
-                      ),
-                      Container(
-                        child: new DropdownButton(
-                              value: _selectedfromDay,
-                              items: _dropDownMenudays,
-                              onChanged: changedDropDownfromday,
-                            )
-                            //Dropdowndays("1"),
-                      ),
-                      Container(
-                        width: 5,
-                      ),
-                      Container(
-                        child:new DropdownButton(
-                              value: _selectedfromMonth,
-                              items: _dropDownMenumonths,
-                              onChanged: changedDropDownfrommonth,
-                            )
-                        // Dropdown_month("1"),
-                      ),
-                      Container(
-                        width: 5,
-                      ),
-                      Container(
-                        child: new DropdownButton(
-                              value: _selectedfromYear,
-                              items: _dropDownMenuyears,
-                              onChanged: changedDropDownfromyear,
-                            )
-                        //Dropdownyear("2020"),
-                      ),
-                      Container(
-                        width: 5,
-                      ),
-                    ]),
-                Container(
-                  height: 20,
-                ),
-                
-                Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          AppLocalizations.of(context).lblUnit,
-                          textAlign: TextAlign.center,
-                          style: MansaFont.getRegularFontinside(),
-                        ),
-                      ),
-                      Container(
-                        width: 5,
-                      ),
-                      Container(
-                        child:new DropdownButton(
-                              value: _selectedToDay,
-                              items: _dropDownMenudays,
-                              onChanged: changedDropDowntoday,
-                            )
+                      value: _selectedfromDay,
+                      items: _dropDownMenudays,
+                      onChanged: changedDropDownfromday,
+                    )
                         //Dropdowndays("1"),
-                      ),
-                      Container(
-                        width: 5,
-                      ),
-                      Container(
+                        ),
+                    Container(
+                      width: 5,
+                    ),
+                    Container(
                         child: new DropdownButton(
-                              value: _selectedToMonth,
-                              items: _dropDownMenumonths,
-                              onChanged: changedDropDowntomonth,
-                            )
+                      value: _selectedfromMonth,
+                      items: _dropDownMenumonths,
+                      onChanged: changedDropDownfrommonth,
+                    )
+                        // Dropdown_month("1"),
+                        ),
+                    Container(
+                      width: 5,
+                    ),
+                    Container(
+                        child: new DropdownButton(
+                      value: _selectedfromYear,
+                      items: _dropDownMenuyears,
+                      onChanged: changedDropDownfromyear,
+                    )
+                        //Dropdownyear("2020"),
+                        ),
+                    Container(
+                      width: 5,
+                    ),
+                  ]),
+              Container(
+                height: 20,
+              ),
+
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      child: Text(
+                        AppLocalizations.of(context).lblUnit,
+                        textAlign: TextAlign.center,
+                        style: MansaFont.getRegularFontinside(),
+                      ),
+                    ),
+                    Container(
+                      width: 5,
+                    ),
+                    Container(
+                        child: new DropdownButton(
+                      value: _selectedToDay,
+                      items: _dropDownMenudays,
+                      onChanged: changedDropDowntoday,
+                    )
+                        //Dropdowndays("1"),
+                        ),
+                    Container(
+                      width: 5,
+                    ),
+                    Container(
+                        child: new DropdownButton(
+                      value: _selectedToMonth,
+                      items: _dropDownMenumonths,
+                      onChanged: changedDropDowntomonth,
+                    )
                         //Dropdown_month("1"),
-                      ),
-                      Container(
-                        width: 5,
-                      ),
-                      Container(
+                        ),
+                    Container(
+                      width: 5,
+                    ),
+                    Container(
                         child: new DropdownButton(
-                              value: _selectedToYear,
-                              items: _dropDownMenuyears,
-                              onChanged: changedDropDowntoyear,
-                            )
-                            //Dropdownyear("2020"),
-                      ),
-                      Container(
-                        width: 5,
-                      ),
-                    ]),
-                Container(
-                  height: 20,
-                ),
-                
-                
-                // Row(
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     children: <Widget>[
-                //       Container(
-                //         width: 230,
-                //         child: Column(
-                //           children: <Widget>[
-                //             appButtonbgimage_normal(
-                //                 // Strings.getupload(),
-                //                 //     () => Navigator.of(context).push(MaterialPageRoute(
-                //                 //     builder: (context) => Emarkiting_campaigns())),
-                //                 AppLocalizations.of(context).lblgetupload,
-                //                     () => Navigator.of(context).push(MaterialPageRoute(
-                //                     builder: (context) => AboutApp())),
-                //                 bgColor: desgin_button1_start,
-                //                 bgColor2: desgin_button1_end),
-                //             Container(
-                //               child: Text(
-                //                 AppLocalizations.of(context).lblgetupload_text,
-                //                 textAlign: TextAlign.center,
-                //                 style: MansaFont.getRegularFontinside(),
-                //               ),
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //     ]
-                // ),
+                      value: _selectedToYear,
+                      items: _dropDownMenuyears,
+                      onChanged: changedDropDowntoyear,
+                    )
+                        //Dropdownyear("2020"),
+                        ),
+                    Container(
+                      width: 5,
+                    ),
+                  ]),
+              Container(
+                height: 20,
+              ),
+
+
+
+              // Row(
+              //     crossAxisAlignment: CrossAxisAlignment.center,
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: <Widget>[
+              //       Container(
+              //         width: 230,
+              //         child: Column(
+              //           children: <Widget>[
+              //             appButtonbgimage_normal(
+              //                 // Strings.getupload(),
+              //                 //     () => Navigator.of(context).push(MaterialPageRoute(
+              //                 //     builder: (context) => Emarkiting_campaigns())),
+              //                 AppLocalizations.of(context).lblgetupload,
+              //                     () => Navigator.of(context).push(MaterialPageRoute(
+              //                     builder: (context) => AboutApp())),
+              //                 bgColor: desgin_button1_start,
+              //                 bgColor2: desgin_button1_end),
+              //             Container(
+              //               child: Text(
+              //                 AppLocalizations.of(context).lblgetupload_text,
+              //                 textAlign: TextAlign.center,
+              //                 style: MansaFont.getRegularFontinside(),
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //     ]
+              // ),
 
               //  Container(
               //     height: 20,
@@ -1115,259 +1364,320 @@ void _upload_Base64_2(File file) {
               //   Container(
               //     child: Text(service==null?"":AppLocalizations.of(context).locale=="en" ?"Service Price : "+service.Price.toString():"سعر الخدمه :  "+service.Price.toString()),
               //   ),
-                Container(
-                  height: 20,
+              Container(
+                height: 20,
+              ),
+              InkWell(
+                onTap: () async {
+                  this.position = await Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => GetLocation()));
+                  if (position != null) {
+                    print(
+                        "loaction is in : : ${position.latitude},${position.longitude}");
+                    String address = await getAddress(position);
+                    setState(() {
+                      this.address = address;
+                    });
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Material(
+                      elevation: 3.0,
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: Colors.white),
+                        constraints: BoxConstraints(
+                          minWidth: MediaQuery.of(context).size.width / 1.3,
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(flex: 7, child: Text(this.address)),
+                            Expanded(
+                                flex: 1,
+                                child: Container(
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.location_on,
+                                      color: Colors.red,
+                                      size: 25.0,
+                                    ),
+                                  ),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                InkWell(
-                        onTap: () async {
-                          this.position = await Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => GetLocation()));
-                          if (position != null) {
-                            print(
-                                "loaction is in : : ${position.latitude},${position.longitude}");
-                            String address = await getAddress(position);
-                            setState(() {
-                              this.address = address;
-                            });
-                          }
-                        },
-                        child: Container(
-                          padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Material(
-                              elevation: 3.0,
+              ),
+              Container(
+                height: 20,
+              ),
+
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    // wrap your Column in Expanded
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          key: desKey_log,
+                          maxLines: 3,
+                          textAlign: AppLocalizations.of(context).locale == "en"
+                              ? TextAlign.left
+                              : TextAlign.right,
+                          style: MansaFont.getLightFont(),
+                          decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context)
+                                .lblDescriptionPlaceholder +
+                                " *",
+                            labelStyle: MansaFont.getLightFont_TextFormField(),
+                            // fillColor: Colors.blueGrey,
+                            // hintText: AppLocalizations.of(context).lblDescriptionPlaceholder,
+                            contentPadding: new EdgeInsets.symmetric(
+                                vertical: 14.0, horizontal: 10.0),
+                            border: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Colors.grey, width: 0.0),
                               borderRadius: BorderRadius.circular(8.0),
-                              child: Container(
-                                padding: EdgeInsets.only(
-                                    left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    color: Colors.white),
-                                constraints: BoxConstraints(
-                                  minWidth:
-                                      MediaQuery.of(context).size.width / 1.3,
-                                ),
-                                child: Row(
-                                  children: <Widget>[
-                                    Expanded(
-                                        flex: 7, child: Text(this.address)),
-                                    Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          child: Center(
-                                            child: Icon(
-                                              Icons.location_on,
-                                              color: Colors.red,
-                                              size: 25.0,
-                                            ),
-                                          ),
-                                        )),
-                                  ],
-                                ),
-                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Colors.grey, width: 1.0),
+                              borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
                         ),
-                      ),
-                      Container(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      // wrap your Column in Expanded
-                      child: Column(
-                        children: <Widget>[
-                          appButtonbgimage(
-                              // Strings.Next(),
-                              // () => Navigator.of(context).push(MaterialPageRoute(
-                              //     builder: (context) => Emarkiting_campaigns())),
-                              AppLocalizations.of(context).lblNext,
-                              () => send_data(),
-                              bgColor: lightBgColor,
-                              bgColor2: transColor),
-                        ],
-                      ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
+              Container(
+                height: 20,
+              ),
 
-
-        ]),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    // wrap your Column in Expanded
+                    child: Column(
+                      children: <Widget>[
+                        appButtonbgimage(
+                            // Strings.Next(),
+                            // () => Navigator.of(context).push(MaterialPageRoute(
+                            //     builder: (context) => Emarkiting_campaigns())),
+                            AppLocalizations.of(context).lblNext,
+                            () => send_data(),
+                            bgColor: lightBgColor,
+                            bgColor2: transColor),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ]),
+          ),
         ),
-    
-    ),
-
-        drawer: buildDrawer()
-      );
+        drawer: buildDrawer());
   }
-List<DropdownMenuItem<String>> buildAndGetDropDownMenuItems(List _countries) {
+
+  List<DropdownMenuItem<String>> buildAndGetDropDownMenuItems(List _countries) {
     List<DropdownMenuItem<String>> items = new List();
     for (String fruit in _countries) {
       items.add(new DropdownMenuItem(value: fruit, child: new Text(fruit)));
     }
     return items;
   }
+
   void changedDropDownCountry(String selectedC) {
     setState(() {
       _selectedCountry = selectedC;
-      if(selectedC=="السعوديه"){
+      if (selectedC == "السعوديه") {
         _dropDownMenuCities = buildAndGetDropDownMenuItems(_saudiaCities);
-      }else if(selectedC =="مصر"){
+      } else if (selectedC == "مصر") {
         _dropDownMenuCities = buildAndGetDropDownMenuItems(_egyptCities);
-      }else if(selectedC =="الامارات"){
+      } else if (selectedC == "الامارات") {
         _dropDownMenuCities = buildAndGetDropDownMenuItems(_emiratesCities);
-      }else if(selectedC =="الكويت"){
+      } else if (selectedC == "الكويت") {
         _dropDownMenuCities = buildAndGetDropDownMenuItems(_kwaitCities);
-      }else if(selectedC =="البحرين"){
+      } else if (selectedC == "البحرين") {
         _dropDownMenuCities = buildAndGetDropDownMenuItems(_bahrinCities);
-      }else if(selectedC =="قطر"){
+      } else if (selectedC == "قطر") {
         _dropDownMenuCities = buildAndGetDropDownMenuItems(_qatarCities);
       }
-      
-    _selectedCity = _dropDownMenuCities[0].value;
+
+      _selectedCity = _dropDownMenuCities[0].value;
     });
   }
-  
+
   void changedDropDownCity(String selectedCity) {
     setState(() {
       _selectedCity = selectedCity;
     });
   }
+
   void changedDropDownSector(String selectedS) {
     setState(() {
       _selectedSector = selectedS;
     });
   }
-  
+
   void changedDropDownDiscount(String selectedDisc) {
     setState(() {
       _selectedDiscount = selectedDisc;
       //_selectedCity = _dropDownMenuDiscounts[0].value;
     });
   }
+
   void changedDropDownfromday(String selectedD) {
     setState(() {
       _selectedfromDay = selectedD;
     });
   }
+
   void changedDropDownfrommonth(String selectedD) {
     setState(() {
       _selectedfromMonth = selectedD;
     });
   }
+
   void changedDropDownfromyear(String selectedD) {
     setState(() {
       _selectedfromYear = selectedD;
     });
   }
+
   ////
   void changedDropDowntoday(String selectedD) {
     setState(() {
       _selectedToDay = selectedD;
     });
   }
+
   void changedDropDowntomonth(String selectedD) {
     setState(() {
       _selectedToMonth = selectedD;
     });
   }
+
   void changedDropDowntoyear(String selectedD) {
     setState(() {
       _selectedToYear = selectedD;
     });
   }
-  
-  send_data() {
 
-    
+  send_data() {
     try {
       if (_form_logo.currentState.validate()) {
-        if(secondUpload==null||secondUpload==""||
-          // desKey_log.currentState.value==null||desKey_log.currentState.value==""||
-        phone1Key_log.currentState.value==null||phone1Key_log.currentState.value==""||
-        // phone2Key_log.currentState.value==null||phone2Key_log.currentState.value==""||
-       // emailKey_log.currentState.value==null||emailKey_log.currentState.value==""||
-        destrictKey_log.currentState.value==null||destrictKey_log.currentState.value==""||
-        _selectedfromDay==null||_selectedfromDay==""||
-        _selectedfromMonth==null||_selectedfromMonth==""||
-        _selectedfromYear==null||_selectedfromYear==""||
-        _selectedToDay==null||_selectedToDay==""||
-        _selectedToMonth==null||_selectedToMonth==""||
-        _selectedToYear==null||_selectedToYear==""||
-        _selectedDiscount==null||_selectedDiscount==""||
-        _selectedSector==null||_selectedSector==""||
-        _selectedCountry==null||_selectedCountry==""||
-        this.position.latitude==null||
-        this.position.longitude==null||
-        _selectedCity==null||_selectedCity==""){
+        if (secondUpload == null ||
+            secondUpload == "" ||
+            // desKey_log.currentState.value==null||desKey_log.currentState.value==""||
+            phone1Key_log.currentState.value == null ||
+            phone1Key_log.currentState.value == "" ||
+            // phone2Key_log.currentState.value==null||phone2Key_log.currentState.value==""||
+            // emailKey_log.currentState.value==null||emailKey_log.currentState.value==""||
+            destrictKey_log.currentState.value == null ||
+            destrictKey_log.currentState.value == "" ||
+            _selectedfromDay == null ||
+            _selectedfromDay == "" ||
+            _selectedfromMonth == null ||
+            _selectedfromMonth == "" ||
+            _selectedfromYear == null ||
+            _selectedfromYear == "" ||
+            _selectedToDay == null ||
+            _selectedToDay == "" ||
+            _selectedToMonth == null ||
+            _selectedToMonth == "" ||
+            _selectedToYear == null ||
+            _selectedToYear == "" ||
+            _selectedDiscount == null ||
+            _selectedDiscount == "" ||
+            _selectedSector == null ||
+            _selectedSector == "" ||
+            _selectedCountry == null ||
+            _selectedCountry == "" ||
+            this.position.latitude == null ||
+            this.position.longitude == null ||
+            _selectedCity == null ||
+            _selectedCity == "") {
           print("objectobjectobjectobjectobjectobjectobject");
-          showInSnackBar(AppLocalizations.of(_context).lblEnterYourData, _context, _scaffoldKey);
-        }else{
+          showInSnackBar(AppLocalizations.of(_context).lblEnterYourData,
+              _context, _scaffoldKey);
+        } else {
           //showAppLoading(context);
           ShoppingCartVM obj = new ShoppingCartVM();
           // obj.NameAr=namearabicKey_log.currentState.value;
           // obj.NameEn=nameenglishKey_log.currentState.value;
-          obj.Phone1=phone1Key_log.currentState.value;
-          obj.Phone2=phone2Key_log.currentState.value;
-          obj.Description=desKey_log.currentState.value;
+          obj.Phone1 = phone1Key_log.currentState.value;
+          obj.Phone2 = phone2Key_log.currentState.value;
+          obj.Description = desKey_log.currentState.value;
           // obj.Facebook=facebookKey_log.currentState.value;
-          obj.Email=emailKey_log.currentState.value;
+          obj.Email = emailKey_log.currentState.value;
           // obj.Twitter=twitterKey_log.currentState.value;
           // obj.Instagram=instagramKey_log.currentState.value;
           // obj.Snapshat=snapShatKey_log.currentState.value;
-          obj.ServiceId=7;
-          obj.UserId=user.user_Id;
-          obj.FromDay=_selectedfromDay;
-          obj.FromMonth=_selectedfromMonth;
-          obj.FromYear=_selectedfromYear;
-          obj.ToDay=_selectedToDay;
-          obj.ToMonth=_selectedToMonth;
-          obj.ToYear=_selectedToYear;
-          obj.Discount=_selectedDiscount;
-          obj.District=destrictKey_log.currentState.value;
-          obj.Sector=_selectedSector;
-          obj.Country=_selectedCountry;
-          obj.City=_selectedCity;
-          obj.Price=service.Price;
-          obj.filesIds=firstUpload;
-          obj.filesIds2=secondUpload;
-          obj.latitude ="${this.position.latitude}";
-          obj.longitude="${this.position.longitude}";
-          obj.AddressForAdvertise=address;
+          obj.ServiceId = 7;
+          obj.UserId = user.user_Id;
+          obj.FromDay = _selectedfromDay;
+          obj.FromMonth = _selectedfromMonth;
+          obj.FromYear = _selectedfromYear;
+          obj.ToDay = _selectedToDay;
+          obj.ToMonth = _selectedToMonth;
+          obj.ToYear = _selectedToYear;
+          obj.Discount = _selectedDiscount;
+          obj.District = destrictKey_log.currentState.value;
+          obj.Sector = _selectedSector;
+          obj.Country = _selectedCountry;
+          obj.City = _selectedCity;
+          obj.Price = service.Price;
+          obj.filesIds = firstUpload;
+          obj.filesIds2 = secondUpload;
+          obj.latitude = "${this.position.latitude}";
+          obj.longitude = "${this.position.longitude}";
+          obj.AddressForAdvertise = address;
           print(obj.latitude);
           print(obj.longitude);
           print(address);
           //"${this.position.latitude},${this.position.longitude}",
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => SocialMediaList(socialItem:
-                  [
-                    new SocialItem('','images/facebook.png',false,1),
-                    //new SocialItem('','images/google.png',false,2),
-                    new SocialItem('','images/insta.png',false,3),
-                    new SocialItem('','images/twitter.png',false,4),
-                    new SocialItem('','images/snap.png',false,5),
-                    new SocialItem('','images/youtube.png',false,6)
-                  ],shoppingCart: obj,),));
-          
+            builder: (context) => SocialMediaList(
+              socialItem: [
+                new SocialItem('', 'images/facebook.png', false, 1),
+                //new SocialItem('','images/google.png',false,2),
+                new SocialItem('', 'images/insta.png', false, 3),
+                new SocialItem('', 'images/twitter.png', false, 4),
+                new SocialItem('', 'images/snap.png', false, 5),
+                new SocialItem('', 'images/youtube.png', false, 6)
+              ],
+              shoppingCart: obj,
+            ),
+          ));
         }
-        
       } else {
         hideAppDialog(context);
       }
-    }catch(error) {
+    } catch (error) {
       print("object");
       print(error.toString());
       hideAppDialog(_context);
       //showSnack(error.toString());
-    };
-
+    }
+    ;
   }
-  UserVM user ;
+
+  UserVM user;
   @override
   void initState() {
     restore();
@@ -1377,67 +1687,65 @@ List<DropdownMenuItem<String>> buildAndGetDropDownMenuItems(List _countries) {
     _dropDownMenuCities = buildAndGetDropDownMenuItems(_saudiaCities);
     _selectedCity = _dropDownMenuCities[0].value;
     _dropDownMenuDiscounts = buildAndGetDropDownMenuItems(_discounts);
-    _selectedDiscount=_dropDownMenuDiscounts[0].value;
+    _selectedDiscount = _dropDownMenuDiscounts[0].value;
 
-var now = new DateTime.now();
-var curr_day = now.day.toString();
-var curr_mon = now.month.toString();
-var curr_year = now.year.toString();
-if(curr_day.length==1){
-  curr_day = "0"+curr_day;
-}
-if(curr_mon.length==1){
-  curr_mon = "0"+curr_mon;
-}
+    var now = new DateTime.now();
+    var curr_day = now.day.toString();
+    var curr_mon = now.month.toString();
+    var curr_year = now.year.toString();
+    if (curr_day.length == 1) {
+      curr_day = "0" + curr_day;
+    }
+    if (curr_mon.length == 1) {
+      curr_mon = "0" + curr_mon;
+    }
 
     _dropDownMenudays = buildAndGetDropDownMenuItems(_days);
-  //  _selectedfromDay=_dropDownMenudays[0].value;
-    _selectedfromDay=curr_day;//_dropDownMenudays[0].value;
-    _selectedToDay=curr_day;//_dropDownMenudays[0].value;
+    //  _selectedfromDay=_dropDownMenudays[0].value;
+    _selectedfromDay = curr_day; //_dropDownMenudays[0].value;
+    _selectedToDay = curr_day; //_dropDownMenudays[0].value;
     _dropDownMenumonths = buildAndGetDropDownMenuItems(_months);
-    _selectedfromMonth=curr_mon;//_dropDownMenumonths[0].value;
-    _selectedToMonth=curr_mon;//_dropDownMenumonths[0].value;
+    _selectedfromMonth = curr_mon; //_dropDownMenumonths[0].value;
+    _selectedToMonth = curr_mon; //_dropDownMenumonths[0].value;
     _dropDownMenuyears = buildAndGetDropDownMenuItems(_years);
-    _selectedfromYear=now.year.toString();//_dropDownMenuyears[0].value;
-    _selectedToYear=now.year.toString();//_dropDownMenuyears[0].value;
+    _selectedfromYear = now.year.toString(); //_dropDownMenuyears[0].value;
+    _selectedToYear = now.year.toString(); //_dropDownMenuyears[0].value;
 
     _dropDownMenuSector = buildAndGetDropDownMenuItems(_sectors);
-    _selectedSector=_dropDownMenuSector[0].value;
-    getUser().then((user){
+    _selectedSector = _dropDownMenuSector[0].value;
+    getUser().then((user) {
       setState(() {
-              this.user = user ;
+        this.user = user;
       });
     });
-    if(user!=null){
-          print("user.emaillllllllllllllllllll");
+    if (user != null) {
+      print("user.emaillllllllllllllllllll");
       print(user.email);
     }
     super.initState();
 
     ServiceApi.getServices().then((response) {
-          if (response.code ==200 ) {
-            response.data.forEach((s){
-              if(s.Id==7){
-                this.service = s;
-              }
-            });
-          } else {
-            print("${response.message}");
+      if (response.code == 200) {
+        response.data.forEach((s) {
+          if (s.Id == 7) {
+            this.service = s;
           }
-          setState(() {
-          });
         });
-  }
-ServiceVM service ;
-  restore() async {
-    final SharedPreferences Prefs= await SharedPreferences.getInstance();
-    setState(() {
-      name=Prefs.getString('username') ?? "";
-      email= Prefs.getString('email') ?? "";
-
+      } else {
+        print("${response.message}");
+      }
+      setState(() {});
     });
   }
 
+  ServiceVM service;
+  restore() async {
+    final SharedPreferences Prefs = await SharedPreferences.getInstance();
+    setState(() {
+      name = Prefs.getString('username') ?? "";
+      email = Prefs.getString('email') ?? "";
+    });
+  }
 
   @override
   void dispose() {
@@ -1445,14 +1753,11 @@ ServiceVM service ;
   }
 }
 
-
-
-
 // ignore: must_be_immutable
 class Dropdowndays extends StatefulWidget {
-  String test2="";
-  Dropdowndays(String s){
-    test2=s;
+  String test2 = "";
+  Dropdowndays(String s) {
+    test2 = s;
   }
 
   @override
@@ -1463,11 +1768,10 @@ class Dropdowndays extends StatefulWidget {
 
 class _DropdowndaysState extends State<Dropdowndays> {
   String discount;
-  String title2="";
-  _DropdowndaysState(String s){
-    title2=s;
+  String title2 = "";
+  _DropdowndaysState(String s) {
+    title2 = s;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -1557,7 +1861,6 @@ class _DropdowndaysState extends State<Dropdowndays> {
             child: Text('19'),
             value: '19',
           ),
-        
           DropdownMenuItem<String>(
             child: Text('20'),
             value: '20',
@@ -1606,21 +1909,17 @@ class _DropdowndaysState extends State<Dropdowndays> {
             child: Text('31'),
             value: '31',
           ),
-
         ],
-
       ),
     );
   }
 }
 
-
-
 // ignore: must_be_immutable
 class Dropdown_month extends StatefulWidget {
-  String test3="";
-  Dropdown_month(String s){
-    test3=s;
+  String test3 = "";
+  Dropdown_month(String s) {
+    test3 = s;
   }
 
   @override
@@ -1631,11 +1930,10 @@ class Dropdown_month extends StatefulWidget {
 
 class _Dropdown_monthState extends State<Dropdown_month> {
   String discount;
-  String title2="";
-  _Dropdown_monthState(String s){
-    title2=s;
+  String title2 = "";
+  _Dropdown_monthState(String s) {
+    title2 = s;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -1698,19 +1996,16 @@ class _Dropdown_monthState extends State<Dropdown_month> {
             value: '12',
           ),
         ],
-
       ),
     );
   }
 }
 
-
-
 // ignore: must_be_immutable
 class Dropdownyear extends StatefulWidget {
-  String test4="";
-  Dropdownyear(String s){
-    test4=s;
+  String test4 = "";
+  Dropdownyear(String s) {
+    test4 = s;
   }
 
   @override
@@ -1721,11 +2016,10 @@ class Dropdownyear extends StatefulWidget {
 
 class _DropdownyearState extends State<Dropdownyear> {
   String discount;
-  String title2="";
-  _DropdownyearState(String s){
-    title2=s;
+  String title2 = "";
+  _DropdownyearState(String s) {
+    title2 = s;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -1820,21 +2114,16 @@ class _DropdownyearState extends State<Dropdownyear> {
             value: '2040',
           ),
         ],
-
       ),
     );
   }
 }
 
-
-
-
-
 // ignore: must_be_immutable
 class DropdownDiscount extends StatefulWidget {
-  String test2="";
-  DropdownDiscount(String s){
-    test2=s;
+  String test2 = "";
+  DropdownDiscount(String s) {
+    test2 = s;
   }
 
   @override
@@ -1845,11 +2134,10 @@ class DropdownDiscount extends StatefulWidget {
 
 class _DropdownDiscountState extends State<DropdownDiscount> {
   String discount;
-  String title2="";
-  _DropdownDiscountState(String s){
-    title2=s;
+  String title2 = "";
+  _DropdownDiscountState(String s) {
+    title2 = s;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -1884,16 +2172,15 @@ class _DropdownDiscountState extends State<DropdownDiscount> {
             value: '40%',
           ),
         ],
-
       ),
     );
   }
 }
 
 class DropdownExample extends StatefulWidget {
-  String test="";
-  DropdownExample(String s){
-    test=s;
+  String test = "";
+  DropdownExample(String s) {
+    test = s;
   }
 
   @override
@@ -1904,11 +2191,10 @@ class DropdownExample extends StatefulWidget {
 
 class _DropdownExampleState extends State<DropdownExample> {
   String city;
-  String title="";
-  _DropdownExampleState(String s){
-    title=s;
+  String title = "";
+  _DropdownExampleState(String s) {
+    title = s;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -2102,32 +2388,18 @@ class _DropdownExampleState extends State<DropdownExample> {
             child: Text('الافلاج'),
             value: 'الافلاج',
           ),
-
         ],
-
       ),
     );
   }
 }
 
-
-
-
-
-
-
-
-
-
-
 /////////// Dropdown Sector
 
-
-
 class DropdownDistrictExample extends StatefulWidget {
-  String test="";
-  DropdownDistrictExample(String s){
-    test=s;
+  String test = "";
+  DropdownDistrictExample(String s) {
+    test = s;
   }
 
   @override
@@ -2138,11 +2410,10 @@ class DropdownDistrictExample extends StatefulWidget {
 
 class _DropdownDistrictExampleState extends State<DropdownDistrictExample> {
   String District;
-  String Districttitle="";
-  _DropdownDistrictExampleState(String s){
-    Districttitle=s;
+  String Districttitle = "";
+  _DropdownDistrictExampleState(String s) {
+    Districttitle = s;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -2169,22 +2440,17 @@ class _DropdownDistrictExampleState extends State<DropdownDistrictExample> {
             value: 'جمعيات خيريه',
           ),
         ],
-
       ),
     );
   }
 }
 
-
-
 /////////// Dropdown Country
 
-
-
 class DropdownCountryExample extends StatefulWidget {
-  String test="";
-  DropdownCountryExample(String s){
-    test=s;
+  String test = "";
+  DropdownCountryExample(String s) {
+    test = s;
   }
 
   @override
@@ -2195,11 +2461,10 @@ class DropdownCountryExample extends StatefulWidget {
 
 class _DropdownCountryExampleState extends State<DropdownCountryExample> {
   String country;
-  String countrytitle="";
-  _DropdownCountryExampleState(String s){
-    countrytitle=s;
+  String countrytitle = "";
+  _DropdownCountryExampleState(String s) {
+    countrytitle = s;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -2226,27 +2491,7 @@ class _DropdownCountryExampleState extends State<DropdownCountryExample> {
             value: 'الامارات',
           ),
         ],
-
       ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -118,8 +118,8 @@ UserVM user ;
           automaticallyImplyLeading: true,
           elevation: 0.0,
           leading: new IconButton(
-                icon: new IconButton(
-                    icon: new Image.asset("images/asset17.png")
+                icon: new IconButton(icon:
+                new Image.asset("images/asset17.png")
                    ), iconSize: 40.0,
                 onPressed: (){
                   _scaffoldKey.currentState.openDrawer();

@@ -88,7 +88,7 @@ ContentVM content = new ContentVM();
                   colors: [lightBgColor, transColor],
                   begin: const FractionalOffset(0.1, 0.8),
                   end: const FractionalOffset(1.0, 0.5),
-                  // tileMode: TileMode.clamp
+                  tileMode: TileMode.clamp
               ),
             ),
           ),

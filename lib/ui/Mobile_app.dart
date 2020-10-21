@@ -145,7 +145,7 @@ void openFileExplorer() async {
       _path = null;
       if (_multiPick) {
         _paths = await FilePicker.getMultiFilePath(
-            type: _pickType, allowedExtensions: [_extension]);
+            type: _pickType,allowedExtensions: [_extension]);
            // showAppLoading(_context);
           // lblFirstUpload="Loading ....";
         _paths.forEach((fileName, filePath) => {upload(fileName, filePath)});  
@@ -155,7 +155,7 @@ void openFileExplorer() async {
        // hideAppDialog(_context); 
       } else {
         _path = await FilePicker.getFilePath(
-            type: _pickType, allowedExtensions: [_extension]);
+            type: _pickType,allowedExtensions: [_extension]);
            
       }
       print("pathssssssss");

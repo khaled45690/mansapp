@@ -232,7 +232,7 @@ class _MaterialPickerState extends State<MaterialPicker> {
                                       .toUpperCase() +
                                   '  ',
                               style: TextStyle(
-                                color: UseWhiteForeground(_color)
+                                color: useWhiteForeground(_color)
                                     ? Colors.white
                                     : Colors.black,
                                 fontWeight: FontWeight.bold,

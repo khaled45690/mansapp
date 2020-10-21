@@ -147,7 +147,7 @@ void openFileExplorer() async {
       _path = null;
       if (_multiPick) {
         _paths = await FilePicker.getMultiFilePath(
-            type: _pickType,allowedExtensions: [_extension]);
+            type: _pickType, allowedExtensions: [_extension]);
            // showAppLoading(_context);
           // lblFirstUpload="Loading ....";
         _paths.forEach((fileName, filePath) => {upload(fileName, filePath)});  
@@ -157,7 +157,7 @@ void openFileExplorer() async {
        // hideAppDialog(_context); 
       } else {
         _path = await FilePicker.getFilePath(
-            type: _pickType,allowedExtensions: [_extension]);
+            type: _pickType, allowedExtensions: [_extension]);
            
       }
       print("pathssssssss");
@@ -210,13 +210,13 @@ void openFileExplorer2() async {
       _path = null;
       if (_multiPick) {
         _paths2 = await FilePicker.getMultiFilePath(
-            type: _pickType,allowedExtensions: [_extension]);
+            type: _pickType, allowedExtensions: [_extension]);
         _paths2.forEach((fileName, filePath) => {upload2(fileName, filePath)});   
         print("Length");
         print( _paths2.length); 
       } else {
         _path = await FilePicker.getFilePath(
-            type: _pickType,allowedExtensions: [_extension]);
+            type: _pickType, allowedExtensions: [_extension]);
       }
       print("pathssssssss");
       print(_paths2);

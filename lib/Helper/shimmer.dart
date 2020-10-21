@@ -83,8 +83,7 @@ class Shimmer extends StatefulWidget {
         0.5,
         0.65,
         1.0
-      ]
-  ),
+      ]),
         super(key: key);
 
   @override
@@ -109,7 +108,7 @@ class _ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _count = 0;
-    _controller = AnimationController( vsync: this, duration: widget.period)
+    _controller = AnimationController(vsync: this, duration: widget.period)
       ..addListener(() {
         setState(() {});
       })

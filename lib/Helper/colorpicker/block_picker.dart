@@ -93,7 +93,7 @@ class BlockPicker extends StatefulWidget {
             opacity: isCurrentColor ? 1.0 : 0.0,
             child: Icon(
               Icons.done,
-              color: UseWhiteForeground(color) ? Colors.white : Colors.black,
+              color: useWhiteForeground(color) ? Colors.white : Colors.black,
             ),
           ),
         ),

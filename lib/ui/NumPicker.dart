@@ -572,8 +572,7 @@ final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
                  send_data();
                }
                 // onPressed: onPress,
-              ),
-                ),
+              )),
               )
               
             

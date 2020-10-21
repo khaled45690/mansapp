@@ -463,11 +463,10 @@ void _toggle() {
                     child: Column(
                       children: <Widget>[
                         SliderButton(
-
                           action: () {
                             ///Do something here
                             ///
-
+                            
                             // _signIn(context)
                             //   .then((FirebaseUser user) => print(user))
                             //   .catchError((e) => print(e));
@@ -476,9 +475,9 @@ void _toggle() {
                            Navigator.of(context).push(MaterialPageRoute(
                                builder: (context) => TestGmailLogin()));
                           },
-                     // action: () {
-                     //   print('Using the sword');
-                     // },
+//                      action: () {
+//                        print('Using the sword');
+//                      },
 
                           ///Put label over here
                           label: Text(

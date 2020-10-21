@@ -29,7 +29,7 @@ import 'package:mansaapp/APIs/UploadApi.dart';
 import 'package:flutter/services.dart';
 import 'Terms.dart';
 import 'package:image_picker/image_picker.dart';
-//PAYMENT SCREEN USED
+
 
 class PaymentScreen extends StatefulWidget {
   @override
@@ -159,8 +159,8 @@ void _upload_Base64(File file) {
           padding: EdgeInsets.all(0),
           child: Form(
                 child: _isButtonDisabled ? sucessview() : paymentview(),
-
-
+         
+         
           ),
         ),
       );
@@ -235,9 +235,9 @@ double subTotal=0;
 
   paymentview() {
     return Column(
-      mainAxisSize: MainAxisSize.max,
+      mainAxisSize: MainAxisSize.max, 
       children: [
-
+        
       // Container(
       //   margin: EdgeInsets.only(right: 0, left: 0, bottom: 0, top: 20),
       //   width: MediaQuery.of(context).size.width,
@@ -345,12 +345,6 @@ double subTotal=0;
                               builder: (context) => TabBarScreen(),));
     }
     else {
-      print("----------------------------------->");
-      print( "${phone1Key_log.currentState.value}");
-      print( "${customerNameKey_log.currentState.value}");
-      print( "${accountTransferKey_log.currentState.value}");
-      print( "${nameWhoTransferKey_log.currentState.value}");
-
       if(
         phone1Key_log.currentState.value==null||phone1Key_log.currentState.value==""||
         // phone2Key_log.currentState.value==null||phone2Key_log.currentState.value==""||
@@ -467,11 +461,6 @@ double subTotal=0;
                         style: gettitleFontinside_blueV2(),
                       ),
                   ),
-                  Text("    "),
-                  Text(AppLocalizations.of(context).lblCopy,
-                      textAlign: TextAlign.left,
-                      style: MansaFont.gettitleFontinside()
-                      ),
                 ]
             ),
 
@@ -500,11 +489,6 @@ double subTotal=0;
                         style: gettitleFontinside_blueV2(),
                       ),
                   ),
-                  Text("    "),
-                  Text(AppLocalizations.of(context).lblCopy,
-                      textAlign: TextAlign.left,
-                      style: MansaFont.gettitleFontinside()
-                      ),
                 ]
             ),
           
@@ -532,11 +516,6 @@ double subTotal=0;
                       style: MansaFont.gettitleFontinside_blue(),
                     ),
                   ),
-                  Text("    "),
-                  Text(AppLocalizations.of(context).lblCopy,
-                      textAlign: TextAlign.left,
-                      style: MansaFont.gettitleFontinside()
-                      ),
                 ]
             ),
           Container(
@@ -589,7 +568,7 @@ double subTotal=0;
                       key: accountTransferKey_log,
                       initialValue: (subTotal+tax).toString(),
                       enabled: false,
-
+                      
                       keyboardType: TextInputType.number,
                       maxLines: 1,
                       style: MansaFont.getLightFont(),
