@@ -85,6 +85,22 @@ int lblFirstUpload=0;
 int lblSecondUpload =0;
    List<Asset> images = List<Asset>();
 
+  Future<void> loadAssetFromCamera1() async{
+    final _picked = ImagePicker();
+    final picked =  await _picked.getImage(source: ImageSource.camera);
+
+    if (picked != null) {
+      print(picked.path.split('/').last);
+      String fileName = picked.path.split('/').last;
+      final bytes = File(picked.path).readAsBytesSync();
+      String base64Image = base64Encode(bytes);
+      _upload_Base64_pass_Base46(base64Image , fileName);
+    }else {
+      print("something happened");
+    }
+  }
+
+
 Future<void> loadAssets() async {
     List<Asset> resultList = List<Asset>();
     String error = 'No Error Dectected';
@@ -146,8 +162,7 @@ void openFileExplorer() async {
       
       _path = null;
       if (_multiPick) {
-        _paths = await FilePicker.getMultiFilePath(
-            type: _pickType, allowedExtensions: [_extension]);
+        _paths = await FilePicker.getMultiFilePath();
            // showAppLoading(_context);
           // lblFirstUpload="Loading ....";
         _paths.forEach((fileName, filePath) => {upload(fileName, filePath)});  
@@ -156,8 +171,7 @@ void openFileExplorer() async {
         print( _paths.length); 
        // hideAppDialog(_context); 
       } else {
-        _path = await FilePicker.getFilePath(
-            type: _pickType, allowedExtensions: [_extension]);
+        _path = await FilePicker.getFilePath();
            
       }
       print("pathssssssss");
@@ -209,14 +223,12 @@ void openFileExplorer2() async {
     try {
       _path = null;
       if (_multiPick) {
-        _paths2 = await FilePicker.getMultiFilePath(
-            type: _pickType, allowedExtensions: [_extension]);
+        _paths2 = await FilePicker.getMultiFilePath();
         _paths2.forEach((fileName, filePath) => {upload2(fileName, filePath)});   
         print("Length");
         print( _paths2.length); 
       } else {
-        _path = await FilePicker.getFilePath(
-            type: _pickType, allowedExtensions: [_extension]);
+        _path = await FilePicker.getFilePath();
       }
       print("pathssssssss");
       print(_paths2);
@@ -321,7 +333,38 @@ void _upload_Base64_2(File file) {
                         width: 20,
                       ),
                       GestureDetector(
-                            onTap: loadAssets,
+                            onTap: (){
+                              return showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  actions: <Widget>[
+                                    Padding(
+                                      padding:
+                                      const EdgeInsets.only(left: 60),
+                                      child: FlatButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          loadAssetFromCamera1();
+                                        },
+                                        child: Icon(Icons.camera_alt),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding:
+                                      const EdgeInsets.only(left: 30),
+                                      child: FlatButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          loadAssets();
+                                        },
+                                        child:
+                                        Icon(Icons.photo_camera_back),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
                             child: Container(
                             child: Image.asset(
                                AppLocalizations.of(context).locale=="en" ?'images/asset311.png':'images/assetAr31.png',

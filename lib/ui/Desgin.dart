@@ -14,6 +14,7 @@ import 'CartScreen.dart';
 import 'ContactUs.dart';
 import 'Images.dart';
 import 'Infographics.dart';
+import 'adsVideoMakingScreen.dart';
 import 'Logs.dart';
 import 'MyCart.dart';
 import 'Offers.dart';
@@ -85,7 +86,7 @@ class _DesginState extends State<Desgin> with WidgetsBindingObserver{
                   Container(
                     child: Image.asset(
                       'images/asset10.png',
-                      height: 270,
+                      height: 200,
                       width: 270,
                       fit: BoxFit.contain,
 
@@ -128,6 +129,16 @@ class _DesginState extends State<Desgin> with WidgetsBindingObserver{
                           MaterialPageRoute(builder: (context) => Infographics()))
                       ,
                       bgColor: desgin_button4_start,
+                      bgColor2: desgin_button4_end),
+                  Container(
+                    height: 10,
+                  ),
+                  appButtonbgimage_main(
+                      " ${AppLocalizations.of(context).locale=="en" ? AppLocalizations.of(context).lblAdsVideo : "تصوير فديو اعلانى"}",
+                          () => imageprofile==""?youMustLogin():Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => adsVideoMakingScreen()))
+                      ,
+                      bgColor: desgin_button3_end,
                       bgColor2: desgin_button4_end),
                   Container(
                     height: 10,

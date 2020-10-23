@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mansaapp/APIs/FamousApi.dart';
@@ -8,6 +10,8 @@ import 'package:mansaapp/Models/FamousVM.dart';
 import 'package:mansaapp/Models/ShoppingCartVM.dart';
 import 'package:mansaapp/utilis/CustomizedWidgets.dart';
 
+
+
 import '../localizations.dart';
 class FamousV2 extends StatefulWidget {
   FamousV2({Key key, this.shoppingCart}) :super(key: key);
@@ -17,13 +21,15 @@ class FamousV2 extends StatefulWidget {
 }
 
 class _FamousV2State extends State<FamousV2> {
+  String headerValue;
   List<SocialFamousVM> SocialFamousVMs = new List<SocialFamousVM>();
   List<ItemModel> prepareData = new List<ItemModel>();
     List<int> myList = List<int>();
-
+List<String>header = [];
   double totalPrice = 0;
   @override
   void initState() {
+    List<String> data= [];
     totalPrice = widget.shoppingCart.Price;
     FamousApi.selectAll().then((response){
       if(response.code !=200){
@@ -37,6 +43,7 @@ class _FamousV2State extends State<FamousV2> {
       ItemModel(header: AppLocalizations.of(context).lblSnapShat, bodyModel: BodyModel(price: 80, quantity: 150,SocialFamousVMs: new List<FamousVM>())),
       ItemModel(header: AppLocalizations.of(context).lblYoutube, bodyModel: BodyModel(price: 80, quantity: 150,SocialFamousVMs: new List<FamousVM>()))
       ];
+
         response.data.forEach((famousObj){
           setState(() {
             if(famousObj.SocialMediaId == 1){
@@ -58,6 +65,13 @@ class _FamousV2State extends State<FamousV2> {
          setState(() {
           this.apiCall = false ;
         });
+         print(prepareData[0].header);
+         for(int i=0 ; i<prepareData.length ; i++){
+           setState(() {
+             header.add(prepareData[i].header);
+             headerValue = prepareData[0].header;
+           });
+         }
           //this.apiCall = false;
         });
       }
@@ -76,82 +90,127 @@ bool apiCall = true ;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+
+    print(prepareData);
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).lblFamous),
       ),
       body: this.apiCall ? Center(child: CircularProgressIndicator(),):
-      
-      ListView.builder(
-        itemCount: prepareData.length+1,
-        itemBuilder: (context, i) {
-          if (i == prepareData.length){
-            return Column(
-              children: <Widget>[
-                Text(totalPrice.toString()+AppLocalizations.of(context).lblRyal),
-          appButtonbgimage(
-                              // Strings.Next(),
-                              // () => Navigator.of(context).push(MaterialPageRoute(
-                              //     builder: (context) => Emarkiting_campaigns())),
-                              AppLocalizations.of(context).lblNext,
-                              (){ send_data();},
-                              bgColor: lightBgColor,
-                              bgColor2: transColor),
-              ],
-            );
-          }
-          return new ExpansionTile(
-            title: new Text(
-              prepareData[i].header,
-              style: new TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.blue),
-            ),
-            children: <Widget>[
-              new Column(
-                children: _buildExpandableContent(prepareData[i]),
+         Container(
+           decoration: BoxDecoration(
+               boxShadow: <BoxShadow>[
+                 BoxShadow(
+                     color: Colors.black54,
+                     blurRadius: 15.0,
+                     offset: Offset(0.0, 0.75)
+                 )
+               ],
+               color: Colors.white
+           ),
+           child: SizedBox(
+             width: 1000,
+             child: DropdownButton<String>(
+               isExpanded: true,
+                value: headerValue,
+                icon: Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                style: TextStyle(
+                    color: Colors.blue
+                ),
+                underline: Container(
+                  height: 0,
+                ),
+                onChanged: (String newValue) {
+                  setState(() {
+                    headerValue = newValue;
+                  });
+                },
+                items: header.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                })
+                    .toList(),
               ),
-            ],
-          );
-        },
-      ),
-    //     floatingActionButton: new FloatingActionButton(
-    //   onPressed: () {
-    //     // Add your onPressed code here!
-    //   },
-    //   elevation: 0.0,
-    //   child: new Icon(Icons.thumb_up),
-    //   backgroundColor: new Color(0xFFE57373),
-    //   floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    // ),
+           ),
+         )
+      // ListView.builder(
+      //   itemCount: prepareData.length+1,
+      //   itemBuilder: (context, i) {
+      //     if (i == prepareData.length){
+      //       return Column(
+      //         children: <Widget>[
+      //           Text(totalPrice.toString()+AppLocalizations.of(context).lblRyal),
+      //     appButtonbgimage(
+      //                         // Strings.Next(),
+      //                         // () => Navigator.of(context).push(MaterialPageRoute(
+      //                         //     builder: (context) => Emarkiting_campaigns())),
+      //                         AppLocalizations.of(context).lblNext,
+      //                         (){ send_data();},
+      //                         bgColor: lightBgColor,
+      //                         bgColor2: transColor),
+      //         ],
+      //       );
+      //     }
+      //     // return new ExpansionTile(
+      //     //   title: new Text(
+      //     //     prepareData[i].header,
+      //     //     style: new TextStyle(
+      //     //         fontSize: 20.0,
+      //     //         fontWeight: FontWeight.bold,
+      //     //         fontStyle: FontStyle.italic,
+      //     //         color: Colors.blue),
+      //     //   ),
+      //     //   children: <Widget>[
+      //     //     new Column(
+      //     //       children: _buildExpandableContent(prepareData[i]),
+      //     //     ),
+      //     //   ],
+      //     // );
+      //
+      //     return DropdownButton<String>(
+      //       value: "One",
+      //       icon: Icon(Icons.arrow_downward),
+      //       iconSize: 24,
+      //       elevation: 16,
+      //       style: TextStyle(
+      //           color: Colors.blue
+      //       ),
+      //       underline: Container(
+      //         height: 2,
+      //         color: Colors.blueAccent,
+      //       ),
+      //       onChanged: (String newValue) {
+      //         // setState(() {
+      //         //   dropdownValue = newValue;
+      //         // });
+      //       },
+      //       items: <String>['One', 'Two', 'Free', 'Four']
+      //           .map<DropdownMenuItem<String>>((String value) {
+      //         return DropdownMenuItem<String>(
+      //           value: value,
+      //           child: Text(value),
+      //         );
+      //       })
+      //           .toList(),
+      //     );
+      //   },
+      // ),
+
       
     );
   }
-  // appButtonbgimage(
-  //                             // Strings.Next(),
-  //                             // () => Navigator.of(context).push(MaterialPageRoute(
-  //                             //     builder: (context) => Emarkiting_campaigns())),
-  //                             AppLocalizations.of(context).lblNext,
-  //                             (){ send_data();},
-  //                             bgColor: lightBgColor,
-  //                             bgColor2: transColor),
+
    _buildExpandableContent(ItemModel policies) {
     List<Widget> columnContent = [];
 
     for (var content in policies.bodyModel.SocialFamousVMs)
       columnContent.add(
-        // new ListTile(
-        //     title: new Text(
-        //       content,
-        //       style: new TextStyle(fontSize: 18.0, color: Colors.lightBlue),
-        //     ),
 
-        //     onTap: () {
-        //       _openWebUrl(Websites.endpoints[content], content);
-        //     }),
         new ListTile(
         onTap:null,
         
@@ -225,8 +284,8 @@ bool apiCall = true ;
                 ),
               flex: 1,
             )
-            
-            
+
+
           ],
         ),
         )

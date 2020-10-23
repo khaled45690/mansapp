@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         },
                       ),
                       Text(
-                          "  ${AppLocalizations.of(context).locale=="en" ? "EN" : "عربي"}",
+                          " ${AppLocalizations.of(context).locale=="en" ? "EN" : "عربي"}",
                           style: MansaFont.baseRegularcolorFont(),
                         ),
                     ],

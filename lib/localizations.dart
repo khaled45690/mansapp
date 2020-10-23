@@ -278,6 +278,10 @@ String get lblYoutube{
     return Intl.message('Infographics', name: 'lblInfographics'); 
   }
 
+  String get lblAdsVideo {
+    return Intl.message('Ads Video making', name: 'lblAdsVideo');
+  }
+
   String get lblApp_Information{
     return Intl.message('App_Information', name: 'lblApp_Information');
   }
