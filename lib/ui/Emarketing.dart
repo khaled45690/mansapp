@@ -331,7 +331,7 @@ class _EmarketingState extends State<Emarketing> with WidgetsBindingObserver {
     "2029",
     "2030"
   ];
-  List _sectors = ["حكومي", "أفراد", "جمعيات خيريه"];
+  List _sectors = [ "حكومي", "أفراد", "جمعيات خيريه" , "خاص"];
   List<DropdownMenuItem<String>> _dropDownMenuCountries;
   List<DropdownMenuItem<String>> _dropDownMenuCities;
   List<DropdownMenuItem<String>> _dropDownMenuDiscounts;
