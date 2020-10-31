@@ -81,20 +81,21 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
   int lblFirstUpload = 0;
   int lblSecondUpload = 0;
   List<Asset> images = List<Asset>();
-  Future<void> loadAssetFromCamera1()async{
+  Future<void> loadAssetFromCamera1() async {
     final _picked = ImagePicker();
-    final picked =  await _picked.getImage(source: ImageSource.camera);
+    final picked = await _picked.getImage(source: ImageSource.camera);
 
     if (picked != null) {
       print(picked.path.split('/').last);
       String fileName = picked.path.split('/').last;
       final bytes = File(picked.path).readAsBytesSync();
       String base64Image = base64Encode(bytes);
-      _upload_Base64_pass_Base46(base64Image , fileName);
-    }else {
+      _upload_Base64_pass_Base46(base64Image, fileName);
+    } else {
       print("something happened");
     }
   }
+
   Future<void> loadAssets() async {
     List<Asset> resultList = List<Asset>();
     String error = 'No Error Dectected';
@@ -274,7 +275,7 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
             ),
           ),
           title: new Text(
-            AppLocalizations.of(context).lblInfographics,
+            "${AppLocalizations.of(context).locale=="en" ? AppLocalizations.of(context).lblAdsVideo : "تصوير فديو اعلانى"}",
             style: MansaFont.baseFontStyle(),
           ),
           centerTitle: true,
@@ -312,7 +313,7 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment:MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text("1"),
                     Radio(
@@ -344,7 +345,6 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
                         });
                       },
                     ),
-
                   ],
                 ),
                 Row(
@@ -361,9 +361,11 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment:MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(AppLocalizations.of(context).locale == "en" ? "yes" : "نعم"),
+                    Text(AppLocalizations.of(context).locale == "en"
+                        ? "yes"
+                        : "نعم"),
                     Radio(
                       groupValue: droneUsages,
                       value: "yes",
@@ -373,7 +375,9 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
                         });
                       },
                     ),
-                    Text(AppLocalizations.of(context).locale == "en" ? "no" : "لا"),
+                    Text(AppLocalizations.of(context).locale == "en"
+                        ? "no"
+                        : "لا"),
                     Radio(
                       groupValue: droneUsages,
                       value: "no",
@@ -383,7 +387,6 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
                         });
                       },
                     ),
-
                   ],
                 ),
                 Row(
@@ -400,9 +403,11 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment:MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(AppLocalizations.of(context).locale == "en" ? "indoor" : "داخلى"),
+                    Text(AppLocalizations.of(context).locale == "en"
+                        ? "indoor"
+                        : "داخلى"),
                     Radio(
                       groupValue: locationVideo,
                       value: "indoor",
@@ -412,7 +417,9 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
                         });
                       },
                     ),
-                    Text(AppLocalizations.of(context).locale == "en" ? "outdoor" : "خارجى"),
+                    Text(AppLocalizations.of(context).locale == "en"
+                        ? "outdoor"
+                        : "خارجى"),
                     Radio(
                       groupValue: locationVideo,
                       value: "outdoor",
@@ -422,7 +429,6 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
                         });
                       },
                     ),
-
                   ],
                 ),
                 Row(
@@ -439,7 +445,7 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment:MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text("1"),
                     Radio(
@@ -491,7 +497,6 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
                         });
                       },
                     ),
-
                   ],
                 ),
                 Row(
@@ -528,14 +533,13 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
                       Column(
                         children: <Widget>[
                           GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               return showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
                                   actions: <Widget>[
                                     Padding(
-                                      padding:
-                                      const EdgeInsets.only(left: 60),
+                                      padding: const EdgeInsets.only(left: 60),
                                       child: FlatButton(
                                         onPressed: () {
                                           Navigator.of(context).pop();
@@ -545,15 +549,13 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
                                       ),
                                     ),
                                     Padding(
-                                      padding:
-                                      const EdgeInsets.only(left: 30),
+                                      padding: const EdgeInsets.only(left: 30),
                                       child: FlatButton(
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                           loadAssets();
                                         },
-                                        child:
-                                        Icon(Icons.photo_camera_back),
+                                        child: Icon(Icons.photo_camera_back),
                                       ),
                                     )
                                   ],
@@ -1142,7 +1144,12 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
         if (desKey_log.currentState.value == null ||
                 desKey_log.currentState.value == "" ||
                 phone1Key_log.currentState.value == null ||
-                phone1Key_log.currentState.value == ""
+                phone1Key_log.currentState.value == "" ||
+                numberOfCameras == 0 ||
+                droneUsages == "" ||
+                locationVideo == "" ||
+                videoDuration == ""
+
             // phone2Key_log.currentState.value==null||phone2Key_log.currentState.value==""||
             // emailKey_log.currentState.value==null||emailKey_log.currentState.value==""
             // facebookKey_log.currentState.value==null||facebookKey_log.currentState.value==""||
@@ -1162,6 +1169,10 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
           // obj.NameAr=namearabicKey_log.currentState.value;
           // obj.NameEn=nameenglishKey_log.currentState.value;
           obj.Phone1 = phone1Key_log.currentState.value;
+          obj.numberOfCameras = numberOfCameras;
+          obj.droneUsages = droneUsages;
+          obj.locationVideo = locationVideo;
+          obj.videoDuration = videoDuration;
           obj.Phone2 = phone2Key_log.currentState.value;
           obj.Description = desKey_log.currentState.value;
           obj.Facebook = facebookKey_log.currentState.value;
@@ -1169,7 +1180,7 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
           obj.Twitter = twitterKey_log.currentState.value;
           obj.Instagram = instagramKey_log.currentState.value;
           obj.Snapshat = snapShatKey_log.currentState.value;
-          obj.ServiceId = 6;
+          obj.ServiceId = 8;
           obj.UserId = user.user_Id;
           obj.Price = service.Price;
           obj.filesIds = firstUpload;
@@ -1225,7 +1236,7 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
     ServiceApi.getServices().then((response) {
       if (response.code == 200) {
         response.data.forEach((s) {
-          if (s.Id == 6) {
+          if (s.Id == 8) {
             this.service = s;
           }
         });

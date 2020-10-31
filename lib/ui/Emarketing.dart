@@ -998,185 +998,7 @@ class _EmarketingState extends State<Emarketing> with WidgetsBindingObserver {
               Container(
                 height: 20,
               ),
-              Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              child: Image.asset(
-                                'images/asset34.png',
-                                height: 20,
-                                //width: 20,
-                                fit: BoxFit.fill,
-                                alignment: Alignment.center,
-                              ),
-                            ),
-                            Container(
-                              width: 10,
-                            ),
-                            Column(
-                              children: <Widget>[
-                                GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      mailValue =
-                                          emailKey_log.currentState.value;
-                                    });
 
-                                    return showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        actions: <Widget>[
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.only(left: 60),
-                                            child: FlatButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                                loadAssetFromCamera1();
-                                              },
-                                              child: Icon(Icons.camera_alt),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.only(left: 30),
-                                            child: FlatButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                                loadAssets();
-                                              },
-                                              child:
-                                              Icon(Icons.photo_camera_back),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    child: Image.asset(
-                                      AppLocalizations.of(context).locale ==
-                                              "en"
-                                          ? 'images/asset311.png'
-                                          : 'images/assetAr31.png',
-                                      height: 20,
-
-                                      // width: 250,
-                                      fit: BoxFit.fill,
-                                      alignment: Alignment.center,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: 20,
-                                ),
-                                Text(
-                                  AppLocalizations.of(context).locale == "en"
-                                      ? " Uploaded " +
-                                          lblFirstUpload.toString() +
-                                          " Images "
-                                      : "* تم رفع " +
-                                          lblFirstUpload.toString() +
-                                          " صور  ",
-                                  textAlign: TextAlign.center,
-                                  style: MansaFont.getBoldFontinside_V2(),
-                                ),
-                              ],
-                            ),
-                          ]),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              child: Image.asset(
-                                'images/asset34.png',
-                                height: 20,
-                                //width: 20,
-                                fit: BoxFit.fill,
-                                alignment: Alignment.center,
-                              ),
-                            ),
-                            Container(
-                              width: 10,
-                            ),
-                            Column(
-                              children: <Widget>[
-                                GestureDetector(
-                                  onTap: () {
-                                    return showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        actions: <Widget>[
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 60),
-                                            child: FlatButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                                 loadAssetFromCamera2();
-                                              },
-                                              child: Icon(Icons.camera_alt),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 30),
-                                            child: FlatButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                                loadAssets2();
-                                              },
-                                              child:
-                                                  Icon(Icons.photo_camera_back),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    child: Image.asset(
-                                      AppLocalizations.of(context).locale ==
-                                              "en"
-                                          ? 'images/assetCerEn.PNG'
-                                          : 'images/filesAndDocs.png',
-                                      height: 20,
-                                      width: 100,
-                                      fit: BoxFit.fill,
-                                      alignment: Alignment.center,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: 20,
-                                ),
-                                Text(
-                                  AppLocalizations.of(context).locale == "en"
-                                      ? "* Uploaded " +
-                                          lblSecondUpload.toString() +
-                                          " Images *"
-                                      : "* تم رفع " +
-                                          lblSecondUpload.toString() +
-                                          " صور  *",
-                                  textAlign: TextAlign.center,
-                                  style: MansaFont.getBoldFontinside_V2(),
-                                ),
-                              ],
-                            ),
-                          ]),
-                    ),
-                  ]),
               Container(
                 height: 20,
               ),
@@ -1364,9 +1186,12 @@ class _EmarketingState extends State<Emarketing> with WidgetsBindingObserver {
               //   Container(
               //     child: Text(service==null?"":AppLocalizations.of(context).locale=="en" ?"Service Price : "+service.Price.toString():"سعر الخدمه :  "+service.Price.toString()),
               //   ),
+
               Container(
                 height: 20,
               ),
+
+
               InkWell(
                 onTap: () async {
                   this.position = await Navigator.of(context).push(
@@ -1421,6 +1246,8 @@ class _EmarketingState extends State<Emarketing> with WidgetsBindingObserver {
                 height: 20,
               ),
 
+
+
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1465,6 +1292,191 @@ class _EmarketingState extends State<Emarketing> with WidgetsBindingObserver {
               Container(
                 height: 20,
               ),
+
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              child: Image.asset(
+                                'images/asset34.png',
+                                height: 20,
+                                //width: 20,
+                                fit: BoxFit.fill,
+                                alignment: Alignment.center,
+                              ),
+                            ),
+                            Container(
+                              width: 10,
+                            ),
+                            Column(
+                              children: <Widget>[
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      mailValue =
+                                          emailKey_log.currentState.value;
+                                    });
+
+                                    return showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        actions: <Widget>[
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.only(left: 60),
+                                            child: FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                loadAssetFromCamera1();
+                                              },
+                                              child: Icon(Icons.camera_alt),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.only(left: 30),
+                                            child: FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                loadAssets();
+                                              },
+                                              child:
+                                              Icon(Icons.photo_camera_back),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    child: Image.asset(
+                                      AppLocalizations.of(context).locale ==
+                                          "en"
+                                          ? 'images/asset311.png'
+                                          : 'images/assetAr31.png',
+                                      height: 20,
+
+                                      // width: 250,
+                                      fit: BoxFit.fill,
+                                      alignment: Alignment.center,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 20,
+                                ),
+                                Text(
+                                  AppLocalizations.of(context).locale == "en"
+                                      ? " Uploaded " +
+                                      lblFirstUpload.toString() +
+                                      " Images "
+                                      : "* تم رفع " +
+                                      lblFirstUpload.toString() +
+                                      " صور  ",
+                                  textAlign: TextAlign.center,
+                                  style: MansaFont.getBoldFontinside_V2(),
+                                ),
+                              ],
+                            ),
+                          ]),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              child: Image.asset(
+                                'images/asset34.png',
+                                height: 20,
+                                //width: 20,
+                                fit: BoxFit.fill,
+                                alignment: Alignment.center,
+                              ),
+                            ),
+                            Container(
+                              width: 10,
+                            ),
+                            Column(
+                              children: <Widget>[
+                                GestureDetector(
+                                  onTap: () {
+                                    return showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        actions: <Widget>[
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.only(left: 60),
+                                            child: FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                loadAssetFromCamera2();
+                                              },
+                                              child: Icon(Icons.camera_alt),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.only(left: 30),
+                                            child: FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                loadAssets2();
+                                              },
+                                              child:
+                                              Icon(Icons.photo_camera_back),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    child: Image.asset(
+                                      AppLocalizations.of(context).locale ==
+                                          "en"
+                                          ? 'images/assetCerEn.PNG'
+                                          : 'images/filesAndDocs.png',
+                                      height: 20,
+                                      width: 100,
+                                      fit: BoxFit.fill,
+                                      alignment: Alignment.center,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 20,
+                                ),
+                                Text(
+                                  AppLocalizations.of(context).locale == "en"
+                                      ? "* Uploaded " +
+                                      lblSecondUpload.toString() +
+                                      " Images *"
+                                      : "* تم رفع " +
+                                      lblSecondUpload.toString() +
+                                      " صور  *",
+                                  textAlign: TextAlign.center,
+                                  style: MansaFont.getBoldFontinside_V2(),
+                                ),
+                              ],
+                            ),
+                          ]),
+                    ),
+                  ]),
+
+              Container(
+                height: 30,
+              ),
+
 
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -1654,12 +1666,12 @@ class _EmarketingState extends State<Emarketing> with WidgetsBindingObserver {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => SocialMediaList(
               socialItem: [
-                new SocialItem('', 'images/facebook.png', false, 1),
-                //new SocialItem('','images/google.png',false,2),
-                new SocialItem('', 'images/insta.png', false, 3),
-                new SocialItem('', 'images/twitter.png', false, 4),
-                new SocialItem('', 'images/snap.png', false, 5),
-                new SocialItem('', 'images/youtube.png', false, 6)
+                new SocialItem('', 'images/facebook.jpg', false, 1),
+                new SocialItem('','images/tiktok.jpg',false,2),
+                new SocialItem('', 'images/instagram.jpg', false, 3),
+                new SocialItem('', 'images/twitter.jpg', false, 4),
+                new SocialItem('', 'images/snapchat.jpg', false, 5),
+                // new SocialItem('', 'images/tiktok.jpg', false, 6),
               ],
               shoppingCart: obj,
             ),
@@ -1688,29 +1700,35 @@ class _EmarketingState extends State<Emarketing> with WidgetsBindingObserver {
     _selectedCity = _dropDownMenuCities[0].value;
     _dropDownMenuDiscounts = buildAndGetDropDownMenuItems(_discounts);
     _selectedDiscount = _dropDownMenuDiscounts[0].value;
-
+    //
     var now = new DateTime.now();
     var curr_day = now.day.toString();
     var curr_mon = now.month.toString();
     var curr_year = now.year.toString();
+    if(curr_day == "31"){
+      curr_day = "30";
+    }
     if (curr_day.length == 1) {
       curr_day = "0" + curr_day;
     }
     if (curr_mon.length == 1) {
       curr_mon = "0" + curr_mon;
     }
-
+    //
     _dropDownMenudays = buildAndGetDropDownMenuItems(_days);
-    //  _selectedfromDay=_dropDownMenudays[0].value;
-    _selectedfromDay = curr_day; //_dropDownMenudays[0].value;
-    _selectedToDay = curr_day; //_dropDownMenudays[0].value;
+     _selectedfromDay=_dropDownMenudays[0].value;
+     print(curr_day);
+    _selectedfromDay = curr_day;
+    _dropDownMenudays[0].value;
+    _selectedToDay = curr_day;
+    _dropDownMenudays[0].value;
     _dropDownMenumonths = buildAndGetDropDownMenuItems(_months);
     _selectedfromMonth = curr_mon; //_dropDownMenumonths[0].value;
     _selectedToMonth = curr_mon; //_dropDownMenumonths[0].value;
     _dropDownMenuyears = buildAndGetDropDownMenuItems(_years);
     _selectedfromYear = now.year.toString(); //_dropDownMenuyears[0].value;
     _selectedToYear = now.year.toString(); //_dropDownMenuyears[0].value;
-
+    //
     _dropDownMenuSector = buildAndGetDropDownMenuItems(_sectors);
     _selectedSector = _dropDownMenuSector[0].value;
     getUser().then((user) {
@@ -1722,12 +1740,13 @@ class _EmarketingState extends State<Emarketing> with WidgetsBindingObserver {
       print("user.emaillllllllllllllllllll");
       print(user.email);
     }
-    super.initState();
 
     ServiceApi.getServices().then((response) {
       if (response.code == 200) {
         response.data.forEach((s) {
+          print(s);
           if (s.Id == 7) {
+            print(s);
             this.service = s;
           }
         });
@@ -1753,7 +1772,7 @@ class _EmarketingState extends State<Emarketing> with WidgetsBindingObserver {
   }
 }
 
-// ignore: must_be_immutable
+// ignore: must_be_immutaFnextble
 class Dropdowndays extends StatefulWidget {
   String test2 = "";
   Dropdowndays(String s) {

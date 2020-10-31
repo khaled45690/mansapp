@@ -165,6 +165,8 @@ flutter:
   - images/threeStars.PNG
   - images/twoStars.PNG
   - images/oneStars.PNG
+  - images/tiktok.jpg
+  - images/
 
   fonts:
     - family: Tajawal

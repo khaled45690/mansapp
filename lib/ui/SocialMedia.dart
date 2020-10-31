@@ -111,7 +111,7 @@ class _SocialMediaListState extends State<SocialMediaList> {
               //     }
               //       print(p.name);
               //   }
-                
+
               //       widget.shoppingCart.socials=widget.myList;
               // //  print(widget.shoppingCart.City);
               //   Navigator.push(context,MaterialPageRoute(builder: (BuildContext context)=> Select(shoppingCart: widget.shoppingCart,)));

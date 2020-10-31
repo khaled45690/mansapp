@@ -90,9 +90,6 @@ class _GetLocationState extends State<GetLocation> {
   }
 
   void getUserLocation() async {
-    // await openAppSettings();
-    // await openLocationSettings();
-    print("0000000==========================>>>>>>>>>>>>>>>>>");
     LocationPermission permission = await Geolocator.requestPermission();
     print(permission);
     Position position =
@@ -185,7 +182,7 @@ class _GetLocationState extends State<GetLocation> {
         ),
       ):FloatingActionButton.extended(
         onPressed: (){
-           widget.isRegister ? saveUserLocation(selectedPosition) : Navigator.pop(context,selectedPosition);
+           widget.isRegister ? saveUserLocation(selectedPosition) : Navigator.pop(context , selectedPosition);
           },
         label: Text('اختر الموقع'),
         icon: Icon(Icons.check),
@@ -272,7 +269,7 @@ class _GetLocationState extends State<GetLocation> {
                 ),
               )
 
-          )
+          ),
         ],
       ),
     );

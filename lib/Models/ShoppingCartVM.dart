@@ -5,6 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ShoppingCartVM {
     int Id ;
     int ServiceId ;
+    String numberOfCameras;
+    String droneUsages;
+    String locationVideo;
+    String videoDuration;
     String UserId ;
     String NameAr ;
     String NameEn ;
