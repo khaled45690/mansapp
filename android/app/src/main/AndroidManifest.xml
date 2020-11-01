@@ -22,7 +22,7 @@
         android:label="Mansa"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDh_fIvktqV36c8vbnByoxqxGpLLvBtzYU"/>
+            android:value="AIzaSyAxlg0RZ-r3e_uSmp6A-dArxeodyMV2hwQ"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

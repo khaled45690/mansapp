@@ -27,21 +27,21 @@ class Select extends StatefulWidget {
 
 class SelectState extends State<Select> {
   int facebookViewNumber = 0;
-  int googleViewNumber = 0;
+  int tiktokViewNumber = 0;
   int instagramViewNumber = 0;
   int twitterViewNumber = 0;
   int snapshatViewNumber = 0;
   int youtubeViewNumber = 0;
 
   double facebookViewPrice = 0;
-  double googleViewPrice = 0;
+  double tiktokViewPrice = 0;
   double instagramViewPrice = 0;
   double twitterViewPrice = 0;
   double snapshatViewPrice = 0;
   double youtubeViewPrice = 0;
 
   double facebookResult = 0;
-  double googleResult = 0;
+  double tiktokResult = 0;
   double instagramResult = 0;
   double twitterResult = 0;
   double snapshatResult = 0;
@@ -52,6 +52,8 @@ class SelectState extends State<Select> {
   @override
   void initState() {
     widget.shoppingCart.platforms.forEach((plats) {
+      print("plat information ------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+      print("${plats.Id}   ${plats.platformName}");
       if (widget.shoppingCart.Sector == "حكومي") {
         if (widget.shoppingCart.socials.contains(1)) {
           if (plats.Id == 1) {
@@ -64,10 +66,10 @@ class SelectState extends State<Select> {
           }
         }
         if (widget.shoppingCart.socials.contains(2)) {
-          if (plats.Id == 2) {
+          if (plats.Id == 19) {
             setState(() {
-              googleViewNumber = plats.viewsNumber;
-              googleViewPrice = plats.viewsPrice;
+              tiktokViewNumber = plats.viewsNumber;
+              tiktokViewPrice = plats.viewsPrice;
             });
           }
         }
@@ -113,10 +115,10 @@ class SelectState extends State<Select> {
           }
         }
         if (widget.shoppingCart.socials.contains(2)) {
-          if (plats.Id == 7) {
+          if (plats.Id == 21) {
             setState(() {
-              googleViewNumber = plats.viewsNumber;
-              googleViewPrice = plats.viewsPrice;
+              tiktokViewNumber = plats.viewsNumber;
+              tiktokViewPrice = plats.viewsPrice;
             });
           }
         }
@@ -162,10 +164,10 @@ class SelectState extends State<Select> {
           }
         }
         if (widget.shoppingCart.socials.contains(2)) {
-          if (plats.Id == 12) {
+          if (plats.Id == 20) {
             setState(() {
-              googleViewNumber = plats.viewsNumber;
-              googleViewPrice = plats.viewsPrice;
+              tiktokViewNumber = plats.viewsNumber;
+              tiktokViewPrice = plats.viewsPrice;
             });
           }
         }
@@ -187,6 +189,55 @@ class SelectState extends State<Select> {
         }
         if (widget.shoppingCart.socials.contains(5)) {
           if (plats.Id == 15) {
+            setState(() {
+              snapshatViewNumber = plats.viewsNumber;
+              snapshatViewPrice = plats.viewsPrice;
+            });
+          }
+        }
+        if (widget.shoppingCart.socials.contains(6)) {
+          if (plats.Id == 18) {
+            setState(() {
+              youtubeViewNumber = plats.viewsNumber;
+              youtubeViewPrice = plats.viewsPrice;
+            });
+          }
+        }
+      }else if (widget.shoppingCart.Sector == "خاص") {
+        if (widget.shoppingCart.socials.contains(1)) {
+          if (plats.Id == 26) {
+            setState(() {
+              facebookViewNumber = plats.viewsNumber;
+              facebookViewPrice = plats.viewsPrice;
+            });
+          }
+        }
+        if (widget.shoppingCart.socials.contains(2)) {
+          if (plats.Id == 23) {
+            setState(() {
+              tiktokViewNumber = plats.viewsNumber;
+              tiktokViewPrice = plats.viewsPrice;
+            });
+          }
+        }
+        if (widget.shoppingCart.socials.contains(3)) {
+          if (plats.Id == 22) {
+            setState(() {
+              instagramViewNumber = plats.viewsNumber;
+              instagramViewPrice = plats.viewsPrice;
+            });
+          }
+        }
+        if (widget.shoppingCart.socials.contains(4)) {
+          if (plats.Id == 28) {
+            setState(() {
+              twitterViewNumber = plats.viewsNumber;
+              twitterViewPrice = plats.viewsPrice;
+            });
+          }
+        }
+        if (widget.shoppingCart.socials.contains(5)) {
+          if (plats.Id == 25) {
             setState(() {
               snapshatViewNumber = plats.viewsNumber;
               snapshatViewPrice = plats.viewsPrice;
@@ -250,10 +301,10 @@ class SelectState extends State<Select> {
                                     ? 0
                                     : (value.toInt() * facebookViewPrice) /
                                         facebookViewNumber;
-                                googleResult = googleViewNumber == 0
+                                tiktokResult = tiktokViewNumber == 0
                                     ? 0
-                                    : (value.toInt() * googleViewPrice) /
-                                        googleViewNumber;
+                                    : (value.toInt() * tiktokViewPrice) /
+                                        tiktokViewNumber;
                                 twitterResult = twitterViewNumber == 0
                                     ? 0
                                     : (value.toInt() * twitterViewPrice) /
@@ -271,7 +322,7 @@ class SelectState extends State<Select> {
                                     : (value.toInt() * youtubeViewPrice) /
                                         youtubeViewNumber;
                                 totalPrice = (facebookResult +
-                                        googleResult +
+                                        tiktokResult +
                                         instagramResult +
                                         twitterResult +
                                         snapshatResult +
@@ -324,10 +375,10 @@ class SelectState extends State<Select> {
                                         ? 0
                                         : (value.toInt() * facebookViewPrice) /
                                             facebookViewNumber;
-                                    googleResult = googleViewNumber == 0
+                                    tiktokResult = tiktokViewNumber == 0
                                         ? 0
-                                        : (value.toInt() * googleViewPrice) /
-                                            googleViewNumber;
+                                        : (value.toInt() * tiktokViewPrice) /
+                                            tiktokViewNumber;
                                     twitterResult = twitterViewNumber == 0
                                         ? 0
                                         : (value.toInt() * twitterViewPrice) /
@@ -345,7 +396,7 @@ class SelectState extends State<Select> {
                                         : (value.toInt() * youtubeViewPrice) /
                                             youtubeViewNumber;
                                     totalPrice = (facebookResult +
-                                            googleResult +
+                                            tiktokResult +
                                             instagramResult +
                                             twitterResult +
                                             snapshatResult +
@@ -368,10 +419,10 @@ class SelectState extends State<Select> {
                                         ? 0
                                         : (value.toInt() * facebookViewPrice) /
                                             facebookViewNumber;
-                                    googleResult = googleViewNumber == 0
+                                    tiktokResult = tiktokViewNumber == 0
                                         ? 0
-                                        : (value.toInt() * googleViewPrice) /
-                                            googleViewNumber;
+                                        : (value.toInt() * tiktokViewPrice) /
+                                            tiktokViewNumber;
                                     twitterResult = twitterViewNumber == 0
                                         ? 0
                                         : (value.toInt() * twitterViewPrice) /
@@ -389,7 +440,7 @@ class SelectState extends State<Select> {
                                         : (value.toInt() * youtubeViewPrice) /
                                             youtubeViewNumber;
                                     totalPrice = (facebookResult +
-                                            googleResult +
+                                            tiktokResult +
                                             instagramResult +
                                             twitterResult +
                                             snapshatResult +
@@ -412,10 +463,10 @@ class SelectState extends State<Select> {
                                         ? 0
                                         : (value.toInt() * facebookViewPrice) /
                                             facebookViewNumber;
-                                    googleResult = googleViewNumber == 0
+                                    tiktokResult = tiktokViewNumber == 0
                                         ? 0
-                                        : (value.toInt() * googleViewPrice) /
-                                            googleViewNumber;
+                                        : (value.toInt() * tiktokViewPrice) /
+                                            tiktokViewNumber;
                                     twitterResult = twitterViewNumber == 0
                                         ? 0
                                         : (value.toInt() * twitterViewPrice) /
@@ -433,7 +484,7 @@ class SelectState extends State<Select> {
                                         : (value.toInt() * youtubeViewPrice) /
                                             youtubeViewNumber;
                                     totalPrice = (facebookResult +
-                                            googleResult +
+                                            tiktokResult +
                                             instagramResult +
                                             twitterResult +
                                             snapshatResult +
@@ -456,10 +507,10 @@ class SelectState extends State<Select> {
                                         ? 0
                                         : (value.toInt() * facebookViewPrice) /
                                             facebookViewNumber;
-                                    googleResult = googleViewNumber == 0
+                                    tiktokResult = tiktokViewNumber == 0
                                         ? 0
-                                        : (value.toInt() * googleViewPrice) /
-                                            googleViewNumber;
+                                        : (value.toInt() * tiktokViewPrice) /
+                                            tiktokViewNumber;
                                     twitterResult = twitterViewNumber == 0
                                         ? 0
                                         : (value.toInt() * twitterViewPrice) /
@@ -477,7 +528,7 @@ class SelectState extends State<Select> {
                                         : (value.toInt() * youtubeViewPrice) /
                                             youtubeViewNumber;
                                     totalPrice = (facebookResult +
-                                            googleResult +
+                                            tiktokResult +
                                             instagramResult +
                                             twitterResult +
                                             snapshatResult +
@@ -700,7 +751,18 @@ class SelectState extends State<Select> {
                                               style: MansaFont
                                                   .baseFontStyleWithBackground(),
                                             )
-                                          : Container(),
+                                          : widget.shoppingCart.Sector ==
+                                  "خاص"
+                                  ? Text(
+                                AppLocalizations.of(context).locale == "en"? "private facebook price" : "سعر خاص فيسبوك " +
+                                    facebookResult.toString() +
+                                    " " +
+                                    AppLocalizations.of(context)
+                                        .lblRyal,
+                                textAlign: TextAlign.center,
+                                style: MansaFont
+                                    .baseFontStyleWithBackground(),
+                              ) : Container(),
                             ),
                           ],
                         ),
@@ -715,9 +777,9 @@ class SelectState extends State<Select> {
                               flex: 1,
                               child: widget.shoppingCart.Sector == "حكومي"
                                   ? Text(
-                                      AppLocalizations.of(context)
-                                              .lblGovGoogle +
-                                          googleResult.toString() +
+                                      AppLocalizations.of(context).locale == "en"? "government google price" : "سعر حكومى تيكتوك "
+                                          +
+                                          tiktokResult.toString() +
                                           " " +
                                           AppLocalizations.of(context).lblRyal,
                                       textAlign: TextAlign.center,
@@ -728,7 +790,7 @@ class SelectState extends State<Select> {
                                       ? Text(
                                           AppLocalizations.of(context)
                                                   .lblSpecialGoogle +
-                                              googleResult.toString() +
+                                              tiktokResult.toString() +
                                               " " +
                                               AppLocalizations.of(context)
                                                   .lblRyal,
@@ -739,9 +801,9 @@ class SelectState extends State<Select> {
                                       : widget.shoppingCart.Sector ==
                                               "جمعيات خيريه"
                                           ? Text(
-                                              AppLocalizations.of(context)
-                                                      .lblCharitiesGoogle +
-                                                  googleResult.toString() +
+                                AppLocalizations.of(context).locale == "en"? "government google price" : "سعر حكومى تيكتوك "
+                                    +
+                                                  tiktokResult.toString() +
                                                   " " +
                                                   AppLocalizations.of(context)
                                                       .lblRyal,
@@ -749,7 +811,20 @@ class SelectState extends State<Select> {
                                               style: MansaFont
                                                   .baseFontStyleWithBackground(),
                                             )
-                                          : Container(),
+                                          : widget.shoppingCart.Sector ==
+                                  "خاص"
+                                  ? Text(
+                                AppLocalizations.of(context).locale == "en"? "private tiktok price" : "سعر خاص تيكتوك "
+                                    +
+                                    tiktokResult.toString() +
+                                    " " +
+                                    AppLocalizations.of(context)
+                                        .lblRyal,
+                                textAlign: TextAlign.center,
+                                style: MansaFont
+                                    .baseFontStyleWithBackground(),
+                              )
+                                  : Container(),
                             ),
                           ],
                         ),
@@ -798,7 +873,20 @@ class SelectState extends State<Select> {
                                               style: MansaFont
                                                   .baseFontStyleWithBackground(),
                                             )
-                                          : Container(),
+                                          : widget.shoppingCart.Sector ==
+                                  "خاص"
+                                  ? Text(
+                                AppLocalizations.of(context).locale == "en"? "private instagram price" : "سعر خاص انستجرام "
+                                 +
+                                    instagramResult.toString() +
+                                    " " +
+                                    AppLocalizations.of(context)
+                                        .lblRyal,
+                                textAlign: TextAlign.center,
+                                style: MansaFont
+                                    .baseFontStyleWithBackground(),
+                              )
+                                  : Container(),
                             ),
                           ],
                         ),
@@ -847,7 +935,19 @@ class SelectState extends State<Select> {
                                               style: MansaFont
                                                   .baseFontStyleWithBackground(),
                                             )
-                                          : Container(),
+                                          : widget.shoppingCart.Sector ==
+                                  "خاص"
+                                  ? Text(
+                                AppLocalizations.of(context).locale == "en"? "private twitter price" : "سعر خاص تويتر " +
+                                    twitterResult.toString() +
+                                    " " +
+                                    AppLocalizations.of(context)
+                                        .lblRyal,
+                                textAlign: TextAlign.center,
+                                style: MansaFont
+                                    .baseFontStyleWithBackground(),
+                              )
+                                  : Container(),
                             ),
                           ],
                         ),
@@ -896,7 +996,19 @@ class SelectState extends State<Select> {
                                               style: MansaFont
                                                   .baseFontStyleWithBackground(),
                                             )
-                                          : Container(),
+                                          : widget.shoppingCart.Sector ==
+                                  "خاص"
+                                  ? Text(
+                                AppLocalizations.of(context).locale == "en"? "private snapchat price" : "سعر خاص سناب شات " +
+                                    snapshatResult.toString() +
+                                    " " +
+                                    AppLocalizations.of(context)
+                                        .lblRyal,
+                                textAlign: TextAlign.center,
+                                style: MansaFont
+                                    .baseFontStyleWithBackground(),
+                              )
+                                  : Container(),
                             ),
                           ],
                         ),
@@ -945,7 +1057,19 @@ class SelectState extends State<Select> {
                                               style: MansaFont
                                                   .baseFontStyleWithBackground(),
                                             )
-                                          : Container(),
+                                          : widget.shoppingCart.Sector ==
+                                  "خاص"
+                                  ? Text(
+                                AppLocalizations.of(context).locale == "en"? "private youtube price" : "سعر خاص يوتيوب " +
+                                    youtubeResult.toString() +
+                                    " " +
+                                    AppLocalizations.of(context)
+                                        .lblRyal,
+                                textAlign: TextAlign.center,
+                                style: MansaFont
+                                    .baseFontStyleWithBackground(),
+                              )
+                                  : Container(),
                             ),
                           ],
                         ),

@@ -10,7 +10,7 @@ import 'package:geocoder/model.dart';
 
 
 const Color PRIMARY_COLOR = Color(0xff0D3F67);
-const String GOOGLE_MAPS_API_KEY = "AIzaSyDh_fIvktqV36c8vbnByoxqxGpLLvBtzYU";
+const String GOOGLE_MAPS_API_KEY = "AIzaSyAxlg0RZ-r3e_uSmp6A-dArxeodyMV2hwQ";
 const String app_name = "Mansa";
 const String splash_intro = "For E-Marketing & Ads";
 const String Phone_number = "Phone Number";

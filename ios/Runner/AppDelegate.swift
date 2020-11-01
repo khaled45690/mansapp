@@ -20,7 +20,7 @@ import GoogleMaps
     eventChannel?.setStreamHandler(linkStreamHandler)
     ///////////
     FirebaseApp.configure()
-    GMSServices.provideAPIKey("AIzaSyDh_fIvktqV36c8vbnByoxqxGpLLvBtzYU")
+    GMSServices.provideAPIKey("AIzaSyAxlg0RZ-r3e_uSmp6A-dArxeodyMV2hwQ")
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

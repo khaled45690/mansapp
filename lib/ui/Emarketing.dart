@@ -1628,6 +1628,8 @@ class _EmarketingState extends State<Emarketing> with WidgetsBindingObserver {
           showInSnackBar(AppLocalizations.of(_context).lblEnterYourData,
               _context, _scaffoldKey);
         } else {
+          print("service.Price------------------------------------------------------------>>>>>>>>>>>>>>>>>>>>>>");
+          print(service.Price);
           //showAppLoading(context);
           ShoppingCartVM obj = new ShoppingCartVM();
           // obj.NameAr=namearabicKey_log.currentState.value;
@@ -1671,7 +1673,6 @@ class _EmarketingState extends State<Emarketing> with WidgetsBindingObserver {
                 new SocialItem('', 'images/instagram.jpg', false, 3),
                 new SocialItem('', 'images/twitter.jpg', false, 4),
                 new SocialItem('', 'images/snapchat.jpg', false, 5),
-                // new SocialItem('', 'images/tiktok.jpg', false, 6),
               ],
               shoppingCart: obj,
             ),
