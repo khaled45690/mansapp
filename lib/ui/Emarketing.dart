@@ -1593,8 +1593,8 @@ class _EmarketingState extends State<Emarketing> with WidgetsBindingObserver {
   send_data() {
     try {
       if (_form_logo.currentState.validate()) {
-        if (secondUpload == null ||
-            secondUpload == "" ||
+        if (firstUpload == null ||
+            firstUpload == "" ||
             // desKey_log.currentState.value==null||desKey_log.currentState.value==""||
             phone1Key_log.currentState.value == null ||
             phone1Key_log.currentState.value == "" ||
@@ -1657,7 +1657,6 @@ class _EmarketingState extends State<Emarketing> with WidgetsBindingObserver {
           obj.City = _selectedCity;
           obj.Price = service.Price;
           obj.filesIds = firstUpload;
-          obj.filesIds2 = secondUpload;
           obj.latitude = "${this.position.latitude}";
           obj.longitude = "${this.position.longitude}";
           obj.AddressForAdvertise = address;

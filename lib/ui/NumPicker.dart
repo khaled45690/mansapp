@@ -47,13 +47,67 @@ class SelectState extends State<Select> {
   double snapshatResult = 0;
   double youtubeResult = 0;
   String totalPrice = "";
-  double _animatedHeight = 0;
-  double _durationAnimatedHeight = 0;
+  List viewersList = [];
+  String viewerNumber = '0';
+  List durationList = [];
+  List ageList = [];
+  double _ageAnimatedHeight = 0;
+
+  makeNumberOfViewerCalculation(value){
+    setState(() {
+      this.vNumbers = value.toInt();
+      facebookResult = facebookViewNumber == 0
+          ? 0
+          : (value.toInt() * facebookViewPrice) /
+          facebookViewNumber;
+      tiktokResult = tiktokViewNumber == 0
+          ? 0
+          : (value.toInt() * tiktokViewPrice) /
+          tiktokViewNumber;
+      twitterResult = twitterViewNumber == 0
+          ? 0
+          : (value.toInt() * twitterViewPrice) /
+          twitterViewNumber;
+      instagramResult = instagramViewNumber == 0
+          ? 0
+          : (value.toInt() * instagramViewPrice) /
+          instagramViewNumber;
+      snapshatResult = snapshatViewNumber == 0
+          ? 0
+          : (value.toInt() * snapshatViewPrice) /
+          snapshatViewNumber;
+      youtubeResult = youtubeViewNumber == 0
+          ? 0
+          : (value.toInt() * youtubeViewPrice) /
+          youtubeViewNumber;
+      totalPrice = (facebookResult +
+          tiktokResult +
+          instagramResult +
+          twitterResult +
+          snapshatResult +
+          youtubeResult)
+          .toStringAsFixed(3);
+    });
+  }
+
+
   @override
   void initState() {
+super.initState();
+    for(int i  = 0 ; i <= 40 ; i++){
+      viewersList.add(50000 * (i));
+    }
+for(int i  = 0 ; i <= 15 ; i++){
+  durationList.add(i);
+}
+
+for(int i = 0 ; i <= 100 ; i++){
+  ageList.add(i);
+}
+makeNumberOfViewerCalculation(double.parse('0'));
+
+
     widget.shoppingCart.platforms.forEach((plats) {
-      print("plat information ------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-      print("${plats.Id}   ${plats.platformName}");
       if (widget.shoppingCart.Sector == "حكومي") {
         if (widget.shoppingCart.socials.contains(1)) {
           if (plats.Id == 1) {
@@ -262,6 +316,7 @@ class SelectState extends State<Select> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     // TODO: implement build
     return Scaffold(
         key: _scaffoldKey,
@@ -291,259 +346,91 @@ class SelectState extends State<Select> {
                             color: Colors.black),
                       ),
                       Stack(children: [
-                        Container(
-                          child: Slider(
-                            value: vNumbers.toDouble(),
-                            onChanged: (double value) {
-                              setState(() {
-                                this.vNumbers = value.toInt();
-                                facebookResult = facebookViewNumber == 0
-                                    ? 0
-                                    : (value.toInt() * facebookViewPrice) /
-                                        facebookViewNumber;
-                                tiktokResult = tiktokViewNumber == 0
-                                    ? 0
-                                    : (value.toInt() * tiktokViewPrice) /
-                                        tiktokViewNumber;
-                                twitterResult = twitterViewNumber == 0
-                                    ? 0
-                                    : (value.toInt() * twitterViewPrice) /
-                                        twitterViewNumber;
-                                instagramResult = instagramViewNumber == 0
-                                    ? 0
-                                    : (value.toInt() * instagramViewPrice) /
-                                        instagramViewNumber;
-                                snapshatResult = snapshatViewNumber == 0
-                                    ? 0
-                                    : (value.toInt() * snapshatViewPrice) /
-                                        snapshatViewNumber;
-                                youtubeResult = youtubeViewNumber == 0
-                                    ? 0
-                                    : (value.toInt() * youtubeViewPrice) /
-                                        youtubeViewNumber;
-                                totalPrice = (facebookResult +
-                                        tiktokResult +
-                                        instagramResult +
-                                        twitterResult +
-                                        snapshatResult +
-                                        youtubeResult)
-                                    .toStringAsFixed(3);
-                                print("total is :" + totalPrice.toString());
-                                print((5 + 5).toString());
-                                print((2.2 + 3.3).toString());
-                                print(vNumbers);
-                                if (value == 0 || value == 2000000) {
-                                  print("hello");
-                                  _animatedHeight = 130;
-                                } else {
-                                  _animatedHeight = 0;
-                                }
-                              });
-                            },
-                            min: 0,
-                            max: 2000000,
-                            divisions: 120,
-                          ),
-                          //padding: EdgeInsets.only(left: 30,right: 30),
+                        Column(
+                          children: [
+                            Container(
+                              width: size.width - 10,
+                              child: Slider(
+                                value: vNumbers.toDouble(),
+                                onChanged: (double value) {
+                                  setState(() {
+                                    this.vNumbers = value.toInt();
+                                    facebookResult = facebookViewNumber == 0
+                                        ? 0
+                                        : (value.toInt() * facebookViewPrice) /
+                                            facebookViewNumber;
+                                    tiktokResult = tiktokViewNumber == 0
+                                        ? 0
+                                        : (value.toInt() * tiktokViewPrice) /
+                                            tiktokViewNumber;
+                                    twitterResult = twitterViewNumber == 0
+                                        ? 0
+                                        : (value.toInt() * twitterViewPrice) /
+                                            twitterViewNumber;
+                                    instagramResult = instagramViewNumber == 0
+                                        ? 0
+                                        : (value.toInt() * instagramViewPrice) /
+                                            instagramViewNumber;
+                                    snapshatResult = snapshatViewNumber == 0
+                                        ? 0
+                                        : (value.toInt() * snapshatViewPrice) /
+                                            snapshatViewNumber;
+                                    youtubeResult = youtubeViewNumber == 0
+                                        ? 0
+                                        : (value.toInt() * youtubeViewPrice) /
+                                            youtubeViewNumber;
+                                    totalPrice = (facebookResult +
+                                            tiktokResult +
+                                            instagramResult +
+                                            twitterResult +
+                                            snapshatResult +
+                                            youtubeResult)
+                                        .toStringAsFixed(3);
+                                    print("total is :" + totalPrice.toString());
+                                    print((5 + 5).toString());
+                                    print((2.2 + 3.3).toString());
+                                    print(vNumbers);
+                                  });
+                                },
+                                min: 0,
+                                max: 2000000,
+                                divisions: 40,
+
+                              ),
+                              //padding: EdgeInsets.only(left: 30,right: 30),
+                            ),
+                            Container(
+                              width: 100,
+                              child: DropdownButton<String>(
+                                isExpanded: true,
+                                iconSize: 18,
+                                iconEnabledColor: Colors.black,
+                                style: TextStyle(fontSize: 15 , ),
+
+                                value: vNumbers.toString(),
+                                hint:  Text("Select item"),
+                                onChanged: (value) {
+                                  print(value);
+                                  makeNumberOfViewerCalculation(double.parse(value));
+
+                                },
+                                items: viewersList.map(( user) {
+                                  return  DropdownMenuItem<String>(
+                                    value: user.toString(),
+                                    child: Container(
+                                      child: Text(
+                                        user.toString(),
+                                        textAlign: TextAlign.center,
+                                        style:  TextStyle(color: Colors.black),
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ],
                         ),
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 150),
-                          height: _animatedHeight,
-                          width: _animatedHeight,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 3,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  int value = 500000;
-                                  setState(() {
-                                    _animatedHeight = 0;
-                                    this.vNumbers = value.toInt();
-                                    facebookResult = facebookViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * facebookViewPrice) /
-                                            facebookViewNumber;
-                                    tiktokResult = tiktokViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * tiktokViewPrice) /
-                                            tiktokViewNumber;
-                                    twitterResult = twitterViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * twitterViewPrice) /
-                                            twitterViewNumber;
-                                    instagramResult = instagramViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * instagramViewPrice) /
-                                            instagramViewNumber;
-                                    snapshatResult = snapshatViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * snapshatViewPrice) /
-                                            snapshatViewNumber;
-                                    youtubeResult = youtubeViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * youtubeViewPrice) /
-                                            youtubeViewNumber;
-                                    totalPrice = (facebookResult +
-                                            tiktokResult +
-                                            instagramResult +
-                                            twitterResult +
-                                            snapshatResult +
-                                            youtubeResult)
-                                        .toStringAsFixed(3);
-                                  });
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.all(5),
-                                  child: Text("500000"),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  int value = 1000000;
-                                  setState(() {
-                                    _animatedHeight = 0;
-                                    this.vNumbers = value.toInt();
-                                    facebookResult = facebookViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * facebookViewPrice) /
-                                            facebookViewNumber;
-                                    tiktokResult = tiktokViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * tiktokViewPrice) /
-                                            tiktokViewNumber;
-                                    twitterResult = twitterViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * twitterViewPrice) /
-                                            twitterViewNumber;
-                                    instagramResult = instagramViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * instagramViewPrice) /
-                                            instagramViewNumber;
-                                    snapshatResult = snapshatViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * snapshatViewPrice) /
-                                            snapshatViewNumber;
-                                    youtubeResult = youtubeViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * youtubeViewPrice) /
-                                            youtubeViewNumber;
-                                    totalPrice = (facebookResult +
-                                            tiktokResult +
-                                            instagramResult +
-                                            twitterResult +
-                                            snapshatResult +
-                                            youtubeResult)
-                                        .toStringAsFixed(3);
-                                  });
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.all(5),
-                                  child: Text("1000000"),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  int value = 1500000;
-                                  setState(() {
-                                    _animatedHeight = 0;
-                                    this.vNumbers = value.toInt();
-                                    facebookResult = facebookViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * facebookViewPrice) /
-                                            facebookViewNumber;
-                                    tiktokResult = tiktokViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * tiktokViewPrice) /
-                                            tiktokViewNumber;
-                                    twitterResult = twitterViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * twitterViewPrice) /
-                                            twitterViewNumber;
-                                    instagramResult = instagramViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * instagramViewPrice) /
-                                            instagramViewNumber;
-                                    snapshatResult = snapshatViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * snapshatViewPrice) /
-                                            snapshatViewNumber;
-                                    youtubeResult = youtubeViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * youtubeViewPrice) /
-                                            youtubeViewNumber;
-                                    totalPrice = (facebookResult +
-                                            tiktokResult +
-                                            instagramResult +
-                                            twitterResult +
-                                            snapshatResult +
-                                            youtubeResult)
-                                        .toStringAsFixed(3);
-                                  });
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.all(5),
-                                  child: Text("1500000"),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  int value = 2000000;
-                                  setState(() {
-                                    _animatedHeight = 0;
-                                    this.vNumbers = value.toInt();
-                                    facebookResult = facebookViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * facebookViewPrice) /
-                                            facebookViewNumber;
-                                    tiktokResult = tiktokViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * tiktokViewPrice) /
-                                            tiktokViewNumber;
-                                    twitterResult = twitterViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * twitterViewPrice) /
-                                            twitterViewNumber;
-                                    instagramResult = instagramViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * instagramViewPrice) /
-                                            instagramViewNumber;
-                                    snapshatResult = snapshatViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * snapshatViewPrice) /
-                                            snapshatViewNumber;
-                                    youtubeResult = youtubeViewNumber == 0
-                                        ? 0
-                                        : (value.toInt() * youtubeViewPrice) /
-                                            youtubeViewNumber;
-                                    totalPrice = (facebookResult +
-                                            tiktokResult +
-                                            instagramResult +
-                                            twitterResult +
-                                            snapshatResult +
-                                            youtubeResult)
-                                        .toStringAsFixed(3);
-                                  });
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.all(5),
-                                  child: Text("2000000"),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+
                       ]),
                       Text(
                         vNumbers.toString() +
@@ -554,116 +441,75 @@ class SelectState extends State<Select> {
                     ],
                   ),
                 ),
-                Stack(children: [
-                  Container(
-                    //height: 200,
-                    margin: EdgeInsets.only(
-                        right: 0, left: 0, bottom: 0, top: 10.0),
-                    width: MediaQuery.of(context).size.width,
-                    color: grey_ligth,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Text(
-                          AppLocalizations.of(context).lblDuration,
-                          style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
+                Container(
+                  //height: 200,
+                  margin: EdgeInsets.only(
+                      right: 0, left: 0, bottom: 0, top: 10.0),
+                  width: MediaQuery.of(context).size.width,
+                  color: grey_ligth,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Text(
+                        AppLocalizations.of(context).lblDuration,
+                        style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                      Container(
+                        child: Slider(
+                          value: duration.toDouble(),
+                          onChanged: (double value) {
+                            setState(() {
+                              this.duration = value.toInt();
+                              print(duration);
+                            });
+                          },
+                          min: 0,
+                          max: 15,
+                          divisions: null,
                         ),
-                        Container(
-                          child: Slider(
-                            value: duration.toDouble(),
-                            onChanged: (double value) {
-                              setState(() {
-                                this.duration = value.toInt();
-                                print(duration);
-                                if(value.toInt() == 0 || value == 15){
-                                  _durationAnimatedHeight = 100;
-                                  print("hello");
-                                }else{
-                                  _durationAnimatedHeight = 0;
-                                }
-                              });
-                            },
-                            min: 0,
-                            max: 15,
-                            divisions: null,
-                          ),
-                          //padding: EdgeInsets.only(left: 30,right: 30),
+                        //padding: EdgeInsets.only(left: 30,right: 30),
+                      ),
+                      Container(
+                        width: 50,
+                        child: DropdownButton<String>(
+                          isExpanded: true,
+                          iconSize: 18,
+                          iconEnabledColor: Colors.black,
+                          style: TextStyle(fontSize: 15 , ),
+
+                          value: duration.toString(),
+                          hint:  Text("Select item"),
+                          onChanged: (value) {
+                            print(value);
+                            setState(() {
+                              duration = int.parse(value);
+                            });
+                          },
+                          items: durationList.map(( user) {
+                            return  DropdownMenuItem<String>(
+                              value: user.toString(),
+                              child: Container(
+                                child: Text(
+                                  user.toString(),
+                                  textAlign: TextAlign.center,
+                                  style:  TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            );
+                          }).toList(),
                         ),
-                        Text(
-                          duration.toString() +
-                              " " +
-                              AppLocalizations.of(context).lblTimes,
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        duration.toString() +
+                            " " +
+                            AppLocalizations.of(context).lblTimes,
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                    ],
                   ),
-
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 150),
-                    height: _durationAnimatedHeight,
-                    width: _durationAnimatedHeight,
-                    margin: EdgeInsets.only(top: 50),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 3,
-                          offset:
-                          Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              _durationAnimatedHeight = 0;
-                              this.duration = 5;
-                            });
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(5),
-                            child: Text("5"),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              _durationAnimatedHeight = 0;
-                              this.duration = 10;
-                            });
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(5),
-                            child: Text("10"),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              _durationAnimatedHeight = 0;
-                              this.duration = 15;
-                            });
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(5),
-                            child: Text("15"),
-                          ),
-                        ),
-
-                      ],
-                    ),
-                  ),
-
-                ],
                 ),
                 Container(
                   //height: 200,
@@ -686,6 +532,12 @@ class SelectState extends State<Select> {
                           value: age.toDouble(),
                           onChanged: (double value) {
                             setState(() {
+                              if(value.toInt() == 0 || value == 100){
+                                _ageAnimatedHeight = 100;
+                                print("hello");
+                              }else{
+                                _ageAnimatedHeight = 0;
+                              }
                               this.age = value.toInt();
                               print(age);
                             });
@@ -695,6 +547,36 @@ class SelectState extends State<Select> {
                           divisions: null,
                         ),
                         //padding: EdgeInsets.only(left: 30,right: 30),
+                      ),
+                      Container(
+                        width: 50,
+                        child: DropdownButton<String>(
+                          isExpanded: true,
+                          iconSize: 18,
+                          iconEnabledColor: Colors.black,
+                          style: TextStyle(fontSize: 15 , ),
+
+                          value: age.toString(),
+                          hint:  Text("Select item"),
+                          onChanged: (value) {
+                            print(value);
+                            setState(() {
+                              age = int.parse(value);
+                            });
+                          },
+                          items: ageList.map(( user) {
+                            return  DropdownMenuItem<String>(
+                              value: user.toString(),
+                              child: Container(
+                                child: Text(
+                                  user.toString(),
+                                  textAlign: TextAlign.center,
+                                  style:  TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
                       ),
                       Text(
                         age.toString() +
@@ -1296,4 +1178,8 @@ class DisplayState extends State<Display> {
       value = i.toInt() + rand.nextInt(f.toInt() - i.toInt() + 1);
     });
   }
+
+
+
+
 }

@@ -53,7 +53,7 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
   String numberOfCameras = "0";
   String droneUsages = "";
   String locationVideo = "";
-  String videoDuration = "";
+  String videoDuration = '0';
   GlobalKey<FormState> _form_logo = GlobalKey<FormState>();
   var nameenglishKey_log = GlobalKey<FormFieldState>();
   var namearabicKey_log = GlobalKey<FormFieldState>();
@@ -275,7 +275,7 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
             ),
           ),
           title: new Text(
-            "${AppLocalizations.of(context).locale=="en" ? AppLocalizations.of(context).lblAdsVideo : "تصوير فديو اعلانى"}",
+            "${AppLocalizations.of(context).locale == "en" ? AppLocalizations.of(context).lblAdsVideo : "تصوير فديو اعلانى"}",
             style: MansaFont.baseFontStyle(),
           ),
           centerTitle: true,
@@ -298,842 +298,895 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
           padding: EdgeInsets.all(10),
           child: Form(
               key: _form_logo,
-              child: Column(children: [
-                Row(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      AppLocalizations.of(context).locale == "en"
-                          ? "choose number of cameras"
-                          : "اختر عدد الكاميرا",
-                      textAlign: AppLocalizations.of(context).locale == "en"
-                          ? TextAlign.left
-                          : TextAlign.right,
-                      style: MansaFont.getBoldFontinside(),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("1"),
-                    Radio(
-                      groupValue: numberOfCameras,
-                      value: "1",
-                      onChanged: (change) {
-                        setState(() {
-                          numberOfCameras = change;
-                        });
-                      },
-                    ),
-                    Text("2"),
-                    Radio(
-                      groupValue: numberOfCameras,
-                      value: "2",
-                      onChanged: (change) {
-                        setState(() {
-                          numberOfCameras = change;
-                        });
-                      },
-                    ),
-                    Text("3"),
-                    Radio(
-                      groupValue: numberOfCameras,
-                      value: "3",
-                      onChanged: (change) {
-                        setState(() {
-                          numberOfCameras = change;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      AppLocalizations.of(context).locale == "en"
-                          ? "do you want drone video?"
-                          : "اختيار تصوير بدرون",
-                      textAlign: AppLocalizations.of(context).locale == "en"
-                          ? TextAlign.left
-                          : TextAlign.right,
-                      style: MansaFont.getBoldFontinside(),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(AppLocalizations.of(context).locale == "en"
-                        ? "yes"
-                        : "نعم"),
-                    Radio(
-                      groupValue: droneUsages,
-                      value: "yes",
-                      onChanged: (change) {
-                        setState(() {
-                          droneUsages = change;
-                        });
-                      },
-                    ),
-                    Text(AppLocalizations.of(context).locale == "en"
-                        ? "no"
-                        : "لا"),
-                    Radio(
-                      groupValue: droneUsages,
-                      value: "no",
-                      onChanged: (change) {
-                        setState(() {
-                          droneUsages = change;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      AppLocalizations.of(context).locale == "en"
-                          ? "location video"
-                          : "تصوير المكان",
-                      textAlign: AppLocalizations.of(context).locale == "en"
-                          ? TextAlign.left
-                          : TextAlign.right,
-                      style: MansaFont.getBoldFontinside(),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(AppLocalizations.of(context).locale == "en"
-                        ? "indoor"
-                        : "داخلى"),
-                    Radio(
-                      groupValue: locationVideo,
-                      value: "indoor",
-                      onChanged: (change) {
-                        setState(() {
-                          locationVideo = change;
-                        });
-                      },
-                    ),
-                    Text(AppLocalizations.of(context).locale == "en"
-                        ? "outdoor"
-                        : "خارجى"),
-                    Radio(
-                      groupValue: locationVideo,
-                      value: "outdoor",
-                      onChanged: (change) {
-                        setState(() {
-                          locationVideo = change;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      AppLocalizations.of(context).locale == "en"
-                          ? "video duration in minute"
-                          : "مدة الفديو بالدقيقة",
-                      textAlign: AppLocalizations.of(context).locale == "en"
-                          ? TextAlign.left
-                          : TextAlign.right,
-                      style: MansaFont.getBoldFontinside(),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("1"),
-                    Radio(
-                      groupValue: videoDuration,
-                      value: "1",
-                      onChanged: (change) {
-                        setState(() {
-                          videoDuration = change;
-                        });
-                      },
-                    ),
-                    Text("2"),
-                    Radio(
-                      groupValue: videoDuration,
-                      value: "2",
-                      onChanged: (change) {
-                        setState(() {
-                          videoDuration = change;
-                        });
-                      },
-                    ),
-                    Text("3"),
-                    Radio(
-                      groupValue: videoDuration,
-                      value: "3",
-                      onChanged: (change) {
-                        setState(() {
-                          videoDuration = change;
-                        });
-                      },
-                    ),
-                    Text("4"),
-                    Radio(
-                      groupValue: videoDuration,
-                      value: "4",
-                      onChanged: (change) {
-                        setState(() {
-                          videoDuration = change;
-                        });
-                      },
-                    ),
-                    Text("5"),
-                    Radio(
-                      groupValue: videoDuration,
-                      value: "5",
-                      onChanged: (change) {
-                        setState(() {
-                          videoDuration = change;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          AppLocalizations.of(context).lblImage_Information,
-                          textAlign: TextAlign.center,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context).locale == "en"
+                              ? "choose number of cameras"
+                              : "اختر عدد الكاميرا",
+                          textAlign: AppLocalizations.of(context).locale == "en"
+                              ? TextAlign.left
+                              : TextAlign.right,
                           style: MansaFont.getBoldFontinside(),
                         ),
-                      ),
-                    ]),
-                Container(
-                  height: 20,
-                ),
-                Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        child: Image.asset(
-                          'images/asset34.png',
-                          height: 35,
-                          width: 60,
-                          fit: BoxFit.fill,
-                          alignment: Alignment.center,
-                        ),
-                      ),
-                      Container(
-                        width: 20,
-                      ),
-                      Column(
-                        children: <Widget>[
-                          GestureDetector(
-                            onTap: () {
-                              return showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  actions: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 60),
-                                      child: FlatButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                          loadAssetFromCamera1();
-                                        },
-                                        child: Icon(Icons.camera_alt),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 30),
-                                      child: FlatButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                          loadAssets();
-                                        },
-                                        child: Icon(Icons.photo_camera_back),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
+                        Container(
+                          height: 30,
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                              boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius:0.2,
+                              blurRadius: 8,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ]),
+                          width: 50,
+                          child: DropdownButton<String>(
+                            isExpanded: true,
+                            value: numberOfCameras,
+                            icon: Icon(Icons.arrow_downward),
+                            iconSize: 25,
+                            elevation: 16,
+                            style: TextStyle(color: Colors.blue, fontSize: 20),
+                            underline: Container(
+                              height: 0,
+                            ),
+                            onChanged: (String newValue) {
+                              setState(() {
+                                numberOfCameras = newValue;
+                              });
                             },
-                            child: Container(
-                              child: Image.asset(
-                                AppLocalizations.of(context).locale == "en"
-                                    ? 'images/asset311.png'
-                                    : 'images/assetAr31.png',
-                                height: 30,
-                                width: 200,
-                                fit: BoxFit.fill,
-                                alignment: Alignment.center,
-                              ),
-                            ),
+                            items: [
+                              '0',
+                              '1',
+                              '2',
+                              '3',
+                              '4',
+                              '5',
+                              '6',
+                              '7',
+                              '8',
+                              '9',
+                              '10'
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
                           ),
-                        ],
-                      ),
-                    ]),
-                Container(
-                  width: 20,
-                ),
-                Text(
-                  AppLocalizations.of(context).locale == "en"
-                      ? "* Uploaded " +
-                          lblFirstUpload.toString() +
-                          " Images *     "
-                      : "       * تم رفع " +
-                          lblFirstUpload.toString() +
-                          " صور  *",
-                  textAlign: TextAlign.center,
-                  style: MansaFont.getBoldFontinside(),
-                ),
-                Container(
-                  height: 20,
-                ),
-                Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        child: Image.asset(
-                          'images/asset34.png',
-                          height: 35,
-                          width: 60,
-                          fit: BoxFit.fill,
-                          alignment: Alignment.center,
                         ),
-                      ),
-                      Container(
-                        width: 20,
-                      ),
-                      Column(
-                        children: <Widget>[
-                          GestureDetector(
-                            onTap: openFileExplorer2,
-                            child: Container(
-                              child: Image.asset(
-                                AppLocalizations.of(context).locale == "en"
-                                    ? 'images/uploadSctiptAr.PNG'
-                                    : 'images/uploadSctiptAr.PNG',
-                                height: 30,
-                                width: 200,
-                                fit: BoxFit.fill,
-                                alignment: Alignment.center,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ]),
-                Container(
-                  width: 20,
-                ),
-                Text(
-                  AppLocalizations.of(context).locale == "en"
-                      ? "* Uploaded " +
-                          lblSecondUpload.toString() +
-                          " Images *     "
-                      : "    * تم رفع " +
-                          lblSecondUpload.toString() +
-                          " صور  *",
-                  textAlign: TextAlign.center,
-                  style: MansaFont.getBoldFontinside(),
-                ),
-                Container(
-                  height: 10,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      // wrap your Column in Expanded
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            key: desKey_log,
-                            maxLines: 3,
-                            // textAlign: TextAlign.left,
-                            style: MansaFont.getLightFont(),
-                            decoration: InputDecoration(
-                              labelText: AppLocalizations.of(context)
-                                  .lblDescriptionPlaceholder,
-                              labelStyle:
-                                  MansaFont.getLightFont_TextFormField(),
-                              // fillColor: Colors.blueGrey,
-                              // hintText: AppLocalizations.of(context).lblDescriptionPlaceholder,
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: 14.0, horizontal: 10.0),
-                              border: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.grey, width: 0.0),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.grey, width: 1.0),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-                Container(
-                  height: 20,
-                ),
-                Container(
-                  height: 2,
-                  color: grey_ligth,
-                ),
-                Container(
-                  height: 20,
-                ),
-                Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          AppLocalizations.of(context).lblContact_Information,
-                          textAlign: TextAlign.center,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context).locale == "en"
+                              ? "do you want drone video?"
+                              : "اختيار تصوير بدرون",
+                          textAlign: AppLocalizations.of(context).locale == "en"
+                              ? TextAlign.left
+                              : TextAlign.right,
                           style: MansaFont.getBoldFontinside(),
                         ),
-                      ),
-                    ]),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        AppLocalizations.of(context).lblFirstNum + " *",
-                        //textAlign: TextAlign.center,
-                        style: MansaFont.baseFontStyleWithBackground(),
-                      ),
+                      ],
                     ),
-                    Expanded(
-                      // wrap your Column in Expanded
-                      flex: 2,
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            key: phone1Key_log,
-                            maxLines: 1,
-                            keyboardType: TextInputType.number,
-                            //textAlign: TextAlign.left,
-                            style: MansaFont.getLightFont(),
-                            decoration: InputDecoration(
-                              labelText: AppLocalizations.of(context)
-                                  .lblFirstNumPlaceholder,
-                              // labelStyle:
-                              // MansaFont.getLightFont_TextFormField(),
-                              // fillColor: Colors.blueGrey,
-                              // hintText: AppLocalizations.of(context).lblFirstNumPlaceholder,
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: 14.0, horizontal: 10.0),
-                              // border: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 0.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
-                              // focusedBorder: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 1.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(AppLocalizations.of(context).locale == "en"
+                            ? "yes"
+                            : "نعم"),
+                        Radio(
+                          groupValue: droneUsages,
+                          value: "yes",
+                          onChanged: (change) {
+                            setState(() {
+                              droneUsages = change;
+                            });
+                          },
+                        ),
+                        Text(AppLocalizations.of(context).locale == "en"
+                            ? "no"
+                            : "لا"),
+                        Radio(
+                          groupValue: droneUsages,
+                          value: "no",
+                          onChanged: (change) {
+                            setState(() {
+                              droneUsages = change;
+                            });
+                          },
+                        ),
+
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context).locale == "en"
+                              ? "location video"
+                              : "تصوير المكان",
+                          textAlign: AppLocalizations.of(context).locale == "en"
+                              ? TextAlign.left
+                              : TextAlign.right,
+                          style: MansaFont.getBoldFontinside(),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(AppLocalizations.of(context).locale == "en"
+                            ? "indoor"
+                            : "داخلى"),
+                        Radio(
+                          groupValue: locationVideo,
+                          value: "indoor",
+                          onChanged: (change) {
+                            setState(() {
+                              locationVideo = change;
+                            });
+                          },
+                        ),
+                        Text(AppLocalizations.of(context).locale == "en"
+                            ? "outdoor"
+                            : "خارجى"),
+                        Radio(
+                          groupValue: locationVideo,
+                          value: "outdoor",
+                          onChanged: (change) {
+                            setState(() {
+                              locationVideo = change;
+                            });
+                          },
+                        ),
+
+                        Text(AppLocalizations.of(context).locale == "en"
+                            ? "both"
+                            : "كلاهما"),
+                        Radio(
+                          groupValue: locationVideo,
+                          value: "both",
+                          onChanged: (change) {
+                            setState(() {
+                              locationVideo = change;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context).locale == "en"
+                              ? "video duration in minute"
+                              : "مدة الفديو بالدقيقة",
+                          textAlign: AppLocalizations.of(context).locale == "en"
+                              ? TextAlign.left
+                              : TextAlign.right,
+                          style: MansaFont.getBoldFontinside(),
+                        ),
+                        Container(
+                          height: 30,
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.3),
+                                  spreadRadius:0.2,
+                                  blurRadius: 8,
+                                  offset:
+                                  Offset(0, 3), // changes position of shadow
+                                ),
+                              ]),
+                          width: 100,
+                          child: DropdownButton<String>(
+
+                            isExpanded: true,
+                            value: videoDuration,
+                            icon: Icon(Icons.arrow_downward),
+                            iconSize: 25,
+                            elevation: 16,
+                            style: TextStyle(color: Colors.blue, fontSize: 20),
+                            underline: Container(
+
+                              height: 0,
                             ),
-                          )
-                        ],
-                      ),
+                            onChanged: (String newValue) {
+                              setState(() {
+                                videoDuration = newValue;
+                              });
+                            },
+                            items: [
+                              '0',
+                              '1',
+                              '2',
+                              '3',
+                              '4',
+                              '5',
+                              '6',
+                              '7',
+                              '8',
+                              '9',
+                              '10',
+                              'unknown'
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              if(value == "unknown"){
+                                return DropdownMenuItem<String>(
+                                  value: AppLocalizations.of(context).locale == "en"
+                                      ? "unknown"
+                                      : "غير معروف",
+                                  child: Text(AppLocalizations.of(context).locale == "en"
+                                      ? "unknown"
+                                      : "غير معروف"),
+                                );
+                              }else{
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }
+
+                            }).toList(),
+                          ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        AppLocalizations.of(context).lblSecondNum,
-                        textAlign: TextAlign.center,
-                        style: MansaFont.baseFontStyleWithBackground(),
-                      ),
-                    ),
-                    Expanded(
-                      // wrap your Column in Expanded
-                      flex: 2,
-                      child: Column(
+
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          TextFormField(
-                            key: phone2Key_log,
-                            maxLines: 1,
-                            keyboardType: TextInputType.number,
-                            //textAlign: TextAlign.left,
-                            style: MansaFont.getLightFont(),
-                            decoration: InputDecoration(
-                              labelText: AppLocalizations.of(context)
-                                  .lblSecondNumPlaceholder,
-                              // labelStyle:
-                              // MansaFont.getLightFont_TextFormField(),
-                              // fillColor: Colors.blueGrey,
-                              // hintText: AppLocalizations.of(context).lblSecondNumPlaceholder,
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: 14.0, horizontal: 10.0),
-                              // border: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 0.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
-                              // focusedBorder: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 1.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
+                          Container(
+                            child: Text(
+                              AppLocalizations.of(context).lblImage_Information,
+                              textAlign: TextAlign.center,
+                              style: MansaFont.getBoldFontinside(),
                             ),
-                          )
-                        ],
-                      ),
+                          ),
+                        ]),
+                    Container(
+                      height: 20,
                     ),
-                  ],
-                ),
-                Container(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        AppLocalizations.of(context).lblemail,
-                        //textAlign: TextAlign.center,
-                        style: MansaFont.baseFontStyleWithBackground(),
-                      ),
-                    ),
-                    Expanded(
-                      // wrap your Column in Expanded
-                      flex: 3,
-                      child: Column(
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          TextFormField(
-                            key: emailKey_log,
-                            maxLines: 1,
-                            //textAlign: TextAlign.left,
-                            style: MansaFont.getLightFont(),
-                            decoration: InputDecoration(
-                              labelText: AppLocalizations.of(context).lblemail,
-                              // labelStyle:
-                              // MansaFont.getLightFont_TextFormField(),
-                              // fillColor: Colors.blueGrey,
-                              // hintText: AppLocalizations.of(context).lblEmailSample,
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: 14.0, horizontal: 10.0),
-                              // border: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 0.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
-                              // focusedBorder: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 1.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
+                          Container(
+                            child: Image.asset(
+                              'images/asset34.png',
+                              height: 35,
+                              width: 60,
+                              fit: BoxFit.fill,
+                              alignment: Alignment.center,
                             ),
-                          )
-                        ],
-                      ),
+                          ),
+                          Container(
+                            width: 20,
+                          ),
+                          Column(
+                            children: <Widget>[
+                              GestureDetector(
+                                onTap: () {
+                                  return showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      actions: <Widget>[
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 60),
+                                          child: FlatButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              loadAssetFromCamera1();
+                                            },
+                                            child: Icon(Icons.camera_alt),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 30),
+                                          child: FlatButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              loadAssets();
+                                            },
+                                            child:
+                                                Icon(Icons.photo_camera_back),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  child: Image.asset(
+                                    AppLocalizations.of(context).locale == "en"
+                                        ? 'images/asset311.png'
+                                        : 'images/assetAr31.png',
+                                    height: 30,
+                                    width: 200,
+                                    fit: BoxFit.fill,
+                                    alignment: Alignment.center,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ]),
+                    Container(
+                      width: 20,
                     ),
-                  ],
-                ),
-                Container(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        AppLocalizations.of(context).lblFacebook,
-                        //textAlign: TextAlign.center,
-                        style: MansaFont.baseFontStyleWithBackground(),
-                      ),
+                    Text(
+                      AppLocalizations.of(context).locale == "en"
+                          ? "* Uploaded " +
+                              lblFirstUpload.toString() +
+                              " Images *     "
+                          : "       * تم رفع " +
+                              lblFirstUpload.toString() +
+                              " صور  *",
+                      textAlign: TextAlign.center,
+                      style: MansaFont.getBoldFontinside(),
                     ),
-                    Expanded(
-                      // wrap your Column in Expanded
-                      flex: 3,
-                      child: Column(
+                    Container(
+                      height: 20,
+                    ),
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          TextFormField(
-                            key: facebookKey_log,
-                            maxLines: 1,
-                            //textAlign: TextAlign.left,
-                            style: MansaFont.getLightFont(),
-                            decoration: InputDecoration(
-                              labelText:
-                                  AppLocalizations.of(context).lblFacebook,
-                              // labelStyle:
-                              // MansaFont.getLightFont_TextFormField(),
-                              // fillColor: Colors.blueGrey,
-                              hintText: "facebook.com/....",
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: 14.0, horizontal: 10.0),
-                              // border: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 0.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
-                              // focusedBorder: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 1.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
+                          Container(
+                            child: Image.asset(
+                              'images/asset34.png',
+                              height: 35,
+                              width: 60,
+                              fit: BoxFit.fill,
+                              alignment: Alignment.center,
                             ),
-                          )
-                        ],
-                      ),
+                          ),
+                          Container(
+                            width: 20,
+                          ),
+                          Column(
+                            children: <Widget>[
+                              GestureDetector(
+                                onTap: openFileExplorer2,
+                                child: Container(
+                                  child: Image.asset(
+                                    AppLocalizations.of(context).locale == "en"
+                                        ? 'images/uploadSctiptAr.PNG'
+                                        : 'images/uploadSctiptAr.PNG',
+                                    height: 30,
+                                    width: 200,
+                                    fit: BoxFit.fill,
+                                    alignment: Alignment.center,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ]),
+                    Container(
+                      width: 20,
                     ),
-                  ],
-                ),
-                Container(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        AppLocalizations.of(context).lblTwitter,
-                        //textAlign: TextAlign.center,
-                        style: MansaFont.baseFontStyleWithBackground(),
-                      ),
+                    Text(
+                      AppLocalizations.of(context).locale == "en"
+                          ? "* Uploaded " +
+                              lblSecondUpload.toString() +
+                              " Images *     "
+                          : "    * تم رفع " +
+                              lblSecondUpload.toString() +
+                              " صور  *",
+                      textAlign: TextAlign.center,
+                      style: MansaFont.getBoldFontinside(),
                     ),
-                    Expanded(
-                      // wrap your Column in Expanded
-                      flex: 3,
-                      child: Column(
+                    Container(
+                      height: 10,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          // wrap your Column in Expanded
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                key: desKey_log,
+                                maxLines: 3,
+                                // textAlign: TextAlign.left,
+                                style: MansaFont.getLightFont(),
+                                decoration: InputDecoration(
+                                  labelText: AppLocalizations.of(context)
+                                      .lblDescriptionPlaceholder,
+                                  labelStyle:
+                                      MansaFont.getLightFont_TextFormField(),
+                                  // fillColor: Colors.blueGrey,
+                                  // hintText: AppLocalizations.of(context).lblDescriptionPlaceholder,
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical: 14.0, horizontal: 10.0),
+                                  border: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.grey, width: 0.0),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.grey, width: 1.0),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 20,
+                    ),
+                    Container(
+                      height: 2,
+                      color: grey_ligth,
+                    ),
+                    Container(
+                      height: 20,
+                    ),
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          TextFormField(
-                            key: twitterKey_log,
-                            maxLines: 1,
-                            //textAlign: TextAlign.left,
-                            style: MansaFont.getLightFont(),
-                            decoration: InputDecoration(
-                              labelText:
-                                  AppLocalizations.of(context).lblTwitter,
-                              // labelStyle:
-                              // MansaFont.getLightFont_TextFormField(),
-                              // fillColor: Colors.blueGrey,
-                              hintText: "twitter.com/....",
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: 14.0, horizontal: 10.0),
-                              // border: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 0.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
-                              // focusedBorder: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 1.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
+                          Container(
+                            child: Text(
+                              AppLocalizations.of(context)
+                                  .lblContact_Information,
+                              textAlign: TextAlign.center,
+                              style: MansaFont.getBoldFontinside(),
                             ),
-                          )
-                        ],
-                      ),
+                          ),
+                        ]),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            AppLocalizations.of(context).lblFirstNum + " *",
+                            //textAlign: TextAlign.center,
+                            style: MansaFont.baseFontStyleWithBackground(),
+                          ),
+                        ),
+                        Expanded(
+                          // wrap your Column in Expanded
+                          flex: 2,
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                key: phone1Key_log,
+                                maxLines: 1,
+                                keyboardType: TextInputType.number,
+                                //textAlign: TextAlign.left,
+                                style: MansaFont.getLightFont(),
+                                decoration: InputDecoration(
+                                  labelText: AppLocalizations.of(context)
+                                      .lblFirstNumPlaceholder,
+                                  // labelStyle:
+                                  // MansaFont.getLightFont_TextFormField(),
+                                  // fillColor: Colors.blueGrey,
+                                  // hintText: AppLocalizations.of(context).lblFirstNumPlaceholder,
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical: 14.0, horizontal: 10.0),
+                                  // border: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 0.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                  // focusedBorder: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 1.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            AppLocalizations.of(context).lblSecondNum,
+                            textAlign: TextAlign.center,
+                            style: MansaFont.baseFontStyleWithBackground(),
+                          ),
+                        ),
+                        Expanded(
+                          // wrap your Column in Expanded
+                          flex: 2,
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                key: phone2Key_log,
+                                maxLines: 1,
+                                keyboardType: TextInputType.number,
+                                //textAlign: TextAlign.left,
+                                style: MansaFont.getLightFont(),
+                                decoration: InputDecoration(
+                                  labelText: AppLocalizations.of(context)
+                                      .lblSecondNumPlaceholder,
+                                  // labelStyle:
+                                  // MansaFont.getLightFont_TextFormField(),
+                                  // fillColor: Colors.blueGrey,
+                                  // hintText: AppLocalizations.of(context).lblSecondNumPlaceholder,
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical: 14.0, horizontal: 10.0),
+                                  // border: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 0.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                  // focusedBorder: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 1.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                Container(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        AppLocalizations.of(context).lblInstagram,
-                        //textAlign: TextAlign.center,
-                        style: MansaFont.baseFontStyleWithBackground(),
-                      ),
+                    Container(
+                      height: 20,
                     ),
-                    Expanded(
-                      // wrap your Column in Expanded
-                      flex: 3,
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            key: instagramKey_log,
-                            maxLines: 1,
-                            //textAlign: TextAlign.left,
-                            style: MansaFont.getLightFont(),
-                            decoration: InputDecoration(
-                              labelText:
-                                  AppLocalizations.of(context).lblInstagram,
-                              // labelStyle:
-                              // MansaFont.getLightFont_TextFormField(),
-                              // fillColor: Colors.blueGrey,
-                              hintText: "Instagram.com/....",
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: 14.0, horizontal: 10.0),
-                              // border: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 0.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
-                              // focusedBorder: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 1.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
-                            ),
-                          )
-                        ],
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            AppLocalizations.of(context).lblemail,
+                            //textAlign: TextAlign.center,
+                            style: MansaFont.baseFontStyleWithBackground(),
+                          ),
+                        ),
+                        Expanded(
+                          // wrap your Column in Expanded
+                          flex: 3,
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                key: emailKey_log,
+                                maxLines: 1,
+                                //textAlign: TextAlign.left,
+                                style: MansaFont.getLightFont(),
+                                decoration: InputDecoration(
+                                  labelText:
+                                      AppLocalizations.of(context).lblemail,
+                                  // labelStyle:
+                                  // MansaFont.getLightFont_TextFormField(),
+                                  // fillColor: Colors.blueGrey,
+                                  // hintText: AppLocalizations.of(context).lblEmailSample,
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical: 14.0, horizontal: 10.0),
+                                  // border: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 0.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                  // focusedBorder: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 1.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                Container(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        AppLocalizations.of(context).lblSnapShat,
-                        //textAlign: TextAlign.center,
-                        style: MansaFont.baseFontStyleWithBackground(),
-                      ),
+                    Container(
+                      height: 20,
                     ),
-                    Expanded(
-                      // wrap your Column in Expanded
-                      flex: 3,
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            key: snapShatKey_log,
-                            maxLines: 1,
-                            textAlign: TextAlign.left,
-                            style: MansaFont.getLightFont(),
-                            decoration: InputDecoration(
-                              labelText:
-                                  AppLocalizations.of(context).lblSnapShat,
-                              // labelStyle:
-                              // MansaFont.getLightFont_TextFormField(),
-                              // fillColor: Colors.blueGrey,
-                              hintText: "Snapshat.com/....",
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: 14.0, horizontal: 10.0),
-                              // border: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 0.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
-                              // focusedBorder: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 1.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
-                            ),
-                          )
-                        ],
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            AppLocalizations.of(context).lblFacebook,
+                            //textAlign: TextAlign.center,
+                            style: MansaFont.baseFontStyleWithBackground(),
+                          ),
+                        ),
+                        Expanded(
+                          // wrap your Column in Expanded
+                          flex: 3,
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                key: facebookKey_log,
+                                maxLines: 1,
+                                //textAlign: TextAlign.left,
+                                style: MansaFont.getLightFont(),
+                                decoration: InputDecoration(
+                                  labelText:
+                                      AppLocalizations.of(context).lblFacebook,
+                                  // labelStyle:
+                                  // MansaFont.getLightFont_TextFormField(),
+                                  // fillColor: Colors.blueGrey,
+                                  hintText: "facebook.com/....",
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical: 14.0, horizontal: 10.0),
+                                  // border: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 0.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                  // focusedBorder: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 1.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                Container(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        AppLocalizations.of(context).lblYoutube,
-                        //textAlign: TextAlign.center,
-                        style: MansaFont.baseFontStyleWithBackground(),
-                      ),
+                    Container(
+                      height: 20,
                     ),
-                    Expanded(
-                      // wrap your Column in Expanded
-                      flex: 3,
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            key: youtubeKey_log,
-                            maxLines: 1,
-                            //textAlign: TextAlign.left,
-                            style: MansaFont.getLightFont(),
-                            decoration: InputDecoration(
-                              labelText:
-                                  AppLocalizations.of(context).lblYoutube,
-                              // labelStyle:
-                              // MansaFont.getLightFont_TextFormField(),
-                              // fillColor: Colors.blueGrey,
-                              hintText: "Youtube.com/....",
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: 14.0, horizontal: 10.0),
-                              // border: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 0.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
-                              // focusedBorder: OutlineInputBorder(
-                              //   borderSide:
-                              //   const BorderSide(color: grey_ligth, width: 1.0),
-                              //   borderRadius: BorderRadius.circular(25.0),
-                              // ),
-                            ),
-                          )
-                        ],
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            AppLocalizations.of(context).lblTwitter,
+                            //textAlign: TextAlign.center,
+                            style: MansaFont.baseFontStyleWithBackground(),
+                          ),
+                        ),
+                        Expanded(
+                          // wrap your Column in Expanded
+                          flex: 3,
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                key: twitterKey_log,
+                                maxLines: 1,
+                                //textAlign: TextAlign.left,
+                                style: MansaFont.getLightFont(),
+                                decoration: InputDecoration(
+                                  labelText:
+                                      AppLocalizations.of(context).lblTwitter,
+                                  // labelStyle:
+                                  // MansaFont.getLightFont_TextFormField(),
+                                  // fillColor: Colors.blueGrey,
+                                  hintText: "twitter.com/....",
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical: 14.0, horizontal: 10.0),
+                                  // border: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 0.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                  // focusedBorder: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 1.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                Container(
-                  height: 20,
-                ),
-                Container(
-                  child: Text(service == null
-                      ? ""
-                      : AppLocalizations.of(context).lblServicePrice +
-                          service.Price.toString() +
-                          AppLocalizations.of(context).lblRyal),
-                ),
-                Container(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      // wrap your Column in Expanded
-                      child: Column(
-                        children: <Widget>[
-                          appButtonbgimage(AppLocalizations.of(context).lblNext,
-                              () => send_data(),
-                              bgColor: lightBgColor, bgColor2: transColor),
-                        ],
-                      ),
+                    Container(
+                      height: 20,
                     ),
-                  ],
-                ),
-              ])),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            AppLocalizations.of(context).lblInstagram,
+                            //textAlign: TextAlign.center,
+                            style: MansaFont.baseFontStyleWithBackground(),
+                          ),
+                        ),
+                        Expanded(
+                          // wrap your Column in Expanded
+                          flex: 3,
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                key: instagramKey_log,
+                                maxLines: 1,
+                                //textAlign: TextAlign.left,
+                                style: MansaFont.getLightFont(),
+                                decoration: InputDecoration(
+                                  labelText:
+                                      AppLocalizations.of(context).lblInstagram,
+                                  // labelStyle:
+                                  // MansaFont.getLightFont_TextFormField(),
+                                  // fillColor: Colors.blueGrey,
+                                  hintText: "Instagram.com/....",
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical: 14.0, horizontal: 10.0),
+                                  // border: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 0.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                  // focusedBorder: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 1.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 20,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            AppLocalizations.of(context).lblSnapShat,
+                            //textAlign: TextAlign.center,
+                            style: MansaFont.baseFontStyleWithBackground(),
+                          ),
+                        ),
+                        Expanded(
+                          // wrap your Column in Expanded
+                          flex: 3,
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                key: snapShatKey_log,
+                                maxLines: 1,
+                                textAlign: TextAlign.left,
+                                style: MansaFont.getLightFont(),
+                                decoration: InputDecoration(
+                                  labelText:
+                                      AppLocalizations.of(context).lblSnapShat,
+                                  // labelStyle:
+                                  // MansaFont.getLightFont_TextFormField(),
+                                  // fillColor: Colors.blueGrey,
+                                  hintText: "Snapshat.com/....",
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical: 14.0, horizontal: 10.0),
+                                  // border: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 0.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                  // focusedBorder: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 1.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 20,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            AppLocalizations.of(context).lblYoutube,
+                            //textAlign: TextAlign.center,
+                            style: MansaFont.baseFontStyleWithBackground(),
+                          ),
+                        ),
+                        Expanded(
+                          // wrap your Column in Expanded
+                          flex: 3,
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                key: youtubeKey_log,
+                                maxLines: 1,
+                                //textAlign: TextAlign.left,
+                                style: MansaFont.getLightFont(),
+                                decoration: InputDecoration(
+                                  labelText:
+                                      AppLocalizations.of(context).lblYoutube,
+                                  // labelStyle:
+                                  // MansaFont.getLightFont_TextFormField(),
+                                  // fillColor: Colors.blueGrey,
+                                  hintText: "Youtube.com/....",
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical: 14.0, horizontal: 10.0),
+                                  // border: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 0.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                  // focusedBorder: OutlineInputBorder(
+                                  //   borderSide:
+                                  //   const BorderSide(color: grey_ligth, width: 1.0),
+                                  //   borderRadius: BorderRadius.circular(25.0),
+                                  // ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 20,
+                    ),
+                    Container(
+                      child: Text(service == null
+                          ? ""
+                          : AppLocalizations.of(context).lblServicePrice +
+                              service.Price.toString() +
+                              AppLocalizations.of(context).lblRyal),
+                    ),
+                    Container(
+                      height: 20,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          // wrap your Column in Expanded
+                          child: Column(
+                            children: <Widget>[
+                              appButtonbgimage(
+                                  AppLocalizations.of(context).lblNext,
+                                  () => send_data(),
+                                  bgColor: lightBgColor,
+                                  bgColor2: transColor),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ])),
         ),
         drawer: buildDrawer());
   }
@@ -1148,7 +1201,7 @@ class _adsVideoMakingScreenState extends State<adsVideoMakingScreen> {
                 numberOfCameras == 0 ||
                 droneUsages == "" ||
                 locationVideo == "" ||
-                videoDuration == ""
+                videoDuration == "0"
 
             // phone2Key_log.currentState.value==null||phone2Key_log.currentState.value==""||
             // emailKey_log.currentState.value==null||emailKey_log.currentState.value==""

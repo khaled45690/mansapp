@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mansaapp/APIs/FamousApi.dart';
@@ -9,6 +10,7 @@ import 'package:mansaapp/Constants/strings.dart';
 import 'package:mansaapp/Models/FamousVM.dart';
 import 'package:mansaapp/Models/ShoppingCartVM.dart';
 import 'package:mansaapp/utilis/CustomizedWidgets.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 import '../localizations.dart';
 
@@ -104,12 +106,16 @@ class _FamousV2State extends State<FamousV2> {
           setState(() {
             this.apiCall = false;
           });
-          print(prepareData[0].header);
           for (int i = 0; i < prepareData.length; i++) {
-            setState(() {
-              header.add(prepareData[i].header);
-              headerValue = prepareData[0].header;
-            });
+            if (prepareData[i].header == "جوجل" || prepareData[i].header == "Google") {
+
+            }else{
+              setState(() {
+                header.add(prepareData[i].header);
+                headerValue = prepareData[0].header;
+              });
+            }
+
           }
           //this.apiCall = false;
         });
@@ -127,8 +133,10 @@ class _FamousV2State extends State<FamousV2> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     print(prepareData);
     return Scaffold(
+      backgroundColor: Colors.grey.shade300,
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).lblFamous),
@@ -145,6 +153,7 @@ class _FamousV2State extends State<FamousV2> {
                   child: Column(
                       children: [
                         Container(
+                          padding: EdgeInsets.only(right: 30 , left: 20),
                           decoration: BoxDecoration(boxShadow: <BoxShadow>[
                             BoxShadow(
                                 color: Colors.black54,
@@ -152,14 +161,15 @@ class _FamousV2State extends State<FamousV2> {
                                 offset: Offset(0.0, 0.75))
                           ], color: Colors.white),
                           child: SizedBox(
-                            width: 1000,
+                            width: width,
                             child: DropdownButton<String>(
+
                               isExpanded: true,
                               value: headerValue,
                               icon: Icon(Icons.arrow_downward),
-                              iconSize: 24,
+                              iconSize: 25,
                               elevation: 16,
-                              style: TextStyle(color: Colors.blue),
+                              style: TextStyle(color: Colors.blue , fontSize: 20),
                               underline: Container(
                                 height: 0,
                               ),
@@ -199,7 +209,7 @@ class _FamousV2State extends State<FamousV2> {
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: _buildExpandableContent(prepareData[preparedDataParameter]),
+                          children: _buildExpandableContent(prepareData[preparedDataParameter] , width),
                         ),
 
                       ],
@@ -287,129 +297,124 @@ class _FamousV2State extends State<FamousV2> {
     );
   }
 
-  _buildExpandableContent(ItemModel policies) {
+  _buildExpandableContent(ItemModel policies , double width) {
     List<Widget> columnContent = [];
 
     for (var content in policies.bodyModel.SocialFamousVMs)
       columnContent.add(
-        new ListTile(
-            onTap: null,
-            leading: new Container(
-              //backgroundColor: Colors.blue,
-              child: CircleAvatar(
-                radius: 25.0,
-                backgroundImage: NetworkImage(content.Image),
-                backgroundColor: Colors.transparent,
-              ),
-            ),
-            title: Container(
-              margin: EdgeInsets.only(right: 0, left: 0, bottom: 0, top: 10),
-              width: MediaQuery.of(context).size.width,
-              color: grey_ligth,
-              // decoration: BoxDecoration(
-              //   boxShadow: [
-              //     BoxShadow(
-              //       color: Colors.grey.withOpacity(0.8),
-              //       spreadRadius: 5,
-              //       blurRadius: 5,
-              //       offset: Offset(0, 7), // changes position of shadow
-              //     ),
-              //   ],
-              // ),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          AppLocalizations.of(context).locale == "en"
-                              ? content.NameEn
-                              : content.NameAr,
-                          style: TextStyle(fontSize: 16),
-                          textAlign: TextAlign.right,
+         Container(
+           margin: EdgeInsets.only(top: 20 , bottom: 20),
+           height: 130,
+           decoration: BoxDecoration(
+               boxShadow: <BoxShadow>[
+               BoxShadow(
+                   color: Colors.grey,
+                   blurRadius:5.0,
+                   offset: Offset(0.0, 0))
+             ], color: Colors.grey.shade300
+           ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+
+                  children: [
+                    Container(
+                      width : 90,
+                      height: 130,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(image: Image.network(content.Image).image ,fit: BoxFit.fill)
                         ),
-                        Text(
-                          content.Followers.toString() +
-                              AppLocalizations.of(context).lblFollowers,
-                          style: TextStyle(fontSize: 15),
-                          textAlign: TextAlign.right,
-                        ),
-                        //Text(content.Rate.toString() + AppLocalizations.of(context).lblFollowers, style: TextStyle( fontSize: 15), textAlign: TextAlign.right, ),
-                        Container(
-                          child: content.Rate >= 5
-                              ? new Image(
-                                  image: new AssetImage('images/fiveStars.PNG'),
-                                  height: 40,
-                                  width: 60,
-                                )
-                              : (content.Rate >= 4
-                                  ? new Image(
-                                      image: new AssetImage(
-                                          'images/fourStars.PNG'),
-                                      height: 40,
-                                      width: 50,
-                                    )
-                                  : (content.Rate >= 3
-                                      ? new Image(
-                                          image: new AssetImage(
-                                              'images/threeStars.PNG'),
-                                          height: 40,
-                                          width: 40,
-                                        )
-                                      : ((content.Rate >= 2
-                                          ? new Image(
-                                              image: new AssetImage(
-                                                  'images/twoStars.PNG'),
-                                              height: 40,
-                                              width: 30,
-                                            )
-                                          : (content.Rate >= 1
-                                              ? new Image(
-                                                  image: new AssetImage(
-                                                      'images/oneStars.PNG'),
-                                                  height: 40,
-                                                  width: 20,
-                                                )
-                                              : new Image(
-                                                  image: new AssetImage(
-                                                      'images/oneStars.PNG'),
-                                                  height: 40,
-                                                  width: 10,
-                                                )))))),
-                        )
-                      ],
+                        // child: Image.network(content.Image),
                     ),
-                    flex: 2,
+                  ],
+                ),
+                Container(
+                  width: width / 1.35,
+                  child: Column(
+                    children: [
+                      Text(
+                        AppLocalizations.of(context).locale == "en"
+                            ? content.NameEn
+                            : content.NameAr,
+                        style: TextStyle(fontSize: 16),
+                        textAlign: TextAlign.right,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(bottom: 0 , top: 5),
+                                  child: Text(
+                                    content.Followers.toString() +
+                                        AppLocalizations.of(context).lblFollowers,
+                                    style: TextStyle(fontSize: 15),
+                                    textAlign: TextAlign.right,
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(top:10),
+                                  child: SmoothStarRating(
+                                      isReadOnly: true,
+                                      starCount: content.Rate == 0 ? 1 : content.Rate.toDouble(),
+                                      filledIconData: Icons.star,
+                                      halfFilledIconData: Icons.star_half,
+                                      rating: content.Rate == 0 ? 1 : content.Rate.toDouble(),
+                                      size: 30.0,
+                                      color: Colors.amberAccent,
+                                      borderColor: Colors.amberAccent,
+                                      spacing:0.0
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          Container(
+
+                            child: Column(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 0 , top: 20),
+                                  child: Text(
+                                    content.Price.toString() +
+                                        AppLocalizations.of(context).lblRyal,
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                ),
+                                Container(
+                                  child: Checkbox(
+                                      value: content.isCheck,
+                                      onChanged: (bool value) {
+                                        setState(() {
+                                          content.isCheck = value;
+                                          if (value) {
+                                            totalPrice = totalPrice + content.Price;
+                                            myList.add(content.Id);
+                                          } else {
+                                            totalPrice = totalPrice - content.Price;
+                                            myList.remove(content.Id);
+                                          }
+                                        });
+                                      }),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+
+                    ],
                   ),
-                  Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        new Checkbox(
-                            value: content.isCheck,
-                            onChanged: (bool value) {
-                              setState(() {
-                                content.isCheck = value;
-                                if (value) {
-                                  totalPrice = totalPrice + content.Price;
-                                  myList.add(content.Id);
-                                } else {
-                                  totalPrice = totalPrice - content.Price;
-                                  myList.remove(content.Id);
-                                }
-                              });
-                            }),
-                        Text(
-                          content.Price.toString() +
-                              AppLocalizations.of(context).lblRyal,
-                          style: TextStyle(fontSize: 15),
-                        )
-                      ],
-                    ),
-                    flex: 1,
-                  )
-                ],
-              ),
-            )),
+                ),
+              ],
+
+            ),
+         ),
       );
 
     return columnContent;

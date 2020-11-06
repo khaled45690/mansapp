@@ -72,7 +72,6 @@ class _GetLocationState extends State<GetLocation> {
       PlacesDetailsResponse detail =
       await _places.getDetailsByPlaceId(p.placeId);
 
-      var placeId = p.placeId;
       double lat = detail.result.geometry.location.lat;
       double lng = detail.result.geometry.location.lng;
 
