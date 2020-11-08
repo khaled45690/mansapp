@@ -97,7 +97,7 @@ class _SigninScreenState extends State<SigninScreen>{
 final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googlSignIn = new GoogleSignIn();
 
-Future<FirebaseUser> _signIn(BuildContext context) async {
+Future<UserCredential> _signIn(BuildContext context) async {
   
    Scaffold.of(context).showSnackBar(new SnackBar(
           content: new Text('Sign in'),
@@ -106,22 +106,22 @@ Future<FirebaseUser> _signIn(BuildContext context) async {
     final GoogleSignInAccount googleUser = await _googlSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =await googleUser.authentication;
 
-  final AuthCredential credential = GoogleAuthProvider.getCredential(
+  final AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
 
-  FirebaseUser userDetails = await _firebaseAuth.signInWithCredential(credential);
-  ProviderDetails providerInfo = new ProviderDetails(userDetails.providerId);
+   UserCredential userDetails = await _firebaseAuth.signInWithCredential(credential);
+  ProviderDetails providerInfo = new ProviderDetails(userDetails.additionalUserInfo.providerId);
 
 List<ProviderDetails> providerData = new List<ProviderDetails>();
     providerData.add(providerInfo);
 
     UserDetails details = new UserDetails(
-        userDetails.providerId,
-        userDetails.displayName,
-        userDetails.photoUrl,
-        userDetails.email,
+        userDetails.additionalUserInfo.providerId,
+        userDetails.user.displayName,
+        userDetails.user.photoUrl,
+        userDetails.user.email,
         providerData,
 );
 print(details.userEmail);

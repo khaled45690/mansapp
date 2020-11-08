@@ -33,7 +33,7 @@ class _GoogleSignAppState extends State<GoogleSignApp> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googlSignIn = new GoogleSignIn();
 
-Future<FirebaseUser> _signIn(BuildContext context) async {
+Future<UserCredential> _signIn(BuildContext context) async {
   
    Scaffold.of(context).showSnackBar(new SnackBar(
           content: new Text('Sign in'),
@@ -47,17 +47,17 @@ Future<FirebaseUser> _signIn(BuildContext context) async {
       idToken: googleAuth.idToken,
     );
 
-  FirebaseUser userDetails = await _firebaseAuth.signInWithCredential(credential);
-  ProviderDetails providerInfo = new ProviderDetails(userDetails.providerId);
+  UserCredential userDetails = await _firebaseAuth.signInWithCredential(credential);
+  ProviderDetails providerInfo = new ProviderDetails(userDetails.additionalUserInfo.providerId);
 
 List<ProviderDetails> providerData = new List<ProviderDetails>();
     providerData.add(providerInfo);
 
     UserDetails details = new UserDetails(
-        userDetails.providerId,
-        userDetails.displayName,
-        userDetails.photoUrl,
-        userDetails.email,
+        userDetails.additionalUserInfo.providerId,
+        userDetails.user.displayName,
+        userDetails.user.photoURL,
+        userDetails.user.email,
         providerData,
 );
 print(details.userEmail);
@@ -147,7 +147,7 @@ BuildContext _context;
                           ),
                           ],),
                           onPressed: () => _signIn(context)
-                                    .then((FirebaseUser user) => print(user))
+                                    .then((UserCredential user) => print(user))
                                     .catchError((e) => print(e)),
                         ),
                       )

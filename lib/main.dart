@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mansaapp/ui/SplashScreen.dart';
-import 'package:mansaapp/ui/TestFamousV1.dart';
-import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
+
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
