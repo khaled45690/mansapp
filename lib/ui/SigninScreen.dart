@@ -23,7 +23,7 @@ import '../localizations.dart';
 import 'RememberPass.dart';
 import 'SignupScreen.dart';
 import 'TabBarScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'Terms.dart';
@@ -94,48 +94,48 @@ class SigninScreen extends StatefulWidget {
 
 class _SigninScreenState extends State<SigninScreen>{
 
-final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+// final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googlSignIn = new GoogleSignIn();
 
-Future<UserCredential> _signIn(BuildContext context) async {
-  
-   Scaffold.of(context).showSnackBar(new SnackBar(
-          content: new Text('Sign in'),
-        ));
-
-    final GoogleSignInAccount googleUser = await _googlSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth =await googleUser.authentication;
-
-  final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-   UserCredential userDetails = await _firebaseAuth.signInWithCredential(credential);
-  ProviderDetails providerInfo = new ProviderDetails(userDetails.additionalUserInfo.providerId);
-
-List<ProviderDetails> providerData = new List<ProviderDetails>();
-    providerData.add(providerInfo);
-
-    UserDetails details = new UserDetails(
-        userDetails.additionalUserInfo.providerId,
-        userDetails.user.displayName,
-        userDetails.user.photoUrl,
-        userDetails.user.email,
-        providerData,
-);
-print(details.userEmail);
-print(details.userName);
-  Navigator.of(context).push(MaterialPageRoute(
-   builder: (context) => TabBarScreen()));
-    // Navigator.push(
-    //   context,
-    //   new MaterialPageRoute(
-    //     builder: (context) => new ProfileScreen(detailsUser: details),
-    //   ),
-    // );
-    return userDetails;
-  }
+// Future<UserCredential> _signIn(BuildContext context) async {
+//
+//    Scaffold.of(context).showSnackBar(new SnackBar(
+//           content: new Text('Sign in'),
+//         ));
+//
+//     final GoogleSignInAccount googleUser = await _googlSignIn.signIn();
+//     final GoogleSignInAuthentication googleAuth =await googleUser.authentication;
+//
+//   final AuthCredential credential = GoogleAuthProvider.credential(
+//       accessToken: googleAuth.accessToken,
+//       idToken: googleAuth.idToken,
+//     );
+//
+//    UserCredential userDetails = await _firebaseAuth.signInWithCredential(credential);
+//   ProviderDetails providerInfo = new ProviderDetails(userDetails.additionalUserInfo.providerId);
+//
+// List<ProviderDetails> providerData = new List<ProviderDetails>();
+//     providerData.add(providerInfo);
+//
+//     UserDetails details = new UserDetails(
+//         userDetails.additionalUserInfo.providerId,
+//         userDetails.user.displayName,
+//         userDetails.user.photoUrl,
+//         userDetails.user.email,
+//         providerData,
+// );
+// print(details.userEmail);
+// print(details.userName);
+//   Navigator.of(context).push(MaterialPageRoute(
+//    builder: (context) => TabBarScreen()));
+//     // Navigator.push(
+//     //   context,
+//     //   new MaterialPageRoute(
+//     //     builder: (context) => new ProfileScreen(detailsUser: details),
+//     //   ),
+//     // );
+//     return userDetails;
+//   }
 
   SpecificLocalizationDelegate _specificLocalizationDelegate;
 bool _obscureText = true ;
@@ -472,8 +472,8 @@ void _toggle() {
                             //   .catchError((e) => print(e));
                          //_handleGetContact();
                            // Navigator.of(context).pop();
-                           Navigator.of(context).push(MaterialPageRoute(
-                               builder: (context) => TestGmailLogin()));
+                           // Navigator.of(context).push(MaterialPageRoute(
+                           //     builder: (context) => TestGmailLogin()));
                           },
 //                      action: () {
 //                        print('Using the sword');
