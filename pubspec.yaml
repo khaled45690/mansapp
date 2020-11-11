@@ -71,7 +71,7 @@ dependencies:
   #christian_picker_image: ^0.1.6
   permission_handler:
   smooth_star_rating: ^1.1.1
-
+  flutter_xlider: ^3.4.0
   #image_picker: ^0.6.0+8
 
 flutter_icons:

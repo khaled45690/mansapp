@@ -89,6 +89,8 @@ var json=null;
                 serviceName=AppLocalizations.of(context).lblInfographics;
               }else if(cart.ServiceId==7){
                 serviceName=AppLocalizations.of(context).lblEMarketing_compaigns;
+              }else if(cart.ServiceId==8){
+                serviceName= "${AppLocalizations.of(context).locale == "en" ? AppLocalizations.of(context).lblAdsVideo : "تصوير فديو اعلانى"}";
               }else{
                 serviceName="Service Not Exist";
               }

@@ -9,11 +9,11 @@ import 'package:mansaapp/Models/ShoppingCartVM.dart';
 import 'package:mansaapp/resources/fonts.dart';
 import 'package:mansaapp/ui/Emarketing.dart';
 import 'package:mansaapp/utilis/CustomizedWidgets.dart';
-
 import '../localizations.dart';
 import 'Famous.dart';
 import 'FamousV2.dart';
 import 'SocialMedia.dart';
+import 'package:flutter_xlider/flutter_xlider.dart';
 
 class Select extends StatefulWidget {
   Select({Key key, this.shoppingCart}) : super(key: key);
@@ -312,7 +312,7 @@ makeNumberOfViewerCalculation(double.parse('0'));
     print("After Initiat");
   }
 
-  int vNumbers = 0, duration = 0, age = 0;
+  int vNumbers = 0, duration = 0, age = 50 , startAge = 10;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -528,61 +528,113 @@ makeNumberOfViewerCalculation(double.parse('0'));
                             color: Colors.black),
                       ),
                       Container(
-                        child: Slider(
-                          value: age.toDouble(),
-                          onChanged: (double value) {
-                            setState(() {
-                              if(value.toInt() == 0 || value == 100){
-                                _ageAnimatedHeight = 100;
-                                print("hello");
-                              }else{
-                                _ageAnimatedHeight = 0;
-                              }
-                              this.age = value.toInt();
-                              print(age);
-                            });
-                          },
-                          min: 0,
-                          max: 100,
-                          divisions: null,
-                        ),
-                        //padding: EdgeInsets.only(left: 30,right: 30),
-                      ),
-                      Container(
-                        width: 50,
-                        child: DropdownButton<String>(
-                          isExpanded: true,
-                          iconSize: 18,
-                          iconEnabledColor: Colors.black,
-                          style: TextStyle(fontSize: 15 , ),
 
-                          value: age.toString(),
-                          hint:  Text("Select item"),
-                          onChanged: (value) {
-                            print(value);
+                        child: FlutterSlider(
+                          values: [startAge.toDouble(), age.toDouble()],
+                          rangeSlider:  AppLocalizations.of(context).locale == "en" ? false : true ,
+                          max: 100,
+                          min: 0,
+                          rtl: true,
+                          onDragging: (handlerIndex, lowerValue, upperValue) {
+                            print(upperValue);
                             setState(() {
-                              age = int.parse(value);
+                              startAge = lowerValue.toInt();
+                              age = upperValue.toInt();
                             });
                           },
-                          items: ageList.map(( user) {
-                            return  DropdownMenuItem<String>(
-                              value: user.toString(),
-                              child: Container(
-                                child: Text(
-                                  user.toString(),
-                                  textAlign: TextAlign.center,
-                                  style:  TextStyle(color: Colors.black),
+                        ),
+                      ),
+                      Row(
+                        textDirection: AppLocalizations.of(context).locale == "en" ? TextDirection.ltr : TextDirection.rtl ,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(AppLocalizations.of(context).locale == "en" ? "From" : "من"),
+                          Column(
+                            children: [
+                              Container(
+                                width: 50,
+                                child: DropdownButton<String>(
+                                  isExpanded: true,
+                                  iconSize: 18,
+                                  iconEnabledColor: Colors.black,
+                                  style: TextStyle(fontSize: 15 , ),
+
+                                  value: startAge.toString(),
+                                  hint:  Text("Select item"),
+                                  onChanged: (value) {
+                                    print(value);
+                                    setState(() {
+                                      if(int.parse(value) < age){
+                                        startAge = int.parse(value);
+                                      }
+                                    });
+                                  },
+                                  items: ageList.map(( user) {
+                                    return  DropdownMenuItem<String>(
+                                      value: user.toString(),
+                                      child: Container(
+                                        child: Text(
+                                          user.toString(),
+                                          textAlign: TextAlign.center,
+                                          style:  TextStyle(color: Colors.black),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
                                 ),
                               ),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                      Text(
-                        age.toString() +
-                            " " +
-                            AppLocalizations.of(context).lblYear,
-                        style: TextStyle(fontSize: 20.0),
+                              Text(
+                                startAge.toString() +
+                                    " " +
+                                    AppLocalizations.of(context).lblYear,
+                                style: TextStyle(fontSize: 20.0),
+                              ),
+                            ],
+                          ),
+                          Text(AppLocalizations.of(context).locale == "en" ? "To" : "الى"),
+                          Column(
+                            children: [
+                              Container(
+                                width: 50,
+                                child: DropdownButton<String>(
+                                  isExpanded: true,
+                                  iconSize: 18,
+                                  iconEnabledColor: Colors.black,
+                                  style: TextStyle(fontSize: 15 , ),
+
+                                  value: age.toString(),
+                                  hint:  Text("Select item"),
+                                  onChanged: (value) {
+                                    print(value);
+                                    setState(() {
+                                      if(int.parse(value) > startAge){
+                                        age = int.parse(value);
+                                      }
+                                    });
+                                  },
+                                  items: ageList.map(( user) {
+                                    return  DropdownMenuItem<String>(
+                                      value: user.toString(),
+                                      child: Container(
+                                        child: Text(
+                                          user.toString(),
+                                          textAlign: TextAlign.center,
+                                          style:  TextStyle(color: Colors.black),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                              Text(
+                                age.toString() +
+                                    " " +
+                                    AppLocalizations.of(context).lblYear,
+                                style: TextStyle(fontSize: 20.0),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -1068,6 +1120,7 @@ makeNumberOfViewerCalculation(double.parse('0'));
     try {
       showAppLoading(context);
       widget.shoppingCart.Age = age;
+      widget.shoppingCart.StartAge = startAge;
       widget.shoppingCart.Duration = duration;
       widget.shoppingCart.ViewNumbers = vNumbers;
       widget.shoppingCart.Price = double.parse(totalPrice);

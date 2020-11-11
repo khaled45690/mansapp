@@ -1,12 +1,15 @@
 library json_table;
 
 import 'package:flutter/material.dart';
+import 'package:mansaapp/APIs/ShoppingCartApi.dart';
+import 'package:mansaapp/Models/ShoppingCartVM.dart';
+import 'package:mansaapp/Models/UserVM.dart';
+import 'package:mansaapp/main.dart';
 import 'package:mansaapp/resources/fonts.dart';
 
 import 'package:json_utilities/json_utilities.dart';
+import 'package:mansaapp/ui/TabBarScreen.dart';
 import 'json_table_column.dart';
-
-
 
 typedef TableHeaderBuilder = Widget Function(String header);
 typedef TableCellBuilder = Widget Function(dynamic value);
@@ -20,7 +23,8 @@ class JsonTable extends StatefulWidget {
   final Color header_color;
 
   JsonTable(
-    this.dataList,this.header_color ,{
+    this.dataList,
+    this.header_color, {
     Key key,
     this.tableHeaderBuilder,
     this.tableCellBuilder,
@@ -35,11 +39,35 @@ class JsonTable extends StatefulWidget {
 class _JsonTableState extends State<JsonTable> {
   Set<String> headerList = new Set();
   Set<String> filterHeaderList = new Set();
-
+  List cartList = [];
   @override
   void initState() {
     super.initState();
     init();
+    List<ShoppingCartVM> shoppingCarts;
+    int loopCount = 0;
+    getUser().then((user) {
+      if (user != null) {
+        ShoppingCartApi.getShoppingCarForUser(user.user_Id).then((response) {
+          if (response.code == 200) {
+            shoppingCarts = response.data;
+            print(shoppingCarts.length);
+            shoppingCarts.forEach((cart) {
+              setState(() {
+                cartList.add(cart.toJson());
+              });
+
+              loopCount = loopCount + 1;
+
+              if (loopCount == shoppingCarts.length) {}
+            });
+            // jsonSample=s;
+          } else {
+            print("${response.message}");
+          }
+        });
+      }
+    });
   }
 
   void init() {
@@ -106,13 +134,13 @@ class _JsonTableState extends State<JsonTable> {
                 children: widget.columns
                     .map(
                       (item) => TableColumn(
-                        item.label,
-                        widget.dataList,
-                        widget.header_color,
-                        widget.tableHeaderBuilder,
-                        widget.tableCellBuilder,
-                        item,
-                      ),
+                          item.label,
+                          widget.dataList,
+                          widget.header_color,
+                          widget.tableHeaderBuilder,
+                          widget.tableCellBuilder,
+                          item,
+                          cartList),
                     )
                     .toList(),
               )
@@ -122,13 +150,13 @@ class _JsonTableState extends State<JsonTable> {
                     .where((header) => filterHeaderList.contains(header))
                     .map(
                       (header) => TableColumn(
-                        header,
-                        widget.dataList,
-                        widget.header_color,
-                        widget.tableHeaderBuilder,
-                        widget.tableCellBuilder,
-                        null,
-                      ),
+                          header,
+                          widget.dataList,
+                          widget.header_color,
+                          widget.tableHeaderBuilder,
+                          widget.tableCellBuilder,
+                          null,
+                          cartList),
                     )
                     .toList(),
               )
@@ -158,7 +186,7 @@ class _JsonTableState extends State<JsonTable> {
 
 class TableColumn extends StatelessWidget {
   final String header;
-  final List dataList;
+  final List dataList, cartList;
   final Color headercolor;
   final TableHeaderBuilder tableHeaderBuilder;
   final TableCellBuilder tableCellBuilder;
@@ -172,6 +200,7 @@ class TableColumn extends StatelessWidget {
     this.tableHeaderBuilder,
     this.tableCellBuilder,
     this.column,
+    this.cartList,
   );
 
   @override
@@ -184,17 +213,14 @@ class TableColumn extends StatelessWidget {
               ? tableHeaderBuilder(header)
               : Container(
                   padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 6.0),
-                  width: MediaQuery.of(context).size.width/3.5,
+                  width: MediaQuery.of(context).size.width / 3.5,
                   decoration: BoxDecoration(
                     border: Border.all(width: 0.5),
                     color: headercolor,
                   ),
-                  child: Text(
-                    header,
-                    textAlign: TextAlign.center,
-                    style: MansaFont.baseFontStyle()
-
-                  ),
+                  child: Text(header,
+                      textAlign: TextAlign.center,
+                      style: MansaFont.baseFontStyle()),
                 ),
           Container(
             child: Column(
@@ -219,20 +245,24 @@ class TableColumn extends StatelessWidget {
                                       border: Border.all(
                                     width: 1.0,
                                     color: Colors.grey.withOpacity(0.5),
-
                                   )),
-                                  child: Text(
-                                    getFormattedValue(
-                                      jsonUtils.get(
-                                        rowMap,
-                                        column?.field ?? header,
-                                        column?.defaultValue ?? '',
+                                  child: Row(
+                                    children: [
+                                      removeItemFromCart(rowMap ,  this.cartList , context),
+                                      Text(
+                                        getFormattedValue(
+                                          jsonUtils.get(
+                                            rowMap,
+                                            column?.field ?? header,
+                                            column?.defaultValue ?? '',
+                                          ),
+                                        ),
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 20.0,
+                                        ),
                                       ),
-                                    ),
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 20.0,
-                                    ),
+                                    ],
                                   ),
                                 ),
                         ],
@@ -251,5 +281,27 @@ class TableColumn extends StatelessWidget {
       return column.valueBuilder(value);
     }
     return value.toString();
+  }
+
+  removeItemFromCart(rowMap, List cartList , context) {
+    int cartItemOrder = int.parse(rowMap["name"]);
+
+    return InkWell(
+      onTap: () {
+        print(rowMap);
+        print(cartList);
+        print(cartItemOrder);
+        print(cartList[cartItemOrder-1]);
+        // Navigator.of(context).pushReplacement(
+        //   MaterialPageRoute(
+        //     builder: (context) => TabBarScreen(),
+        //   ),
+        // );
+      },
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: Text("x"),
+      ),
+    );
   }
 }

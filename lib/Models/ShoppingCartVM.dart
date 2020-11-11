@@ -40,6 +40,7 @@ class ShoppingCartVM {
     int ViewNumbers=0;
     int Duration=0;
     int Age=0;
+    int StartAge = 0;
     double Price=0;
     String filesIds;
     String filesIds2;
@@ -51,7 +52,7 @@ class ShoppingCartVM {
     this.Color3 , this.Description , this.Phone1, this.Phone2 , this.Email , this.Facebook , this.Twitter , this.Instagram,
     this.Snapshat , this.Youtube , this.Country , this.City , this.Sector , this.District , this.Discount,
     this.FromDay , this.FromMonth,this.FromYear,this.ToDay,this.ToMonth,this.ToYear , this.socials,this.famous,
-    this.ViewNumbers , this.Duration , this.Age , this.Price,this.filesIds,this.filesIds2,this.platforms ,
+    this.ViewNumbers , this.Duration , this.Age , this.StartAge , this.Price,this.filesIds,this.filesIds2,this.platforms ,
      this.latitude ,this.longitude,this.AddressForAdvertise });
 
 
