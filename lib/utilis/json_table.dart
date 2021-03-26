@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:mansaapp/APIs/ShoppingCartApi.dart';
 import 'package:mansaapp/Models/ShoppingCartVM.dart';
 import 'package:mansaapp/Models/UserVM.dart';
-import 'package:mansaapp/main.dart';
 import 'package:mansaapp/resources/fonts.dart';
-
 import 'package:json_utilities/json_utilities.dart';
+import 'package:http/http.dart' as http;
 import 'package:mansaapp/ui/TabBarScreen.dart';
 import 'json_table_column.dart';
 
@@ -291,12 +290,18 @@ class TableColumn extends StatelessWidget {
         print(rowMap);
         print(cartList);
         print(cartItemOrder);
-        print(cartList[cartItemOrder-1]);
-        // Navigator.of(context).pushReplacement(
-        //   MaterialPageRoute(
-        //     builder: (context) => TabBarScreen(),
-        //   ),
-        // );
+        Map cartItem = cartList[cartItemOrder-1];
+        print(cartItem);
+        print(cartItem["Id"]);
+        print('http://mansa-app.com/api/ShoppingCart/DeleteById?id=${cartItem["Id"]}');
+        var response = http.post(
+          'http://mansa-app.com/api/ShoppingCart/DeleteById?id=${cartItem["Id"]}',
+        );
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => TabBarScreen(),
+          ),
+        );
       },
       child: Container(
         padding: EdgeInsets.all(10),

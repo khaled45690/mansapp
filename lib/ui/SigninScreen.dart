@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -316,16 +317,16 @@ void _toggle() {
                       hintText: AppLocalizations.of(context).lblemailPlaceholder,
                       contentPadding: new EdgeInsets.symmetric(
                           vertical: 17.0, horizontal: 10.0),
-                      // border: OutlineInputBorder(
-                      //   borderSide:
-                      //       const BorderSide(color: grey_ligth, width: 0.0),
-                      //   borderRadius: BorderRadius.circular(25.0),
-                      // ),
-                      // focusedBorder: OutlineInputBorder(
-                      //   borderSide: const BorderSide(
-                      //       color: desgin_button4_end, width: 1.0),
-                      //   borderRadius: BorderRadius.circular(25.0),
-                      // ),
+                      border: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: grey_ligth, width: 0.0),
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: desgin_button4_end, width: 1.0),
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
                     ),
                   )),
                   Container(
@@ -468,16 +469,16 @@ void _toggle() {
                             ///
                             
                             // _signIn(context)
-                            //   .then((FirebaseUser user) => print(user))
+                            //   .then((UserCredential user) => print(user))
                             //   .catchError((e) => print(e));
-                         //_handleGetContact();
-                           // Navigator.of(context).pop();
-                           // Navigator.of(context).push(MaterialPageRoute(
-                           //     builder: (context) => TestGmailLogin()));
+                         _handleGetContact();
+                           Navigator.of(context).pop();
+                           Navigator.of(context).push(MaterialPageRoute(
+                               builder: (context) => TestGmailLogin()));
                           },
-//                      action: () {
-//                        print('Using the sword');
-//                      },
+                     // action: () {
+                     //   print('Using the sword');
+                     // },
 
                           ///Put label over here
                           label: Text(

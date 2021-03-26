@@ -14,6 +14,7 @@ import 'package:mansaapp/ui/CreatePayment.dart';
 import 'package:mansaapp/utilis/CustomizedWidgets.dart';
 import 'package:mansaapp/utilis/json_table.dart';
 import 'package:mansaapp/utilis/json_table_column.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'AboutApp.dart';
 import '../localizations.dart';
 import 'Ads.dart';
@@ -113,7 +114,8 @@ var json=null;
               }
             });
              json= jsonDecode(s);
-             tax = (int.parse(response.message)/100)*subTotal;//int.parse(response.message) is Percent 
+             // tax = (int.parse(response.message)/100)*subTotal;//int.parse(response.message) is Percent
+             tax = 0;//int.parse(response.message) is Percent
           // jsonSample=s;
           } else {
             print("${response.message}");
@@ -228,12 +230,12 @@ List<ShoppingCartVM> shoppingCarts ;
                         //     //textAlign: TextAlign.center,
                         //     style: MansaFont.baseFontStyleWithBackground(),),
                         // ),
-                        Expanded(
-                          flex: 1,
-                          child: Text(AppLocalizations.of(context).lblTax+" " +tax.round().toString()+" "+AppLocalizations.of(context).lblRyal, 
-                            //textAlign: TextAlign.left,
-                            style: MansaFont.baseFontStyleWithBackground(),),
-                        ),
+                        // Expanded(
+                        //   flex: 1,
+                        //   child: Text(AppLocalizations.of(context).lblTax+" " +tax.round().toString()+" "+AppLocalizations.of(context).lblRyal,
+                        //     //textAlign: TextAlign.left,
+                        //     style: MansaFont.baseFontStyleWithBackground(),),
+                        // ),
                       ],
                     ),
                     Row(
@@ -292,8 +294,11 @@ List<ShoppingCartVM> shoppingCarts ;
                   height: 30,
                 ),
                 appButtonbgimage(AppLocalizations.of(context).lblPayNow,
-                () => Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => CreatePayment())),
+                        () async {
+                      if (await canLaunch('https://mansa-app.com/Checkout.html')) {
+                        await launch('https://mansa-app.com/Checkout.html');
+                      }
+                    },
                bgColor: lightBgColor,
                bgColor2: transColor),
 
