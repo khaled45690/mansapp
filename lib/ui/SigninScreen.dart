@@ -444,14 +444,14 @@ void _toggle() {
               Container(
                 height: 5,
               ),
-              Container(
-                child: Text(
-                   AppLocalizations.of(context).lblOr,
-                  textAlign: TextAlign.justify,
-                  
-                  style: MansaFont.getMediumFont_medium2(),
-                ),
-              ),
+              // Container(
+              //   child: Text(
+              //      AppLocalizations.of(context).lblOr,
+              //     textAlign: TextAlign.justify,
+              //
+              //     style: MansaFont.getMediumFont_medium2(),
+              //   ),
+              // ),
               Container(
                 height: 5,
               ),
@@ -512,7 +512,7 @@ void _toggle() {
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                
+
                   children: <Widget>[
                     Expanded(
                       //padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
@@ -521,7 +521,7 @@ void _toggle() {
                       child: Text(
                         AppLocalizations.of(context).lblHaveAccount,
                         textAlign: TextAlign.justify,
-                       
+
                         style: MansaFont.getMediumFont_gray2(),
                       ),
                     ),
@@ -544,11 +544,11 @@ void _toggle() {
                       ),
                     ),
                     ),
-                    
+
                     // Container(
                     //   width: 5,
                     // ),
-                    
+
                   ]),
             ],
           ),

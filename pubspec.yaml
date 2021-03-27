@@ -16,63 +16,64 @@ version: 2.0.0+4
 environment:
   sdk: ">=2.6.0 <3.0.0"
   #sdk: ">=2.1.0 <3.0.0"
+dependency_overrides:
+  intl: 0.17.0
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
-    sdk: flutter 
-    
+    sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+  cupertino_icons:
   flutter_launcher_icons: "^0.7.3"
-  easy_localization: ^1.0.3+1
-  shared_preferences: ^0.4.2
+  easy_localization:
+  shared_preferences:
   #image_picker: ^0.6.0+8
-  share: ^0.6.1+1
-  credit_card: ^0.1.8
+  share:
+  credit_card:
   #share: ^0.6.3+5
-  connectivity: ^0.4.3+2
-  flutter_swiper: ^1.1.6
-  json_utilities: ^0.1.3
-  image_gallery_saver: ^1.1.0
-  url_launcher: ^5.0.1
+  connectivity:
+  flutter_swiper:
+  json_utilities:
+  image_gallery_saver:
+  url_launcher:
   intl:
-  location: ^2.3.5
-  google_sign_in: ^4.0.4
-  http: ^0.12.0+2
-  crypto: ^2.1.3
-  meta: ^1.1.7
-  mime_type: ^0.2.4
-  http_parser: ^3.1.3
-  equatable: ^0.6.1
-  test: ^1.6.3
-  dotenv: ^1.0.0
-  mockito: ^4.1.1
-  flutter_cupertino_date_picker: ^1.0.12
-  dio: ^3.0.7
+  location:
+  google_sign_in:
+  http:
+  crypto:
+  meta:
+  mime_type:
+  http_parser:
+  equatable:
+  test:
+  dotenv:
+  mockito:
+  flutter_cupertino_date_picker: ^1.0.26+2
+  dio:
   flutter_colorpicker: any
-  intl_translation: ^0.17.1
-  flutter_email_sender: ^2.2.2
-  file_picker: ^1.1.1
+  intl_translation:
+  flutter_email_sender:
+  file_picker:
 #  firebase_core: ^0.5.2
 #  firebase_auth: ^0.18.3
   #google_sign_in: ^4.0.1+3
-  font_awesome_flutter: ^8.2.0
-  google_maps_flutter: ^1.0.6
-  geocoder: ^0.2.1
-  flutter_google_places: ^0.2.6
-  geolocator: ^6.1.4
-  permission: ^0.1.5
-  image_picker: ^0.6.7+12
-  multi_image_picker: ^4.7.14
-  webview_flutter: ^1.0.6
+  font_awesome_flutter:
+  google_maps_flutter:
+  geocoder:
+  flutter_google_places:
+  geolocator:
+  permission:
+  image_picker:
+  multi_image_picker:
+  webview_flutter:
   #christian_picker_image: ^0.1.6
   permission_handler:
-  smooth_star_rating: ^1.1.1
-  flutter_xlider: ^3.4.0
+  smooth_star_rating:
+  flutter_xlider:
   #image_picker: ^0.6.0+8
 
 flutter_icons:

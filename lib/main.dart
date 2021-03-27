@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mansaapp/ui/PaymentByVisaScreen.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:mansaapp/ui/SplashScreen.dart';
 
 void main() => runApp(MyApp());

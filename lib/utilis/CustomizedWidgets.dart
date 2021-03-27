@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization_delegate.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:mansaapp/Constants/customcolors.dart';
@@ -303,7 +303,7 @@ void hideAppDialog(BuildContext context) {
 
 String L(String word, BuildContext context) {
   if (context != null) {
-    return AppLocalizations.of(context).tr("noUser.$word");
+    return " ";
   } else
     return word;
 }
