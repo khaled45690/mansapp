@@ -4,7 +4,7 @@
 <dict>
 	<key>NSCameraUsageDescription</key>
 	<string>we need to access your camera to take photos of the design that you desire to upload or what ever the photo you want to upload</string>
-	<key>NSPhotoLibraryUsageDescription </key>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>we need to access your photo library to take photos of the design that you desire to upload or what ever the photo you want to upload</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
